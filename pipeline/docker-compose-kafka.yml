@@ -9,7 +9,7 @@ services:
     ports:
       - "2181:2181"
     volumes:
-      - "./zookeeper_data:/docker_sona"    
+      - "./data/zookeeper:/docker_sona"    
 
 # 카프카 -standalone
   kafka:
@@ -26,7 +26,7 @@ services:
       - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
       - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
     volumes:
-      - "./kafka_data:/docker_sona"
+      - "./data/kafka:/docker_sona"
 
 # git clone https://github.com/linkedin/Burrow
   burrow: 
