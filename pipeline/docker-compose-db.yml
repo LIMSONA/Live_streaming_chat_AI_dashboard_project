@@ -48,3 +48,8 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+
+networks: 
+  default: 
+    external: 
+      name: hy22-external-network
