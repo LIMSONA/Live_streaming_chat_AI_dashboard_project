@@ -23,3 +23,8 @@ services:
         source: ./logstash_data/config/pipelines.yml
         target: /usr/share/logstash/config/pipelines.yml
         read_only: true
+
+networks: 
+  default: 
+    external: 
+      name: hy22-external-network

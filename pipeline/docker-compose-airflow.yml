@@ -33,3 +33,8 @@ services:
       - AIRFLOW_EXECUTOR=CeleryExecutor
     ports:
       - '8082:8082'
+
+networks: 
+  default: 
+    external: 
+      name: hy22-external-network
