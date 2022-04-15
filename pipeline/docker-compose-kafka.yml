@@ -4,12 +4,13 @@ services:
 
 # 주키퍼
   zookeeper:
+    image: zookeeper:3.6.0
     container_name: zookeeper
-    image: wurstmeister/zookeeper:latest
     ports:
       - "2181:2181"
     volumes:
-      - "./data/zookeeper:/docker_sona"    
+      - ./data/zookeeper/data:/data
+      - ./data/zookeeper/logs:/datalog
 
 # 카프카 -standalone
   kafka:
@@ -26,7 +27,8 @@ services:
       - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
       - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
     volumes:
-      - "./data/kafka:/docker_sona"
+      - ./data/kafka/logs:/opt/kafka/logs
+      - ./data/kafka/data:/kafka
 
 # git clone https://github.com/linkedin/Burrow
   burrow: 
