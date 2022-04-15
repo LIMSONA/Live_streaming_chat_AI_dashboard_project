@@ -30,16 +30,16 @@ services:
 
 # git clone https://github.com/linkedin/Burrow
   burrow: 
-    build:
-      context: .
-      dockerfile: ./Burrow/Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: ./Burrow/Dockerfile
     image: hy22-burrow:0.1
-    volumes:
+    # volumes:
       # - "./burrow_data:/docker_sona"
       # - ${PWD}/docker-config:/etc/burrow/
       # - ${PWD}/tmp:/var/tmp/burrow
-      - ./burrow_docker/docker-config:/etc/burrow/
-      - ./burrow_docker/tmp:/var/tmp/burrow
+      # - ./burrow_docker/docker-config:/etc/burrow/
+      # - ./burrow_docker/tmp:/var/tmp/burrow
 
     ports:
       - 8000:8000
