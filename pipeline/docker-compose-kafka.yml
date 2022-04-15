@@ -43,3 +43,8 @@ services:
       - kafka
       - zookeeper
     restart: always
+
+networks: 
+  default: 
+    external: 
+      name: hy22-external-network
