@@ -26,21 +26,20 @@ services:
       - KAFKA_ADVERTISED_PORT= 9092
       - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
       - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
+      - KAFKA_BROKER_ID=1
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
 
-# git clone https://github.com/linkedin/Burrow
+# bash ./burrow-build.sh
   burrow: 
-    # build:
-    #   context: .
-    #   dockerfile: ./Burrow/Dockerfile
     image: hy22-burrow:0.1
     volumes:
-      - ./burrow_docker/docker-config:/etc/burrow/
-
-    ports:
-      - 8000:8000
+      - ./burrow_asset:/etc/burrow/
+      - ./data/burrow:/var/tmp/burrow
+    expose:
+      - 8000
     depends_on:
       - kafka
+      - zookeeper
     restart: always
