@@ -13,8 +13,7 @@ services:
     #   - INFLUXDB_ADMIN_USER_PASSWORD=bitnami123
     #   - INFLUXDB_ADMIN_USER_TOKEN=admintoken123
     volumes:
-      # - influxdb_data:/docker_sona/influxdb 
-      - /data/influxdb:/docker_sona/influxdb
+      - ./data/influxdb:/var/lib/influxdb
 
 #mongoDB
   mongodb:
@@ -23,7 +22,7 @@ services:
     ports:
       - "27017:27017" #mongoDB 기본
     volumes:
-      - ./data/mongodb:/docker_sona/mongodb
+      - ./data/mongodb:/bitnami/mongodb
 
 
 #airflow & PostgreSQL & Redis
@@ -33,7 +32,7 @@ services:
   postgresql:
     image: docker.io/bitnami/postgresql:10
     volumes:
-      - ./data/postgresql:/docker_sona/postgresql
+      - ./data/postgresql:/bitnami/postgresql
     environment:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
