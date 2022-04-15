@@ -1,7 +1,7 @@
-packages.json??
+requirement.txt
 
 ```
-pip install kafka
-pip install json
-pip install time
+kafka==
+json==
+time==
 ```
