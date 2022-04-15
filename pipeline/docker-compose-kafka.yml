@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+# 주키퍼
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+    volumes:
+      - "./zookeeper_data:/docker_sona"    
+
+# 카프카 -standalone
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:latest 
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_HOST_NAME= 127.0.0.1
+      - KAFKA_ADVERTISED_PORT= 9092
+      - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
+      - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
+    volumes:
+      - "./kafka_data:/docker_sona"
+
+# git clone https://github.com/linkedin/Burrow
+  burrow: 
+    build:
+      context: .
+      dockerfile: ./Burrow/Dockerfile
+    image: hy22-burrow:0.1
+    volumes:
+      # - "./burrow_data:/docker_sona"
+      # - ${PWD}/docker-config:/etc/burrow/
+      # - ${PWD}/tmp:/var/tmp/burrow
+      - ./burrow_docker/docker-config:/etc/burrow/
+      - ./burrow_docker/tmp:/var/tmp/burrow
+
+    ports:
+      - 8000:8000
+    depends_on:
+      - kafka
+    restart: always

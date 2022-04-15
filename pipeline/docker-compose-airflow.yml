@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  # airflow-scheduler: 작업을 트리거하고 작업 진행 상황을 모니터링하는 도구를 제공
+  airflow-scheduler:
+    image: docker.io/bitnami/airflow-scheduler:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor #실행
+      - AIRFLOW_WEBSERVER_HOST=airflow 
+
+  #airflow-worker: 워크플로 작업이 포함된 대기열처리
+  airflow-worker:
+    image: docker.io/bitnami/airflow-worker:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
+
+  # 방향성 비순환 그래프를 workflow로 표현
+  airflow:
+    image: docker.io/bitnami/airflow:2
+    container_name: airflow
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+    ports:
+      - '8082:8082'
