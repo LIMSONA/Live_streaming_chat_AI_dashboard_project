@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+# logstash
+# https://github.com/elastic/logstash-docker
+  logstash:
+    image: docker.io/bitnami/logstash:8
+    container_name: logstash
+    ports:
+      - 5044:5044 #기본포트
+    volumes:
+      - type: bind
+        source: ./logstash_data/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+        read_only: false
+      - type: bind
+        source: ./logstash_data/pipeline
+        target: /usr/share/logstash/pipeline
+        read_only: false
+      # pipelines 추가
+      - type: bind
+        source: ./logstash_data/config/pipelines.yml
+        target: /usr/share/logstash/config/pipelines.yml
+        read_only: true
