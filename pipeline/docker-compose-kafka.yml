@@ -36,12 +36,8 @@ services:
     #   context: .
     #   dockerfile: ./Burrow/Dockerfile
     image: hy22-burrow:0.1
-    # volumes:
-      # - "./burrow_data:/docker_sona"
-      # - ${PWD}/docker-config:/etc/burrow/
-      # - ${PWD}/tmp:/var/tmp/burrow
-      # - ./burrow_docker/docker-config:/etc/burrow/
-      # - ./burrow_docker/tmp:/var/tmp/burrow
+    volumes:
+      - ./burrow_docker/docker-config:/etc/burrow/
 
     ports:
       - 8000:8000
