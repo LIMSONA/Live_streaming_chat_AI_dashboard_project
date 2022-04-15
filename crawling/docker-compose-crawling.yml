@@ -11,7 +11,10 @@ services:
     environment:
       - KAFKA_SERVER=${KAFKA_SERVER}
     volumes:
-      - ./kafka_consumer.py:/usr/src/app/main.py
+      - ./:/usr/src/app
+    command: python ./kafka_consumer.py
+    depends_on:
+      - py-producer
 
   py-producer:
     build:
@@ -23,7 +26,8 @@ services:
     environment:
       - KAFKA_SERVER=${KAFKA_SERVER}
     volumes:
-      - ./kafka_producer.py:/usr/src/app/main.py
+      - ./:/usr/src/app
+    command: python ./kafka_producer.py
 
 networks: 
   default: 
