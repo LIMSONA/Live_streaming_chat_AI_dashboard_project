@@ -1,7 +1,9 @@
-requirement.txt
-
+# Package install
 ```
-kafka==
-json==
-time==
+pip install -r ./requirements.txt
+```
+
+## pip
+```
+sudo apt install python3-pip
 ```
