@@ -5,7 +5,7 @@ services:
 #influxDB
   influxdb:
     image: influxdb:1.8.6
-    container_name: influxDB
+    container_name: influxdb
     ports:
       - 8086:8086 #influxDB 기본
       # - 8088:8088 #백업 및 복원 위해
@@ -23,6 +23,8 @@ services:
       - "27017:27017" #mongoDB 기본
     volumes:
       - ./data/mongodb:/bitnami/mongodb
+
+      # ek : https://www.youtube.com/watch?v=WnREUsxqJ3Y 참고
 
 
 #airflow & PostgreSQL & Redis
