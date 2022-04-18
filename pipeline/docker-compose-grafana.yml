@@ -11,8 +11,6 @@ services:
       - '3000:3000' #grafana 기본
     # environment:
     #   - 'GF_SECURITY_ADMIN_PASSWORD=bitnami'
-    depends_on:
-      - influxdb
     volumes:
       - './data/grafana:/opt/bitnami/grafana/data'
 
