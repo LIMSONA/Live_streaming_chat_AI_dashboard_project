@@ -2,6 +2,10 @@
 
 CUR_PWD=${PWD}
 
+if [ ! -d "tmp" ] ; then
+mkdir tmp
+fi
+
 cd tmp
 
 # 디렉토리 존재 유무 확인
