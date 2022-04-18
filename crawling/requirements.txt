@@ -1,10 +1,15 @@
-#카프카 전송
+# 카프카 전송
 kafka-python==2.0.2
-# json
-# time
+# json 기본
+# time 기본
 
-#크롤링
+# 크롤링
 pytchat==0.5.3
-pafy==0.5.5
+# pafy==0.5.5 영상제목,별점,뷰수,제작자,플레이길이/시간,좋아요,싫어요
 selenium==3.141.0
 webdriver-manager==3.4.2
+
+# 토큰화
+# re 기본
+konlpy==0.5.2
+jamo==0.4.1
