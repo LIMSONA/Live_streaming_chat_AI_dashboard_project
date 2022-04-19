@@ -10,7 +10,7 @@ import re
 from konlpy.tag import Okt
 from jamo import h2j, j2hcj #초성/중성/종성분리
 
-import pytchat
+import pytchatc
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -24,3 +24,12 @@ ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 cr = crawling.crawling() # crawling 클래스
 
+# 카프카 토픽
+kafka_topic= ['input', 'output']
+
+# 유튜브 크롤링 test
+
+cr.youtube_kafka()
+
+
+# 네이버 크롤링 test

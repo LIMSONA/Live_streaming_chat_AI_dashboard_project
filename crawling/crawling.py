@@ -8,8 +8,9 @@ import cr_kafka # 카프카파일명
 import cr_token # 토큰파일명
 
 ck = cr_kafka.c_kafka() # c_kafka 클래스
-ct = cr_token.c_token() # c_token 클래스
 
+ct = cr_token.c_token() # c_token 클래스
+# filter_str(문자만 필터링) # cm_tokenize 형태소단위분리 & 초중성분리
 
 class crawling:
     
@@ -38,9 +39,12 @@ class crawling:
                 for c in chat.get().sync_items():               
                     # c.datetime 채팅시간 / c.author.name 채팅닉네임 / c.message 채팅내용
                     # 영상unique값 / num / 시간 / 닉네임 / 채팅
+                    
+                    t_chat_message= ct.cm_tokenize(c.message)
+                    
                     data= self.save_json(video_id, num,
                                          c.datetime, c.author.name,
-                                         c.message)
+                                         t_chat_message)
                     num +=1 #하나씩 커지게
                     ck.pro_kafka(topic_name, data) #카프카로 태우기
                     
@@ -79,14 +83,16 @@ class crawling:
                 for i in range(len(n_chat_message)):
                     try:
                         if n_chat_name[i].text: #채팅이 있는 경우
-                            chat_text = (n_chat_name[i].text, n_chat_message[i].text)
+                            t_chat_message= ct.cm_tokenize(n_chat_message[i].text)
+                            chat_text = (n_chat_name[i].text, t_chat_message)
                             if chat_text in pop_list: #중복되는 경우
                                 pass
                             else: #중복되지 않는 경우
                                 pop_list.append(chat_text)
+                                t_chat_message= ct.cm_tokenize(n_chat_message[i].text)
                                 data= self.save_json(video_id, num,
                                                      chat_time, n_chat_name[i].test,
-                                                     n_chat_message[i].text)
+                                                     t_chat_message)
                                 num +=1 #하나씩 커지게
                                 ck.pro_kafka(topic_name, data) #카프카로 태우기
                     except:
