@@ -1,8 +1,10 @@
 from kafka import KafkaProducer, KafkaConsumer
 from json import dumps, loads
 import time
+# import os
 
-kafka_server= "kafka:9092"
+# bootstrap_servers = os.getenv('KAFKA_SERVER')
+kafka_server= "kafka:9092" #환경변수 설정.... ㅠㅠㅠ
 
 class c_kafka: 
     def pro_kafka(self, topic_name, get_data):
