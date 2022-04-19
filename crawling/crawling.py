@@ -48,7 +48,6 @@ class crawling:
                 chat.terminate() # 유튜브 긁어오는거 중지
                 break
             
-    
 # 2. 네이버쇼핑
 # url 예시: https://shoppinglive.naver.com/lives/177021
     def naver_kafka(self, video_url, topic_name):
