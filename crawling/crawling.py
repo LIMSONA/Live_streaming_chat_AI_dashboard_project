@@ -89,6 +89,7 @@ class crawling:
                                 num +=1 #하나씩 커지게
                                 ck.pro_kafka(topic_name, data) #카프카로 태우기
                     except:
-                        pass
+                        pass    
         finally:
             driver.close()
+

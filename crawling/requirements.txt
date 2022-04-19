@@ -14,3 +14,4 @@ python-dotenv==0.20.0
 # re 기본
 konlpy==0.5.2
 jamo==0.4.1
+tweepy==3.10.0

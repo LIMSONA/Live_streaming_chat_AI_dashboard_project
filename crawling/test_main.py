@@ -24,12 +24,26 @@ ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 cr = crawling.crawling() # crawling 클래스
 
-# 카프카 토픽
+you_url = "https://www.youtube.com/watch?v=py_phbQxy5Y"
+video_id= you_url.split('?v=')[-1]
+chat = pytchat.create(video_id=video_id)
+while chat.is_alive():
+    for c in chat.get().sync_items():               
+        t_chat_message= ct.preprocessing(c.message)
+        print(c.message)
+        print(t_chat_message)
+        
+        
+
+
+
+
+# 카프카 
 kafka_topic= ['input', 'output']
 
 # 유튜브 크롤링 test
 you_url = "https://www.youtube.com/watch?v=py_phbQxy5Y"
-cr.youtube_kafka(you_url,input)
+cr.youtube_kafka(you_url, kafka_topic[0])
 
 
 # 네이버 크롤링 test
