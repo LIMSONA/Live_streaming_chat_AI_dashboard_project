@@ -19,9 +19,6 @@ class c_kafka:
         producer.send(topic_name, value=get_data)
         producer.flush()
 
-
-
-
     def con_kafka(self, topic_name):      
         consumer = KafkaConsumer(
                     topic_name,
@@ -33,3 +30,8 @@ class c_kafka:
                     consumer_timeout_ms=1000
                     )
         return consumer    
+    
+    
+c= c_kafka()
+c.pro_kafka("test_topic","안녕!!")
+c.con_kafka("test_topic")
