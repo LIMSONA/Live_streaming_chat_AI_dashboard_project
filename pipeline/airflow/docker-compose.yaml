@@ -69,6 +69,7 @@ x-airflow-common:
     postgres:
       condition: service_healthy
 
+ # postgres = DB
 services:
   postgres:
     image: postgres:13
@@ -84,6 +85,7 @@ services:
       retries: 5
     restart: always
 
+ # redis = 스케줄러에서 작업자(worker)에게 메세지 전달하는 브로커
   redis:
     image: redis:latest
     expose:
@@ -95,6 +97,7 @@ services:
       retries: 50
     restart: always
 
+ # airflow-webserver = localhost:8080 접속할때 뜨는 웹 서버 설정
   airflow-webserver:
     <<: *airflow-common
     command: webserver
@@ -111,6 +114,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+ # airflow-scheduler = 모든 작업과 DAG를 모니터링하기위함. 완료시 작업 인스턴스 트리거 역할
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
@@ -125,6 +129,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+ # airflow-worker = 스케줄러에 의해 주어진 작업을 실행하는 작업자
   airflow-worker:
     <<: *airflow-common
     command: celery worker
@@ -160,6 +165,7 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+ # airflow-init = 초기화
   airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
@@ -250,6 +256,7 @@ services:
       - -c
       - airflow
 
+ # flower = 환경 모니터링, localhost:5555 접속 시 뜨는 웹페이지
   flower:
     <<: *airflow-common
     command: celery flower
