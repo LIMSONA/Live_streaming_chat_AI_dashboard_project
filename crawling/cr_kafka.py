@@ -4,6 +4,7 @@ import time
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
 bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 class c_kafka: 
