@@ -7,8 +7,8 @@ from datetime import datetime as dt
 import cr_kafka # 카프카파일명
 import cr_token # 토큰파일명
 
-ck = cr_kafka.c_kafka # c_kafka 클래스
-ct = cr_token.c_token # c_token 클래스
+ck = cr_kafka.c_kafka() # c_kafka 클래스
+ct = cr_token.c_token() # c_token 클래스
 
 
 class crawling:
