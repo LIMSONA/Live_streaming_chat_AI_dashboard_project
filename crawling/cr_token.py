@@ -12,7 +12,7 @@ class c_token:
     for line in lines:
         line = line.replace('\n', '')
         stopwords.append(line)
-    f.close()
+    f.close()                                
          
 # 1 + 2 + stopword 그냥 다 합치기!
     def preprocessing(self, input_str):
@@ -21,7 +21,7 @@ class c_token:
             .sub('', input_str)
     #형태소단위 
         okt = Okt() #선택이유는 논문 참고
-        m_token = okt.morphs(re_string, stem=True)
+        m_token = okt.morphs(re_string, stem=True)                                
     # 초중성분리  ==> 너무 작게 쪼개져서 주석처리!!
         # cm_token = []
         # for i in m_token:
@@ -68,13 +68,9 @@ class c_token:
         token = okt.nouns(self.filter_str(input_str))
         return token
 
-
-
-    
 # 테스트하기
 cl = c_token()
 test = "제품은 좋을수도 있고 나쁠수도 있는데 그걸 고객들을 속이려고 하고 심지어 사과도 안하고 양심도없지"
 result = cl.preprocessing(test)
 print(result)
 # ==> 제품 좋다 있다 나쁘다 있다 그걸 고객 속이다 하다 심지어 사과 하고 양심 없다
-

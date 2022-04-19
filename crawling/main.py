@@ -10,7 +10,7 @@ import re
 from konlpy.tag import Okt
 from jamo import h2j, j2hcj #초성/중성/종성분리
 
-import pytchatc
+import pytchat
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -28,8 +28,8 @@ cr = crawling.crawling() # crawling 클래스
 kafka_topic= ['input', 'output']
 
 # 유튜브 크롤링 test
-
-cr.youtube_kafka()
+you_url = "https://www.youtube.com/watch?v=py_phbQxy5Y"
+cr.youtube_kafka(you_url,input)
 
 
 # 네이버 크롤링 test
