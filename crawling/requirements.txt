@@ -8,6 +8,7 @@ pytchat==0.5.3
 # pafy==0.5.5 영상제목,별점,뷰수,제작자,플레이길이/시간,좋아요,싫어요
 selenium==3.141.0
 webdriver-manager==3.4.2
+python-dotenv==0.20.0
 
 # 토큰화
 # re 기본

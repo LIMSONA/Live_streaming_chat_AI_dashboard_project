@@ -1,10 +1,10 @@
 from kafka import KafkaProducer, KafkaConsumer
 from json import dumps, loads
 import time
-# import os
+import os
+from dotenv import load_dotenv
 
-# bootstrap_servers = os.getenv('KAFKA_SERVER')
-kafka_server= "kafka:9092" #환경변수 설정.... ㅠㅠㅠ
+bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 class c_kafka: 
     def pro_kafka(self, topic_name, get_data):
@@ -12,7 +12,7 @@ class c_kafka:
         producer = KafkaProducer(
                 acks=0,
                 compression_type='gzip', #CPU 사용은 많지만 속도는 빠르니
-                bootstrap_servers=[kafka_server],
+                bootstrap_servers=[bootstrap_servers],
                 value_serializer=lambda x: dumps(x).encode('utf-8')
                 )
         producer.send(topic_name, value=get_data)
@@ -24,7 +24,7 @@ class c_kafka:
     def con_kafka(self, topic_name):      
         consumer = KafkaConsumer(
                     topic_name,
-                    bootstrap_servers=[kafka_server],
+                    bootstrap_servers=[bootstrap_servers],
                     auto_offset_reset='earliest', # 또는 latest
                     enable_auto_commit=True,
                     group_id=None, #일단 그룹아이디 만들지 말고
