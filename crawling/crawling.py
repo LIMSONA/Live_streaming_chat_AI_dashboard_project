@@ -8,12 +8,9 @@ import cr_kafka # 카프카파일명
 import cr_token # 토큰파일명
 
 ck = cr_kafka.c_kafka() # c_kafka 클래스
-
 ct = cr_token.c_token() # c_token 클래스
-# filter_str(문자만 필터링) # cm_tokenize 형태소단위분리 & 초중성분리
 
-class crawling:
-    
+class crawling:   
 # 0. json형식 파일저장하기
 # 영상unique값 / num / 시간 / 닉네임 / 채팅
     def save_json(self, video_unique, num, chat_time, chat_name, chat_message):
@@ -29,7 +26,6 @@ class crawling:
 # 1. 유튜브 
 # url 예시 https://www.youtube.com/watch?v=py_phbQxy5Y
 # 제목클래스 h1 / style-scope ytd-video-primary-info-renderer
-
     def youtube_kafka(self, video_url, topic_name):
         num= 0
         video_id= video_url.split('?v=')[-1]
@@ -40,7 +36,7 @@ class crawling:
                     # c.datetime 채팅시간 / c.author.name 채팅닉네임 / c.message 채팅내용
                     # 영상unique값 / num / 시간 / 닉네임 / 채팅
                     
-                    t_chat_message= ct.cm_tokenize(c.message)
+                    t_chat_message= ct.preprocessing(c.message)
                     
                     data= self.save_json(video_id, num,
                                          c.datetime, c.author.name,
@@ -52,9 +48,7 @@ class crawling:
                 chat.terminate() # 유튜브 긁어오는거 중지
                 break
             
-        
-        
-
+    
 # 2. 네이버쇼핑
 # url 예시: https://shoppinglive.naver.com/lives/177021
     def naver_kafka(self, video_url, topic_name):
@@ -83,13 +77,13 @@ class crawling:
                 for i in range(len(n_chat_message)):
                     try:
                         if n_chat_name[i].text: #채팅이 있는 경우
-                            t_chat_message= ct.cm_tokenize(n_chat_message[i].text)
+                            t_chat_message= ct.preprocessing(n_chat_message[i].text)
                             chat_text = (n_chat_name[i].text, t_chat_message)
                             if chat_text in pop_list: #중복되는 경우
                                 pass
                             else: #중복되지 않는 경우
                                 pop_list.append(chat_text)
-                                t_chat_message= ct.cm_tokenize(n_chat_message[i].text)
+                                t_chat_message= ct.preprocessing(n_chat_message[i].text)
                                 data= self.save_json(video_id, num,
                                                      chat_time, n_chat_name[i].test,
                                                      t_chat_message)
@@ -97,6 +91,5 @@ class crawling:
                                 ck.pro_kafka(topic_name, data) #카프카로 태우기
                     except:
                         pass
-            
         finally:
             driver.close()
