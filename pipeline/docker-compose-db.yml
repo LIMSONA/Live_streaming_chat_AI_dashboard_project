@@ -24,16 +24,11 @@ services:
     volumes:
       - ./data/mongodb:/bitnami/mongodb
 
-<<<<<<< HEAD
-      # ek : https://www.youtube.com/watch?v=WnREUsxqJ3Y 참고
-
 
 #airflow & PostgreSQL & Redis
 #캐싱전략?? https://rumor1993.tistory.com/m/86
 #Airflow 컨테이너 - PostgreSQL와 Redis에 의존하여 데이터를 유지
 #데이터 손실을 방지하려면 PostgreSQL 데이터 및 Redis(TM) 데이터의 지속성을 위해 볼륨을 마운트
-=======
->>>>>>> 858b9bf05381ccfb08a7f7f82023522f4de7a43a
   postgresql:
     image: bitnami/postgresql:10
     volumes:
