@@ -3,16 +3,24 @@ from konlpy.tag import Okt
 from jamo import h2j, j2hcj #초성/중성/종성분리
 
 
+f = open("./stopwords-ko.txt", 'r', encoding="utf-8")
+lines = f.readlines()
+stopwords = []
+for line in lines:
+    line = line.replace('\n', '')
+    stopwords.append(line)
+f.close()   
+
 class c_token:    
-# 불용어 파일 불러오기
-    global stopwords
-    f = open("./crawling/stopwords-ko.txt", 'r', encoding="utf-8")
-    lines = f.readlines()
-    stopwords = []
-    for line in lines:
-        line = line.replace('\n', '')
-        stopwords.append(line)
-    f.close()                                
+# 불용어 파일 불러오기 ==> 밖에서 지정해저야 오류 안생김 
+    # global stopwords
+    # f = open("./crawling/stopwords-ko.txt", 'r', encoding="utf-8")
+    # lines = f.readlines()
+    # stopwords = []
+    # for line in lines:
+    #     line = line.replace('\n', '')
+    #     stopwords.append(line)
+    # f.close()                                
          
 # 1 + 2 + stopword 그냥 다 합치기!
     def preprocessing(self, input_str):
@@ -69,8 +77,8 @@ class c_token:
         return token
 
 # 테스트하기
-cl = c_token()
-test = "제품은 좋을수도 있고 나쁠수도 있는데 그걸 고객들을 속이려고 하고 심지어 사과도 안하고 양심도없지"
-result = cl.preprocessing(test)
-print(result)
-# ==> 제품 좋다 있다 나쁘다 있다 그걸 고객 속이다 하다 심지어 사과 하고 양심 없다
+# cl = c_token()
+# test = "제품은 좋을수도 있고 나쁠수도 있는데 그걸 고객들을 속이려고 하고 심지어 사과도 안하고 양심도없지"
+# result = cl.preprocessing(test)
+# print(result)
+# # ==> 제품 좋다 있다 나쁘다 있다 그걸 고객 속이다 하다 심지어 사과 하고 양심 없다

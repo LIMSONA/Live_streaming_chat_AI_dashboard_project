@@ -30,8 +30,3 @@ class c_kafka:
                     consumer_timeout_ms=1000
                     )
         return consumer    
-    
-    
-c= c_kafka()
-c.pro_kafka("test_topic","안녕!!")
-c.con_kafka("test_topic")
