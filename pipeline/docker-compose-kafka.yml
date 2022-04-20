@@ -35,7 +35,7 @@ services:
   burrow: 
     image: hy22-burrow:0.1
     volumes:
-      - ./asstes/burrow:/etc/burrow/
+      - ./assets/burrow:/etc/burrow/
       - ./data/burrow:/var/tmp/burrow
     expose:
       - 8000
