@@ -26,9 +26,9 @@ cr = cr_crawling.c_crawling() # crawling 클래스
 
 
 # 카프카 
-# kafka_topic= ['input', 'output']
+kafka_topic= ['input', 'output']
 
 # 유튜브 크롤링 test
 video_url = "https://www.youtube.com/watch?v=py_phbQxy5Y"
 
-cr.youtube_kafka(video_url, 'input')
+cr.youtube_kafka(video_url, kafka_topic[0])

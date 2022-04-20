@@ -22,7 +22,7 @@ class c_crawling:
         "chat_message" : chat_message}
         # "chat_n_token" : ct.noun_tokenize(chat_message)}
         return json_form
-    
+
 # 1. 유튜브 
 # url 예시 https://www.youtube.com/watch?v=py_phbQxy5Y
 # 제목클래스 h1 / style-scope ytd-video-primary-info-renderer
@@ -30,6 +30,7 @@ class c_crawling:
         num= 0
         video_id= video_url.split('?v=')[-1]
         chat = pytchat.create(video_id= video_id)
+        ck.init_producer()
         while chat.is_alive():
             try:
                 for c in chat.get().sync_items():               
@@ -58,6 +59,7 @@ class c_crawling:
         num= 0 #while 반복문 상관없이 cnt 되도록
         
         try:
+            ck.init_producer()
             while True:
                 driver.get(video_url)
                 pop_list = []
@@ -91,4 +93,3 @@ class c_crawling:
                         pass    
         finally:
             driver.close()
-

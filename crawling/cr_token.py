@@ -12,15 +12,7 @@ for line in lines:
 f.close()   
 
 class c_token:    
-# 불용어 파일 불러오기 ==> 밖에서 지정해저야 오류 안생김 
-    # global stopwords
-    # f = open("./crawling/stopwords-ko.txt", 'r', encoding="utf-8")
-    # lines = f.readlines()
-    # stopwords = []
-    # for line in lines:
-    #     line = line.replace('\n', '')
-    #     stopwords.append(line)
-    # f.close()                                
+# 불용어 파일 불러오기 ==> 밖에서 지정해저야 오류 안생김                         
          
 # 1 + 2 + stopword 그냥 다 합치기!
     def preprocessing(self, input_str):
