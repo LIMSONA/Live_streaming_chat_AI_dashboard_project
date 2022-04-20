@@ -13,7 +13,7 @@ topic_name = "test_topic" #꼭 producer파일 확인하기!
 consumer = KafkaConsumer(
             topic_name,
             bootstrap_servers=[bootstrap_servers],
-            auto_offset_reset='earliest',
+            auto_offset_reset='latest',
             enable_auto_commit=True,
             group_id='my-group',
             value_deserializer=lambda x: loads(x.decode('utf-8')),
@@ -26,4 +26,4 @@ print("[begin] Topic: %s 으로 consumer가 메시지 받아옴" % (topic_name))
 for message in consumer:
     # print("Partition: %d, Offset: %d, Value: %s" % ( message.partition, message.offset,message.value ))
     print(consumer)
-print("[end] 걸린시간 :", time.time() - start)
+# print("[end] 걸린시간 :", time.time() - start)

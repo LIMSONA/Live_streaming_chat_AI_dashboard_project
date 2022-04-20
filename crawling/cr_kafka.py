@@ -8,19 +8,20 @@ load_dotenv()
 bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 class c_kafka: 
-    def pro_kafka(self, topic_name, get_data):
-# topic_name = "test_topic" #토픽확인! 
-        producer = KafkaProducer(
+    def init_producer(self):
+        self.producer = KafkaProducer(
                 acks=0,
                 compression_type='gzip', #CPU 사용은 많지만 속도는 빠르니
                 bootstrap_servers=[bootstrap_servers],
-                value_serializer=lambda x: dumps(x).encode('utf-8')
-                )
+                value_serializer=lambda x: dumps(x).encode('utf-8'))
+        print("카프카 프로듀서 열림")
+        
+    def pro_kafka(self, topic_name, get_data):
         print("메세지 전송중 ...")
         print(get_data)
-        producer.send(topic_name, value=get_data)
+        self.producer.send(topic_name, value=get_data)
         print('보냈음')
-        producer.flush()
+        self.producer.flush()
         print('flush 다음')
 
     def con_kafka(self, topic_name):      
