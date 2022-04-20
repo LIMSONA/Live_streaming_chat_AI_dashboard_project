@@ -19,8 +19,8 @@ class crawling:
         "num" : num,
         "chat_time" : chat_time,
         "chat_id" : chat_name,
-        "chat_message" : chat_message,
-        "chat_n_token" : ct.noun_tokenize(chat_message)}
+        "chat_message" : chat_message}
+        # "chat_n_token" : ct.noun_tokenize(chat_message)}
         return json_form
     
 # 1. 유튜브 
@@ -29,7 +29,7 @@ class crawling:
     def youtube_kafka(self, video_url, topic_name):
         num= 0
         video_id= video_url.split('?v=')[-1]
-        chat = pytchat.create(video_id=video_id)
+        chat = pytchat.create(video_id= video_id)
         while chat.is_alive():
             try:
                 for c in chat.get().sync_items():               
@@ -37,7 +37,6 @@ class crawling:
                     # 영상unique값 / num / 시간 / 닉네임 / 채팅
                     
                     t_chat_message= ct.preprocessing(c.message)
-                    
                     data= self.save_json(video_id, num,
                                          c.datetime, c.author.name,
                                          t_chat_message)
