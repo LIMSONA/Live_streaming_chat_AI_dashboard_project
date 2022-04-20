@@ -4,8 +4,8 @@ kafka-python==2.0.2
 # time 기본
 
 # 크롤링
-pytchat==0.5.3
-# pafy==0.5.5 영상제목,별점,뷰수,제작자,플레이길이/시간,좋아요,싫어요
+pytchat==0.5.5 # 최신버젼
+# pafy==0.5.5 api 포인트 요구 영상제목,별점,뷰수,제작자,플레이길이/시간,좋아요,싫어요
 selenium==3.141.0
 webdriver-manager==3.4.2
 python-dotenv==0.20.0
