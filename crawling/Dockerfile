@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 COPY . .
 
 # 스크립트 실행
-CMD [ "python", "./main.py" ]
+CMD [ "python3" ]
