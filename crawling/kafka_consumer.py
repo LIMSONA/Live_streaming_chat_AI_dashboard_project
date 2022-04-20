@@ -2,14 +2,16 @@ from kafka import KafkaConsumer
 from json import loads
 import time
 import os
+# from dotenv import load_dotenv
 
-bootstrap_servers = os.getenv('KAFKA_SERVER')
+# load_dotenv()
+# bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 # topic, broker list
 topic_name = "test_topic" #꼭 producer파일 확인하기!
 consumer = KafkaConsumer(
             topic_name,
-            bootstrap_servers=[bootstrap_servers],
+            bootstrap_servers=['localhost:9092'],
             auto_offset_reset='earliest',
             enable_auto_commit=True,
             group_id='my-group',
