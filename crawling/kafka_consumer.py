@@ -2,8 +2,11 @@ from kafka import KafkaConsumer
 from json import loads
 import time
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 bootstrap_servers = os.getenv('KAFKA_SERVER')
+print(bootstrap_servers)
 
 # topic, broker list
 topic_name = "test_topic" #꼭 producer파일 확인하기!
@@ -21,6 +24,6 @@ consumer = KafkaConsumer(
 start = time.time()
 print("[begin] Topic: %s 으로 consumer가 메시지 받아옴" % (topic_name))
 for message in consumer:
-    print("Partition: %d, Offset: %d, Value: %s" % ( message.partition, message.offset,message.value ))
-    
+    # print("Partition: %d, Offset: %d, Value: %s" % ( message.partition, message.offset,message.value ))
+    print(consumer)
 print("[end] 걸린시간 :", time.time() - start)

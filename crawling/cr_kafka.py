@@ -16,8 +16,12 @@ class c_kafka:
                 bootstrap_servers=[bootstrap_servers],
                 value_serializer=lambda x: dumps(x).encode('utf-8')
                 )
+        print("메세지 전송중 ...")
+        print(get_data)
         producer.send(topic_name, value=get_data)
+        print('보냈음')
         producer.flush()
+        print('flush 다음')
 
     def con_kafka(self, topic_name):      
         consumer = KafkaConsumer(

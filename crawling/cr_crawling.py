@@ -10,7 +10,7 @@ import cr_token # 토큰파일명
 ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 
-class crawling:   
+class c_crawling:   
 # 0. json형식 파일저장하기
 # 영상unique값 / num / 시간 / 닉네임 / 채팅
     def save_json(self, video_unique, num, chat_time, chat_name, chat_message):

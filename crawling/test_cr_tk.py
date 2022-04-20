@@ -13,7 +13,7 @@ import cr_token # 토큰파일명
 # ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 
-class crawling:   
+class c_crawling:   
 # 0. json형식 파일저장하기
     def save_json(self, video_unique, num, chat_time, chat_name, chat_message):
         json_form= {
@@ -44,8 +44,7 @@ class crawling:
                                          c.datetime, c.author.name,
                                          t_chat_message)
                     num +=1 #하나씩 커지게
-                    # ck.pro_kafka(topic_name, data) #카프카로 태우기
-                    print(data,"\n")
+                    return data
                 
             # except KeyboardInterrupt: # ctrl + c
             #     chat.terminate() # 유튜브 긁어오는거 중지
@@ -56,5 +55,10 @@ class crawling:
 
 
 
-c = crawling()
-c.youtube_kafka("https://www.youtube.com/watch?v=py_phbQxy5Y")
+c = c_crawling()
+# c.youtube_kafka("https://www.youtube.com/watch?v=py_phbQxy5Y")
+result = c.youtube_kafka("https://www.youtube.com/watch?v=py_phbQxy5Y")
+import cr_kafka # 카프카파일명
+ck= cr_kafka.c_kafka()
+
+ck.pro_kafka("test_topic", result)
