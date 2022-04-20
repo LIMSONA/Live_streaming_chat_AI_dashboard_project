@@ -3,13 +3,13 @@ from json import dumps
 import time
 import os
 
-bootstrap_servers = os.getenv('KAFKA_SERVER')
+# bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 topic_name = "test_topic" #토픽확인! 
 producer = KafkaProducer(
         acks=0,
         compression_type='gzip',
-        bootstrap_servers=[bootstrap_servers],
+        bootstrap_servers=['localhost:9092'],
         value_serializer=lambda x: dumps(x).encode('utf-8')
         )
 
