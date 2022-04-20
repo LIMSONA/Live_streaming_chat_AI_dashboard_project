@@ -2,7 +2,6 @@ version: '3'
 
 services:
   py-consumer:
-    container_name: kafka_consumer
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -13,12 +12,11 @@ services:
       - KAFKA_SERVER=${KAFKA_SERVER}
     volumes:
       - ./:/usr/src/app
-    command: python ./kafka_consumer.py
-    depends_on:
-      - py-producer
+    command: python3 ./kafka_consumer.py
+    # depends_on:
+    #   - py-producer
 
   py-producer:
-    container_name: kafka_crawling
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -29,7 +27,7 @@ services:
       - KAFKA_SERVER=${KAFKA_SERVER}
     volumes:
       - ./:/usr/src/app
-    command: python ./test_main.py
+    command: python3 ./test_main.py
 
 networks: 
   default: 
