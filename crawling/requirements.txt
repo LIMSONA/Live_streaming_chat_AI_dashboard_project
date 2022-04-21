@@ -9,6 +9,8 @@ pytchat==0.5.5 # 최신버젼
 selenium==3.141.0
 webdriver-manager==3.4.2
 python-dotenv==0.20.0
+urllib3==1.24.3
+chardet==3.0.4
 
 # 토큰화
 # re 기본
