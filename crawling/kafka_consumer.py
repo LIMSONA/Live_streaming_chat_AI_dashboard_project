@@ -14,7 +14,7 @@ while True:
     consumer = KafkaConsumer(
                 topic_name,
                 bootstrap_servers=[bootstrap_servers],
-                auto_offset_reset='earliest',
+                auto_offset_reset='latest',
                 enable_auto_commit=True,
                 group_id='my-group',
                 value_deserializer=lambda x: loads(x.decode('utf-8')),
