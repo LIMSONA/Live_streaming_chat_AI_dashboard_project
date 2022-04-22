@@ -1,3 +1,20 @@
+# 카프카 전송
 kafka-python==2.0.2
-# json
-# time
+# json 기본
+# time 기본
+
+# 크롤링
+pytchat==0.5.5 # 최신버젼
+# pafy==0.5.5 api 포인트 요구 영상제목,별점,뷰수,제작자,플레이길이/시간,좋아요,싫어요
+selenium==3.141.0
+webdriver-manager==3.4.2
+python-dotenv==0.20.0
+urllib3==1.24.3
+chardet==3.0.4
+gunicorn==19.1.1
+
+# 토큰화
+# re 기본
+konlpy==0.5.2
+jamo==0.4.1
+tweepy==3.10.0
