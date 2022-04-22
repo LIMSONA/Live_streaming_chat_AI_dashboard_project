@@ -40,5 +40,5 @@ if "youtube" in video_url:
     cr.youtube_kafka(video_url, kafka_topic[0])
 else:
     print("네이버방송!")
-    cr.naver_kafka(video_url,kafka_topic[0])
+    cr.naver_kafka(video_url, kafka_topic[0])
     
