@@ -5,7 +5,7 @@ import os
 # from dotenv import load_dotenv
 
 # load_dotenv()
-# bootstrap_servers = os.getenv('KAFKA_SERVER')
+bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 # topic, broker list
 topic_name = "test_topic" #꼭 producer파일 확인하기!

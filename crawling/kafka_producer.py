@@ -3,7 +3,7 @@ from json import dumps
 import time
 import os
 
-# bootstrap_servers = os.getenv('KAFKA_SERVER')
+bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 topic_name = "test_topic" #토픽확인! 
 producer = KafkaProducer(
