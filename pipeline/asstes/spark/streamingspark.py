@@ -1,10 +1,16 @@
+import pyspark
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType
+from pyspark.sql.types import StructField
+from pyspark.sql.types import IntegerType
+from pyspark.sql.types import StringType
 
-KAFKA_TOPIC = "craawling1"
+
+KAFKA_TOPIC = "crawling1"
 KAFKA_SERVER = "localhost:9092"
 
 spark_session = SparkSession \
@@ -29,8 +35,8 @@ StructField("firstname",StringType), \
 StructField("middlename",StringType), \
 StructField("lastname",StringType), \
 StructField("dob_year",IntegerType), \
-StructField("dob_month",IntegerType)
-StructField("gender",StringType)
+StructField("dob_month",IntegerType), \
+StructField("gender",StringType), \
 StructField("salary",IntegerType)
 ])
 
