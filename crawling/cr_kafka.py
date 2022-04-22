@@ -1,11 +1,7 @@
 from kafka import KafkaProducer, KafkaConsumer
 from json import dumps, loads
 import time
-# import os
-# from dotenv import load_dotenv
 
-# load_dotenv()
-# bootstrap_servers = os.getenv('KAFKA_SERVER')
 bootstrap_servers="kafka:9092"
 class c_kafka: 
     def init_producer(self):

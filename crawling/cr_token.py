@@ -22,10 +22,7 @@ class c_token:
     #형태소단위 
         okt = Okt() #선택이유는 논문 참고
         m_token = okt.morphs(re_string, stem=True)                                
-    # 초중성분리  ==> 너무 작게 쪼개져서 주석처리!!
-        # cm_token = []
-        # for i in m_token:
-        #     cm_token.append( j2hcj(h2j(i)) )
+
     # 불용어 처리
         result = [token for token in m_token if token not in stopwords]
         preprocessed_text= ' '.join(result)
@@ -33,13 +30,10 @@ class c_token:
         return preprocessed_text
 
 
-
-
 # 1.문자만 필터링(이모티콘제외) & stopword(불용어)
     def filter_str(self, input_str):
         re_string = re.compile('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+').sub('', input_str)
         return print(re_string)
-
 # 2. 
 # 2-1.텍스트를 형태소 단위로 나눔
 # norm(정규화),stem(어간추출) 기본값 False
@@ -67,10 +61,3 @@ class c_token:
         okt = Okt()
         token = okt.nouns(self.filter_str(input_str))
         return token
-
-# 테스트하기
-# cl = c_token()
-# test = "제품은 좋을수도 있고 나쁠수도 있는데 그걸 고객들을 속이려고 하고 심지어 사과도 안하고 양심도없지"
-# result = cl.preprocessing(test)
-# print(result)
-# # ==> 제품 좋다 있다 나쁘다 있다 그걸 고객 속이다 하다 심지어 사과 하고 양심 없다
