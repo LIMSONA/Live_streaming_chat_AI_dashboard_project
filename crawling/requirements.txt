@@ -11,6 +11,7 @@ webdriver-manager==3.4.2
 python-dotenv==0.20.0
 urllib3==1.24.3
 chardet==3.0.4
+gunicorn==19.1.1
 
 # 토큰화
 # re 기본
