@@ -13,9 +13,6 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tg
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
-WORKDIR /opt/spark
-
-
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
@@ -28,11 +25,13 @@ ENV SPARK_MASTER_PORT=7077
 ENV SPARK_MASTER_WEBUI_PORT=8080
 ENV SPARK_WORKER_INSTANCES=1
 ENV SPARK_WORKER_CORES=1
-ENV SPARK_WORKER_MEMORY=2g
+ENV SPARK_WORKER_MEMORY=1g
 ENV SPARK_WORKER_WEBUI_PORT=8082
 
 EXPOSE ${SPARK_MASTER_PORT}
 EXPOSE ${SPARK_MASTER_WEBUI_PORT}
 EXPOSE ${SPARK_WORKER_WEBUI_PORT}
+
+WORKDIR /opt/spark
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
