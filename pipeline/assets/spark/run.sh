@@ -6,5 +6,6 @@ docker run -it \
     -h spark-master \
     -p 7077:7077 \
     -p 8080:8080 \
+    -v ${PWD}/entrypoint.sh:/usr/local/bin/entrypoint.sh \
     spark-hyunjinee:0.1 bash 
 
