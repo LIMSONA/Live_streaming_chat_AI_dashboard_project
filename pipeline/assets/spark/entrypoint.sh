@@ -1,7 +1,9 @@
 #!/bin/bash
 
 if [ "$SPARK_MODE" = "master" ]; then
-    start-master.sh
-else
-    start-worker.sh spark://spark-master:7077
+    /opt/spark/sbin/start-master.sh
+fi
+
+if [ "$SPARK_MODE" = "worker" ]; then
+    /opt/spark/sbin/start-worker.sh spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT}
 fi
