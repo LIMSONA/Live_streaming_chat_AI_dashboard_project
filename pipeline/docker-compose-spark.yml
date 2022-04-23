@@ -16,7 +16,7 @@ services:
       - SPARK_MASTER_PORT=7077
       - SPARK_MASTER_WEBUI_PORT=8080
     volumes: 
-      - ./asstes/spark:/spark-work
+      - ./assets/spark:/spark-work
 
 # 스파크 워커2개
   spark-worker:
@@ -37,24 +37,25 @@ services:
       - spark-master
 
   zeppelin:
-    image: apache/zeppelin:0.10.1
+    build:
+      context: .
+      dockerfile: ./assets/zeppelin/docker/Dockerfile  
+    image: my-zeppelin:0.1
     container_name: zeppelin
-    scale: 1
     environment:
-      # - SPARK_MODE=zeppelin
-      # - SPARK_MASTER_HOST=spark-master
-      # - SPARK_MASTER_PORT=7077
-      # - ZEPPELIN_ADDR=0.0.0.0
-      - ZEPPELIN_LOG_DIR='/logs'
-      - ZEPPELIN_NOTEBOOK_DIR='/notebook'
+      - ZEPPELIN_PORT=8080
+      - ZEPPELIN_LOG_DIR=/logs
+      - ZEPPELIN_NOTEBOOK_DIR=/notebook
+      - SPARK_MASTER=spark://spark-master:7077
+      - USE_HADOOP=false
     ports:
       - 18090:8080
     volumes:
       - ./data/zeppelin/logs:/logs
       - ./data/zeppelin/data:/data
-      - ./data/zeppelin/notebook:/notebook
-    # depends_on:
-    #   - spark-master
+      - ./assets/zeppelin/notebook:/notebook
+      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+
 
 networks: 
   default: 
