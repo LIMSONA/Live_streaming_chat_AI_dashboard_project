@@ -21,15 +21,16 @@ services:
     ports:
       - "9092:9092"
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_HOST_NAME= kafka
       - KAFKA_ADVERTISED_PORT= 9092
       - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
       - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
       - KAFKA_BROKER_ID=1
+
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
+
 
 # bash ./burrow-build.sh
   burrow: 
