@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # hy22-platform
 
 ## docker network
@@ -14,3 +15,11 @@ kafka-topics.sh --create --bootstrap-server kafka:9092 --replication-factor 1 --
 kafka-topics.sh --list --bootstrap-server kafka:9092
 3. 카프카 컨슈머 조회
 kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic input
+=======
+# hy22-platform
+
+## docker network
+```
+docker network create hy22-external-network
+```
+>>>>>>> origin/feature_steven
