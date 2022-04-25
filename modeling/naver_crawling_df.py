@@ -85,10 +85,8 @@ def get_chat_data(html):
         result = pd.concat([prev_df,df], axis=0)
 # ID와 내용 기준으로 중복되는 것 DROP 시키고, 첫번째는 남기는 조건, 인덱스 재정렬
         re_result= result.drop_duplicates(["id","comment"], keep="first", ignore_index= True)
-    
 # 다시 저장하기!
-        re_result.to_csv(file_name, index= False)
-    
+        re_result.to_csv(file_name, index= False)   
     else:
 #         print(df)
         df.to_csv(file_name, index= False)
@@ -97,8 +95,7 @@ def get_chat_data(html):
 current = datetime.datetime.now()
 ten_minutes_later = current + datetime.timedelta(minutes=10)
 
-# 2분동안 반복문 진행되도록
-
+# 10분동안 반복문 진행되도록!!
 while True:
     shopping_links = get_home_links(5)
     for i in shopping_links:
