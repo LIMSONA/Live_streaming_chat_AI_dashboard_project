@@ -95,7 +95,7 @@ def get_chat_data(html):
 current = datetime.datetime.now()
 ten_minutes_later = current + datetime.timedelta(minutes=10)
 
-# 10분동안 반복문 진행되도록
+# 10분동안 반복문 진행되도록!!
 while True:
     shopping_links = get_home_links(5)
     for i in shopping_links:
