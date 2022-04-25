@@ -1,0 +1,20 @@
+certifi==2018.11.29
+chardet==3.0.4
+defusedxml==0.5.0
+Django==2.1.7
+django-allauth==0.39.1
+django-appconf==1.0.3
+django-imagekit==4.0.2
+idna==2.8
+oauthlib==3.0.1
+pilkit==2.0
+Pillow==5.4.1
+python3-openid==3.1.0
+pytz==2018.9
+requests==2.21.0
+requests-oauthlib==1.2.0
+six==1.12.0
+urllib3==1.24.1
+
+# 마커들로는 구분할 수 없는 정보가 있거나, 분리해야 하는 패키지가 너무 많다면 아예 파일을 나눠버리기
+# 조건에 따른 패키지 설치. 설치할때, 배포할때, 배포한 후
