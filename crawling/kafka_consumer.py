@@ -13,7 +13,7 @@ while True:
                 bootstrap_servers=[bootstrap_servers])
 
     for message in consumer: 
-        convert= json.loads(message.value)
+        edit= json.loads(message.value)
         print(message.topic, message.partition, 
-            message.offset, message.key, convert)
+            message.offset, message.key, edit )
     
