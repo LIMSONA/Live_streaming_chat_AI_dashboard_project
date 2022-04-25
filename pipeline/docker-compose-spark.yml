@@ -5,7 +5,7 @@ services:
 # 스파크
 # 스파크 마스터
   spark-master:
-    image: spark-hyunjinee:0.1
+    image: my-spark:0.1
     container_name: spark-master
     ports:
       - 8080:8080 # master webui
@@ -20,7 +20,7 @@ services:
 
 # 스파크 워커2개
   spark-worker:
-    image: spark-hyunjinee:0.1
+    image: my-spark:0.1
     scale: 2
     environment:
       - SPARK_MODE=worker
