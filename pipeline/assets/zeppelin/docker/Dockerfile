@@ -10,5 +10,7 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tg
 RUN chown root:root -R /opt/spark
 
 ENV SPARK_HOME=/opt/spark
+ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 WORKDIR /opt/zeppelin
+USER zeppelin
