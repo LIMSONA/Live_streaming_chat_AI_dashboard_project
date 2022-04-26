@@ -29,7 +29,7 @@ services:
       - ./data/logstash:/usr/share/logstash/data
       # - ./assets/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
 
-networks: 
-  default: 
-    external: 
-      name: hy22-external-network
+networks:
+  default:
+    name: hy22-external-network
+    external: true
