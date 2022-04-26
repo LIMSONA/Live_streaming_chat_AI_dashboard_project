@@ -40,3 +40,8 @@ else:
     print("네이버방송!")
     cr.naver_kafka(video_url, kafka_topic[0])
     
+    
+    
+    
+    
+    
