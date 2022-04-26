@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-version: '3'
-
-services:
-  py-consumer:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    image: py-docker:0.1
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    environment:
-      - KAFKA_SERVER=${KAFKA_SERVER}
-    volumes:
-      - ./:/usr/src/app
-    command: python ./kafka_consumer.py
-    depends_on:
-      - py-producer
-
-  py-producer:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    image: py-docker:0.1
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    environment:
-      - KAFKA_SERVER=${KAFKA_SERVER}
-    volumes:
-      - ./:/usr/src/app
-    command: python ./kafka_producer.py
-
-networks: 
-  default: 
-    external: 
-=======
 version: '3'
 
 services:
@@ -68,5 +32,4 @@ services:
 networks: 
   default: 
     external: 
->>>>>>> 7efb03822f008d3120cd07868f0511401d34116a
       name: hy22-external-network
