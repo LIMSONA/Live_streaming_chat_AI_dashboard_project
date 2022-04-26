@@ -45,7 +45,7 @@ services:
       - zookeeper
     restart: always
 
-networks: 
-  default: 
-    external: 
-      name: hy22-external-network
+networks:
+  default:
+    name: hy22-external-network
+    external: true
