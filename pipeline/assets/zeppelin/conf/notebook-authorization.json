@@ -2,6 +2,7 @@
   "authInfo": {
     "2EW19CSPA": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       "readers": [],
       "owners": [],
@@ -34,6 +35,8 @@
       "runners": []
     },
     "2H33DPMAQ": {
+=======
+>>>>>>> 28127fe (zeppelin에서 kafka 연동 테스트)
       "readers": [],
       "owners": [],
       "writers": [],
@@ -51,12 +54,15 @@
       "writers": [],
       "runners": []
     },
+<<<<<<< HEAD
     "2H2TMT8ZA": {
       "readers": [],
       "owners": [],
       "writers": [],
       "runners": []
     },
+=======
+>>>>>>> 28127fe (zeppelin에서 kafka 연동 테스트)
     "2EZ66TM57": {
       "readers": [],
       "owners": [],
@@ -75,6 +81,15 @@
       "writers": [],
       "runners": []
     },
+<<<<<<< HEAD
+=======
+    "2H15TPHUP": {
+      "readers": [],
+      "owners": [],
+      "writers": [],
+      "runners": []
+    },
+>>>>>>> 28127fe (zeppelin에서 kafka 연동 테스트)
     "2BWJFTXKJ": {
       "readers": [],
       "owners": [],
@@ -99,6 +114,7 @@
       "writers": [],
       "runners": []
     },
+<<<<<<< HEAD
     "2BYEZ5EVK": {
       "readers": [],
       "owners": [],
@@ -256,6 +272,9 @@
       "runners": []
     },
     "2F2YS7PCE": {
+=======
+    "2H23E4H6K": {
+>>>>>>> 28127fe (zeppelin에서 kafka 연동 테스트)
       "readers": [],
       "owners": [],
       "writers": [],
@@ -273,12 +292,15 @@
       "writers": [],
       "runners": []
     },
+<<<<<<< HEAD
     "2H3T2VZ81": {
       "readers": [],
       "owners": [],
       "writers": [],
       "runners": []
     },
+=======
+>>>>>>> 28127fe (zeppelin에서 kafka 연동 테스트)
     "2F8KN6TKK": {
       "readers": [],
       "owners": [],
