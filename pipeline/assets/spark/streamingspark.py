@@ -10,7 +10,7 @@ from pyspark.sql.types import IntegerType
 from pyspark.sql.types import StringType
 
 
-KAFKA_TOPIC = "crawling1"
+KAFKA_TOPIC = "input"
 KAFKA_SERVER = "localhost:9092"
 
 spark_session = SparkSession \
@@ -19,34 +19,23 @@ spark_session = SparkSession \
     .config("spark.some.config.option", "some-value") \
     .getOrCreate()
 
-df = spark_session \
-    .readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", "kafka:9092") \
-    .option("subscribe", "json_topic") \
-    .option("startingOffsets", "earliest") \
-    .load()
+df = spark \
+.readStream\
+.format('kafka') \
+.option('kafka.bootstrap.servers', 'kafka:9092') \
+.option("startingOffsets", "earliest") \
+.option('subscribe', 'input') \
+.load()
 
-df1 = df.selectExpr("CAST(value AS STRING)")
+df1 = df.selectExpr('CAST(value AS STRING) as value')
 
 schema = StructType([ \
-StructField("id",IntegerType), \
-StructField("firstname",StringType), \
-StructField("middlename",StringType), \
-StructField("lastname",StringType), \
-StructField("dob_year",IntegerType), \
-StructField("dob_month",IntegerType), \
-StructField("gender",StringType), \
-StructField("salary",IntegerType)
+StructField("video_unique",StringType(),True), \
+StructField("num",StringType(),True), \
+StructField("chat_time",TimestampType(),True), \
+StructField("chat_id",StringType(),True), \
+StructField("chat_message",ArrayType(StringType()),True), \
 ])
 
 df2 = df1.select(from_json("value",schema).alias("data")).select("data.*")
 
-df2 \
-.selectExpr("CAST('id' AS STRING) AS key", "to_json(struct(*)) AS value") \
-.writeStream \
-.format('kafka') \
-.outputMode("append") \
-.option('kafka.bootstrap.servers', 'kafka:9092') \
-.option('topic', 'json_data_topic') \
-.start().awaitTermination()

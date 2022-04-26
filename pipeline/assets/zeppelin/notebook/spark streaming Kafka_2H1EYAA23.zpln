@@ -1,0 +1,216 @@
+{
+  "paragraphs": [
+    {
+      "text": "sc.version",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-26 02:48:44.347",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d 3.2.1\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650940182723_524400562",
+      "id": "paragraph_1650940182723_524400562",
+      "dateCreated": "2022-04-26 02:29:42.723",
+      "dateStarted": "2022-04-26 02:48:44.366",
+      "dateFinished": "2022-04-26 02:49:15.298",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650941219810_2049044476",
+      "id": "paragraph_1650941219810_2049044476",
+      "dateCreated": "2022-04-26 02:46:59.810",
+      "status": "READY"
+    },
+    {
+      "text": "val df \u003d spark.readStream\r\n        .format(\"kafka\")\r\n        .option(\"kafka.bootstrap.servers\", \"192.168.1.100:9092\")\r\n        .option(\"subscribe\", \"input\")\r\n        .load()",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-26 02:49:19.074",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [key: binary, value: binary ... 5 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650940187180_1175254032",
+      "id": "paragraph_1650940187180_1175254032",
+      "dateCreated": "2022-04-26 02:29:47.180",
+      "dateStarted": "2022-04-26 02:49:19.090",
+      "dateFinished": "2022-04-26 02:49:23.419",
+      "status": "FINISHED"
+    },
+    {
+      "text": ")",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-26 02:53:18.689",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650941595595_1617749106",
+      "id": "paragraph_1650941595595_1617749106",
+      "dateCreated": "2022-04-26 02:53:15.595",
+      "status": "READY"
+    },
+    {
+      "text": "df.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-26 02:53:15.661",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [key: binary, value: binary ... 5 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650940457158_1287363017",
+      "id": "paragraph_1650940457158_1287363017",
+      "dateCreated": "2022-04-26 02:34:17.158",
+      "dateStarted": "2022-04-26 02:52:08.840",
+      "dateFinished": "2022-04-26 02:52:09.265",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650941009157_1431704893",
+      "id": "paragraph_1650941009157_1431704893",
+      "dateCreated": "2022-04-26 02:43:29.158",
+      "status": "READY"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1650941010352_486334769",
+      "id": "paragraph_1650941010352_486334769",
+      "dateCreated": "2022-04-26 02:43:30.352",
+      "status": "READY"
+    }
+  ],
+  "name": "spark streaming Kafka",
+  "id": "2H1EYAA23",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
