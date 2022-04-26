@@ -14,6 +14,22 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tg
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
+
+RUN apt-get install python3.8 -y && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
+    ln -s /usr/bin/python3.8 /usr/bin/python
+
+RUN mkdir /root/.pip && \
+    set -x \
+    && { \
+    echo '[global]'; \
+    echo 'timeout = 60'; \
+    echo '[freeze]'; \
+    echo 'timeout = 10'; \
+    echo '[list]'; \
+    echo 'format = columns'; \
+    } > /root/.pip/pip.conf
+
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin

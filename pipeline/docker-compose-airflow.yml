@@ -42,7 +42,7 @@ services:
     ports:
       - 8082:8080
 
-networks: 
-  default: 
-    external: 
-      name: hy22-external-network
+networks:
+  default:
+    name: hy22-external-network
+    external: true
