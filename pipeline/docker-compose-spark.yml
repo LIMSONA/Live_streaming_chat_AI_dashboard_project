@@ -5,7 +5,7 @@ services:
 # 스파크
 # 스파크 마스터
   spark-master:
-    image: docker.io/bitnami/spark:3
+    image: my-spark:0.1
     container_name: spark-master
     ports:
       - 8080:8080 # master webui
@@ -18,20 +18,16 @@ services:
       - ./assets/spark:/spark-work
 
 # 스파크 워커2개
-  spark-worker-1:
-    image: docker.io/bitnami/spark:3
-    container_name: spark-worker-1
+  spark-worker:
+    image: my-spark:0.1
+    scale: 2
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=1G
       - SPARK_WORKER_CORES=1
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
-    ports:
-      - 18080:18080
+    # ports:
+    #   - 18080:8082
     # volumes:
     #   - shared-workspace:/opt/workspace
     depends_on:

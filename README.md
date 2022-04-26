@@ -4,8 +4,6 @@
 ```
 docker network create hy22-external-network
 ```
-# hy22-platform
-
 ## kafka
 1. 카프카 토픽 생성
 kafka-topics.sh --create --bootstrap-server kafka:9092 --replication-factor 1 --partitions 1 --topic input
