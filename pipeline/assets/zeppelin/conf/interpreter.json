@@ -532,7 +532,7 @@
       "properties": {
         "SPARK_HOME": {
           "name": "SPARK_HOME",
-          "value": "",
+          "value": "spark://spark-master:7077",
           "type": "string",
           "description": "Location of spark distribution"
         }
@@ -554,6 +554,8 @@
       "option": {
         "remote": true,
         "port": -1,
+        "perNote": "shared",
+        "perUser": "shared",
         "isExistingProcess": false,
         "setPermission": false,
         "owners": [],
@@ -1066,8 +1068,8 @@
         },
         "spark.jars.packages": {
           "name": "spark.jars.packages",
-          "value": "",
-          "type": "string",
+          "value": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2\norg.apache.spark:spark-streaming-kafka_2.10:1.6.2\norg.apache.kafka:kafka_2.10:0.8.2.2\norg.apache.kafka:kafka-clients:0.8.2.2",
+          "type": "textarea",
           "description": "Comma-separated list of Maven coordinates of jars to include on the driver and executor classpaths. The coordinates should be groupId:artifactId:version. If spark.jars.ivySettings is given artifacts will be resolved according to the configuration in the file, otherwise artifacts will be searched for in the local maven repo, then maven central and finally any additional remote repositories given by the command-line option --repositories."
         },
         "zeppelin.spark.useHiveContext": {
