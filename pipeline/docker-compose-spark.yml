@@ -37,14 +37,14 @@ services:
       - spark-master
 
   zeppelin:
-    # build:
-    #   context: .
-    #   dockerfile: ./assets/zeppelin/docker/Dockerfile  
-    # image: my-zeppelin:0.1
-    image: my-spark:0.1
+    build:
+      context: .
+      dockerfile: ./assets/zeppelin/docker/Dockerfile  
+    image: my-zeppelin:0.1
+    # image: my-spark:0.1
     container_name: zeppelin
     environment:
-      - SPARK_MODE=zeppelin
+      # - SPARK_MODE=zeppelin
       - ZEPPELIN_PORT=8080
       - ZEPPELIN_LOG_DIR=/logs
       - ZEPPELIN_NOTEBOOK_DIR=/notebook
@@ -54,9 +54,9 @@ services:
       - 18090:8080
     volumes:
       - ./data/zeppelin/logs:/logs
-      - ./data/zeppelin/data:/data
+      # - ./data/zeppelin/data:/data
       - ./assets/zeppelin/notebook:/notebook
-      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      # - ./assets/zeppelin/conf:/opt/zeppelin/conf
 
 networks:
   default:

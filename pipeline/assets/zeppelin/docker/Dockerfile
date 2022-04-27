@@ -13,4 +13,4 @@ ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 WORKDIR /opt/zeppelin
-USER zeppelin
+# USER zeppelin
