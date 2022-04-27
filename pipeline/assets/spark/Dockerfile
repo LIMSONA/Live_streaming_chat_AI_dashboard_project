@@ -15,11 +15,6 @@ RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
 
-RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz && \
-    tar -zxf zeppelin-0.10.1-bin-all.tgz && \
-    mv zeppelin-0.10.1-bin-all /opt/zeppelin && \
-    rm -rf zeppelin-0.10.1-bin-all.tgz
-
 RUN apt-get install python3.8 -y && \
     ln -s /usr/bin/python3.8 /usr/bin/python3 && \
     ln -s /usr/bin/python3.8 /usr/bin/python
@@ -35,10 +30,9 @@ RUN mkdir /root/.pip && \
     echo 'format = columns'; \
     } > /root/.pip/pip.conf
 
-ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
-ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
+ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
