@@ -5,6 +5,9 @@ services:
 # 스파크
 # 스파크 마스터
   spark-master:
+    build:
+      context: .
+      dockerfile: ./assets/spark/Dockerfile 
     image: my-spark:0.1
     container_name: spark-master
     ports:
@@ -20,6 +23,9 @@ services:
 
 # 스파크 워커2개
   spark-worker:
+    build:
+      context: .
+      dockerfile: ./assets/spark/Dockerfile 
     image: my-spark:0.1
     deploy:
       replicas: 2
