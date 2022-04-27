@@ -16,4 +16,3 @@ while True:
         edit= json.loads(message.value)
         print(message.topic, message.partition, 
             message.offset, message.key, edit )
-    
