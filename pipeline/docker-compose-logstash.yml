@@ -5,8 +5,14 @@ services:
 # logstash
 # https://github.com/elastic/logstash-docker
   logstash:
+    env_file:
+      - .env
     # image: docker.io/bitnami/logstash:8
-    image: docker.elastic.co/logstash/logstash-oss:8.1.2
+    # image: docker.elastic.co/logstash/logstash-oss:8.1.2
+    build:
+      context: .
+      dockerfile: ./assets/logstash/Dockerfile.logstash
+    image: my_logstash:0.1
     container_name: logstash
     stdin_open: true # docker run -i
     tty: true        # docker run -t
@@ -23,7 +29,7 @@ services:
       - ./data/logstash:/usr/share/logstash/data
       # - ./assets/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
 
-networks: 
-  default: 
-    external: 
-      name: hy22-external-network
+networks:
+  default:
+    name: hy22-external-network
+    external: true
