@@ -38,4 +38,8 @@ if "youtube" in video_url:
     cr.youtube_kafka(video_url, kafka_topic[0])
 else:
     print("네이버방송!")
+<<<<<<< HEAD
     cr.naver_kafka(video_url, kafka_topic[0])
+=======
+    cr.naver_kafka(video_url, kafka_topic[0])
+>>>>>>> ce96c620904c82c70043a02f299bbd9c5b452c8a
