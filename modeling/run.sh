@@ -1,6 +1,6 @@
 #! /bin/bash
 
-docker run -d \
+docker run -it \
     --rm \
     -e JUPYTER_PORT=9000 \
     -p 8000:9000 \
