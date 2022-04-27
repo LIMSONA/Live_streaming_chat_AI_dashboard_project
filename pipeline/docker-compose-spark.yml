@@ -28,8 +28,8 @@ services:
       - SPARK_MASTER_PORT=7077
       - SPARK_WORKER_MEMORY=1G
       - SPARK_WORKER_CORES=1
-    ports:
-      - 18080:8082
+    # ports:
+    #   - 18080:8082
     # volumes:
     #   - shared-workspace:/opt/workspace
     depends_on:
