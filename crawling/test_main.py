@@ -10,6 +10,7 @@ import re
 from konlpy.tag import Okt
 from jamo import h2j, j2hcj #초성/중성/종성분리
 
+import pytchat
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -38,3 +39,4 @@ if "youtube" in video_url:
 else:
     print("네이버방송!")
     cr.naver_kafka(video_url, kafka_topic[0])
+    
