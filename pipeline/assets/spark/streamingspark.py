@@ -2,21 +2,20 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark import SparkConf
 from pyspark import SparkContext
+<<<<<<< HEAD
 from pyspark.streaming import StreamingContext
 from pyspark.sql import SparkSession
 from pyspark.sql import SQLContext
 from pyspark.sql.functions import explode
 from pyspark.sql.functions import desc
 from pyspark.sql.functions import split
+=======
+from pyspark.sql import SparkSession
+>>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
 from pyspark.sql.types import StructType
 from pyspark.sql.types import StructField
 from pyspark.sql.types import IntegerType
 from pyspark.sql.types import StringType
-from pyspark.sql import SparkSession
-
-sparkConf = SparkConf()
-conf.setMaster('spark://spark-master:7077')
-conf.setAppName('spark-streaming')
 
 spark_session = SparkSession \
 .builder \
@@ -58,4 +57,8 @@ df2 \
 .option("topic", "json_data_topic") \
 .option("checkpointLocation", "/streaming/checkpointLocation") \
 .start() 
+<<<<<<< HEAD
 .awaitTermination()
+=======
+.awaitTermination()
+>>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d

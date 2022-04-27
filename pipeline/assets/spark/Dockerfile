@@ -20,6 +20,9 @@ RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-a
     mv zeppelin-0.10.1-bin-all /opt/zeppelin && \
     rm -rf zeppelin-0.10.1-bin-all.tgz
 
+RUN mkdir /opt/zeppelin/logs && \
+    mkdir /opt/zeppelin/run
+
 RUN apt-get install python3.8 -y && \
     ln -s /usr/bin/python3.8 /usr/bin/python3 && \
     ln -s /usr/bin/python3.8 /usr/bin/python
@@ -35,10 +38,9 @@ RUN mkdir /root/.pip && \
     echo 'format = columns'; \
     } > /root/.pip/pip.conf
 
-ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
-ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
+ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
@@ -46,15 +48,17 @@ ENV SPARK_NO_DAEMONIZE=1
 ENV SPARK_MODE=master
 ENV SPARK_MASTER_HOST=spark-master
 ENV SPARK_MASTER_PORT=7077
+ENV SPARK_MASTER=spark://spark-master:7077
 ENV SPARK_MASTER_WEBUI_PORT=8080
 ENV SPARK_WORKER_INSTANCES=1
 ENV SPARK_WORKER_CORES=1
 ENV SPARK_WORKER_MEMORY=1g
-ENV SPARK_WORKER_WEBUI_PORT=8082
+ENV SPARK_WORKER_WEBUI_PORT=8081
 
-EXPOSE ${SPARK_MASTER_PORT}
-EXPOSE ${SPARK_MASTER_WEBUI_PORT}
-EXPOSE ${SPARK_WORKER_WEBUI_PORT}
+ENV USE_HADOOP=false
+ENV ZEPPELIN_ADDR=0.0.0.0
+ENV ZEPPELIN_PORT=8080
+ENV SPARK_APP_NAME=zeppelin
 
 WORKDIR /opt/spark
 

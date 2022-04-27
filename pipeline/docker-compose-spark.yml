@@ -27,8 +27,8 @@ services:
       - SPARK_MODE=worker
       - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
     # ports:
     #   - 18080:8082
     # volumes:
@@ -37,27 +37,39 @@ services:
       - spark-master
 
   zeppelin:
+<<<<<<< HEAD
     # build:
     #   context: .
     #   dockerfile: ./assets/zeppelin/docker/Dockerfile  
     # image: my-zeppelin:0.1
+=======
+>>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
     image: my-spark:0.1
     container_name: zeppelin
     environment:
       - SPARK_MODE=zeppelin
+<<<<<<< HEAD
       - ZEPPELIN_PORT=8080
+=======
+      # - ZEPPELIN_PORT=8080
+>>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
       - ZEPPELIN_LOG_DIR=/logs
       - ZEPPELIN_NOTEBOOK_DIR=/notebook
       - SPARK_MASTER=spark://spark-master:7077
-      - USE_HADOOP=false
+      # - USE_HADOOP=false
+      # - SPARK_SUBMIT_OPTIONS=--total-executor-cores 4 --name zeppelin
     ports:
       - 18090:8080
     volumes:
       - ./data/zeppelin/logs:/logs
-      - ./data/zeppelin/data:/data
-      - ./assets/zeppelin/notebook:/notebook
-      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      - ./assets/notebook:/notebook
 
+<<<<<<< HEAD
+=======
+    depends_on:
+      - spark-master
+
+>>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
 networks:
   default:
     name: hy22-external-network

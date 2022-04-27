@@ -2,9 +2,6 @@ from kafka import KafkaProducer
 from json import dumps
 import time
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 bootstrap_servers = os.getenv('KAFKA_SERVER')
 
 topic_name = "test_topic" #토픽확인! 
