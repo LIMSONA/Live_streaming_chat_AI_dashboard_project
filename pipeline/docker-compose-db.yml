@@ -5,9 +5,9 @@ services:
 #influxDB
   influxdb:
     image: influxdb:1.8.6
-    container_name: influxDB
+    container_name: influxdb
     ports:
-      - 8086:8086 #influxDB 기본
+      - 18086:8086 #influxDB 기본
       # - 8088:8088 #백업 및 복원 위해
     # environment:
     #   - INFLUXDB_ADMIN_USER_PASSWORD=bitnami123
@@ -17,12 +17,25 @@ services:
 
 #mongoDB
   mongodb:
-    image: docker.io/bitnami/mongodb:5.0
-    container_name: mongoDB
+    image: mongo
+    restart: always
+    environment:
+      # MONGODB_ROOT_PASSWORD: example
+      MONGODB_DATABASE: LiveCommerce
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     ports:
-      - "27017:27017" #mongoDB 기본
-    volumes:
-      - ./data/mongodb:/bitnami/mongodb
+      - "27017:27017"
+
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 18082:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+  #     ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGODB_HOST}/
 
 
 #airflow & PostgreSQL & Redis
@@ -30,7 +43,7 @@ services:
 #Airflow 컨테이너 - PostgreSQL와 Redis에 의존하여 데이터를 유지
 #데이터 손실을 방지하려면 PostgreSQL 데이터 및 Redis(TM) 데이터의 지속성을 위해 볼륨을 마운트
   postgresql:
-    image: docker.io/bitnami/postgresql:10
+    image: bitnami/postgresql:10
     volumes:
       - ./data/postgresql:/bitnami/postgresql
     environment:
@@ -48,3 +61,8 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+
+networks:
+  default:
+    name: hy22-external-network
+    external: true
