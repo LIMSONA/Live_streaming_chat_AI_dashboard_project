@@ -1,4 +1,3 @@
-import pyspark
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark import SparkConf
@@ -10,7 +9,7 @@ from pyspark.sql.types import IntegerType
 from pyspark.sql.types import StringType
 
 
-KAFKA_TOPIC = "crawling1"
+KAFKA_TOPIC = "input"
 KAFKA_SERVER = "localhost:9092"
 
 spark_session = SparkSession \
