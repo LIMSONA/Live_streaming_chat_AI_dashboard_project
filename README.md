@@ -1,7 +1,6 @@
 # hy22-platform
 
-#sub_sona_test <<== 나중에 지워도됨 
-
+## commit test
 ## docker network
 ```
 docker network create hy22-external-network
