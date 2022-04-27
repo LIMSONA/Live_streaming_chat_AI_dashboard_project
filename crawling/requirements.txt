@@ -18,4 +18,3 @@ gunicorn==19.1.1
 konlpy==0.5.2
 jamo==0.4.1
 tweepy==3.10.0
-
