@@ -9,8 +9,10 @@ from pyspark.sql.types import IntegerType
 from pyspark.sql.types import StringType
 
 
-KAFKA_TOPIC = "input"
-KAFKA_SERVER = "localhost:9092"
+spark_session = SparkSession \
+.builder \
+.config("SparkConf") \
+.getOrCreate()
 
 spark_session = SparkSession \
     .builder \
@@ -18,23 +20,33 @@ spark_session = SparkSession \
     .config("spark.some.config.option", "some-value") \
     .getOrCreate()
 
-df = spark \
-.readStream\
-.format('kafka') \
-.option('kafka.bootstrap.servers', 'kafka:9092') \
-.option("startingOffsets", "earliest") \
-.option('subscribe', 'input') \
-.load()
-
-df1 = df.selectExpr('CAST(value AS STRING) as value')
+df = spark_session \
+    .readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "kafka:9092") \
+    .option("subscribe", "jason_topic") \
+    .option("startingOffsets", "earliest") \
+    .load()
+    
+df1 = df.selectExpr("CAST(value AS STRING)")
 
 schema = StructType([ \
-StructField("video_unique",StringType(),True), \
-StructField("num",StringType(),True), \
-StructField("chat_time",TimestampType(),True), \
+StructField("video_id",StringType(),True), \
+StructField("user_name",StringType(),True), \
 StructField("chat_id",StringType(),True), \
-StructField("chat_message",ArrayType(StringType()),True), \
+StructField("chat_text",StringType(),True), \
+StructField("noun_token",ArrayType(StringType()),True), \
+StructField("chat_time", TimestampType(),True)
 ])
 
 df2 = df1.select(from_json("value",schema).alias("data")).select("data.*")
 
+df2 \
+.selectExpr("CAST('data' AS STRING) AS key", "to_json(struct(*)) AS value") \
+.writeStream    \
+.format('kafka') \
+.option('kafka.bootstrap.servers', 'kafka:9092') \
+.option("topic", "json_data_topic") \
+.option("checkpointLocation", "/streaming/checkpointLocation") \
+.start() 
+.awaitTermination()
