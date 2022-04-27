@@ -10,7 +10,11 @@ from pyspark.sql.types import StringType
 
 
 KAFKA_TOPIC = "input"
+<<<<<<< HEAD
 KAFKA_SERVER = "kafka:9092"
+=======
+KAFKA_SERVER = "localhost:9092"
+>>>>>>> ce96c620904c82c70043a02f299bbd9c5b452c8a
 
 spark_session = SparkSession \
     .builder \

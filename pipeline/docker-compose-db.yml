@@ -15,7 +15,7 @@ services:
 #     volumes:
 #       - ./data/influxdb:/var/lib/influxdb
 
-#mongoDB
+  #mongoDB
   mongodb:
     image: mongo
     restart: always
@@ -54,14 +54,14 @@ services:
   #     # ALLOW_EMPTY_PASSWORD is recommended only for development.
   #     - ALLOW_EMPTY_PASSWORD=yes
 
-  # redis:
-  #   image: docker.io/bitnami/redis:6.0
-  #   volumes:
-  #     # - ./data/redis:/docker_sona
-  #     - ./data/redis:/bitnami/redis/data
-  #   environment:
-  #     # ALLOW_EMPTY_PASSWORD is recommended only for development.
-  #     - ALLOW_EMPTY_PASSWORD=yes
+  redis:
+    image: docker.io/bitnami/redis:6.0
+    volumes:
+      # - ./data/redis:/docker_sona
+      - ./data/redis:/bitnami/redis/data
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
 
 networks:
   default:
