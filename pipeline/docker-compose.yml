@@ -27,3 +27,38 @@ services:
       file: docker-compose-kafka.yml
       service: kafka
 
+  influxdb:
+    extends:
+      file: docker-compose-db.yml
+      service: influxdb
+
+  mongodb:
+    extends:
+      file: docker-compose-db.yml
+      service: mongodb
+
+  postgresql:
+    extends:
+      file: docker-compose-db.yml
+      service: postgresql
+
+  redis:
+    extends:
+      file: docker-compose-db.yml
+      service: redis
+
+  airflow-scheduler:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow-scheduler
+
+  airflow-worker:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow-worker
+
+  # 방향성 비순환 그래프를 workflow로 표현
+  airflow:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow
