@@ -46,3 +46,4 @@ networks:
   default:
     name: hy22-external-network
     external: true
+
