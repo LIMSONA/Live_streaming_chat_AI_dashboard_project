@@ -38,11 +38,12 @@ RUN mkdir /root/.pip && \
     echo 'format = columns'; \
     } > /root/.pip/pip.conf
 
+ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
-ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
+ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
 
-COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENV SPARK_NO_DAEMONIZE=1
 ENV SPARK_MODE=master
