@@ -16,3 +16,14 @@ services:
     extends:
       file: docker-compose-spark.yml
       service: zeppelin
+
+  zookeeper:
+    extends:
+      file: docker-compose-kafka.yml
+      service: zookeeper
+
+  kafka:
+    extends:
+      file: docker-compose-kafka.yml
+      service: kafka
+
