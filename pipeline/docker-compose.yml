@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  spark-master:
+    extends:
+      file: docker-compose-spark.yml
+      service: spark-master
+
+  spark-worker:
+    extends:
+      file: docker-compose-spark.yml
+      service: spark-worker
+
+  zeppelin:
+    extends:
+      file: docker-compose-spark.yml
+      service: zeppelin
