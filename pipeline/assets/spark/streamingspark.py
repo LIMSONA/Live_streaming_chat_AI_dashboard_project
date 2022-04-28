@@ -2,25 +2,11 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark import SparkConf
 from pyspark import SparkContext
-<<<<<<< HEAD
-from pyspark.streaming import StreamingContext
 from pyspark.sql import SparkSession
-from pyspark.sql import SQLContext
-from pyspark.sql.functions import explode
-from pyspark.sql.functions import desc
-from pyspark.sql.functions import split
-=======
-from pyspark.sql import SparkSession
->>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
 from pyspark.sql.types import StructType
 from pyspark.sql.types import StructField
 from pyspark.sql.types import IntegerType
 from pyspark.sql.types import StringType
-
-spark_session = SparkSession \
-.builder \
-.config("SparkConf") \
-.getOrCreate()
 
 spark_session = SparkSession \
     .builder \
@@ -32,7 +18,7 @@ df = spark_session \
     .readStream \
     .format("kafka") \
     .option("kafka.bootstrap.servers", "kafka:9092") \
-    .option("subscribe", "jason_topic") \
+    .option("subscribe", "input") \
     .option("startingOffsets", "earliest") \
     .load()
     
@@ -54,11 +40,7 @@ df2 \
 .writeStream    \
 .format('kafka') \
 .option('kafka.bootstrap.servers', 'kafka:9092') \
-.option("topic", "json_data_topic") \
+.option("topic", "output") \
 .option("checkpointLocation", "/streaming/checkpointLocation") \
 .start() 
-<<<<<<< HEAD
 .awaitTermination()
-=======
-.awaitTermination()
->>>>>>> 79d683318145c82857bddd8e5f45fcbe8a20512d
