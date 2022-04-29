@@ -3,14 +3,18 @@ FROM python:3.8.10-alpine
 #RUN apt install -y apk
 
 RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app #프로젝트 작업폴더 지정
+WORKDIR /usr/src/app 
 
-ENV PYTHONDONTWRITEBYECODE 1 #파이썬 .pyc 파일 생성 막기
-ENV PYTHONUNBUFFERED 1 #파이썬 로그 버퍼링 없이 즉시 출력
+#파이썬 .pyc 파일 생성 막기
+ENV PYTHONDONTWRITEBYECODE 1
+
+#파이썬 로그 버퍼링 없이 즉시 출력
+ENV PYTHONUNBUFFERED 1 
 
 RUN apk add --no-cache python3-dev libffi-dev gcc && pip3 install --upgrade pip
 RUN apk update
-RUN apk add postgresql-dev gcc python3-dev musl-dev zlib-dev jpeg-dev #requirements.txt안의 라이브러리 설치하기 위한 작업
+#requirements.txt안의 라이브러리 설치하기 위한 작업
+RUN apk add postgresql-dev gcc python3-dev musl-dev zlib-dev jpeg-dev
 # RUN apk add --no-cache python3-dev libffi-dev gcc && pip3 install --upgrade pip #ffi.h no such file or directory 에러 발생 방지
 
 COPY . /usr/src/app
@@ -19,4 +23,6 @@ COPY . /usr/src/app
 
 RUN pip install --upgrade pip
 COPY requirements.txt ./
-RUN pip install -r requirements.txt #requirements.txt에 나열된 라이브러리 -r(한번에) 설치
+
+#requirements.txt에 나열된 라이브러리 -r(한번에) 설치
+RUN pip install -r requirements.txt 
