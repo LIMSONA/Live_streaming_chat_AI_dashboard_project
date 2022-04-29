@@ -62,3 +62,4 @@ services:
     extends:
       file: docker-compose-bitnami-airflow.yml
       service: airflow
+
