@@ -1,18 +1,19 @@
 {
   "paragraphs": [
     {
-      "text": "pip install jupyter kafka-python python-dotenv\n",
+      "text": "%sh\npip3 install kafka-python python-dotenv jupyter-client grpcio protobuf ipython ipykernel \n",
       "user": "anonymous",
-      "dateUpdated": "2022-04-27 16:42:21.361",
+      "dateUpdated": "2022-04-29 11:17:18.826",
       "progress": 0,
       "config": {
         "editorSetting": {
-          "language": "python",
+          "language": "sh",
           "editOnDblClick": false,
-          "completionSupport": true
+          "completionSupport": false,
+          "completionKey": "TAB"
         },
         "colWidth": 12.0,
-        "editorMode": "ace/mode/python",
+        "editorMode": "ace/mode/sh",
         "fontSize": 9.0,
         "results": {},
         "enabled": true
@@ -23,7 +24,12 @@
       },
       "results": {
         "code": "SUCCESS",
-        "msg": []
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Requirement already satisfied: kafka-python in /usr/local/lib/python3.6/dist-packages (2.0.2)\nRequirement already satisfied: python-dotenv in /usr/local/lib/python3.6/dist-packages (0.20.0)\nRequirement already satisfied: jupyter-client in /usr/local/lib/python3.6/dist-packages (7.1.2)\nRequirement already satisfied: grpcio in /usr/local/lib/python3.6/dist-packages (1.44.0)\nRequirement already satisfied: protobuf in /usr/local/lib/python3.6/dist-packages (3.19.4)\nRequirement already satisfied: ipython in /usr/local/lib/python3.6/dist-packages (7.16.3)\nRequirement already satisfied: ipykernel in /usr/local/lib/python3.6/dist-packages (5.5.6)\nRequirement already satisfied: pyzmq\u003e\u003d13 in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (22.3.0)\nRequirement already satisfied: nest-asyncio\u003e\u003d1.5 in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (1.5.5)\nRequirement already satisfied: jupyter-core\u003e\u003d4.6.0 in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (4.9.2)\nRequirement already satisfied: tornado\u003e\u003d4.1 in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (6.1)\nRequirement already satisfied: traitlets in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (4.3.3)\nRequirement already satisfied: python-dateutil\u003e\u003d2.1 in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (2.8.2)\nRequirement already satisfied: entrypoints in /usr/local/lib/python3.6/dist-packages (from jupyter-client) (0.4)\nRequirement already satisfied: six\u003e\u003d1.5.2 in /usr/lib/python3/dist-packages (from grpcio) (1.11.0)\nRequirement already satisfied: prompt-toolkit!\u003d3.0.0,!\u003d3.0.1,\u003c3.1.0,\u003e\u003d2.0.0 in /usr/local/lib/python3.6/dist-packages (from ipython) (3.0.29)\nRequirement already satisfied: decorator in /usr/local/lib/python3.6/dist-packages (from ipython) (5.1.1)\nRequirement already satisfied: pygments in /usr/local/lib/python3.6/dist-packages (from ipython) (2.12.0)\nRequirement already satisfied: pickleshare in /usr/local/lib/python3.6/dist-packages (from ipython) (0.7.5)\nRequirement already satisfied: setuptools\u003e\u003d18.5 in /usr/local/lib/python3.6/dist-packages (from ipython) (59.6.0)\nRequirement already satisfied: jedi\u003c\u003d0.17.2,\u003e\u003d0.10 in /usr/local/lib/python3.6/dist-packages (from ipython) (0.17.2)\nRequirement already satisfied: backcall in /usr/local/lib/python3.6/dist-packages (from ipython) (0.2.0)\nRequirement already satisfied: pexpect in /usr/local/lib/python3.6/dist-packages (from ipython) (4.8.0)\nRequirement already satisfied: ipython-genutils in /usr/local/lib/python3.6/dist-packages (from ipykernel) (0.2.0)\nRequirement already satisfied: parso\u003c0.8.0,\u003e\u003d0.7.0 in /usr/local/lib/python3.6/dist-packages (from jedi\u003c\u003d0.17.2,\u003e\u003d0.10-\u003eipython) (0.7.1)\nRequirement already satisfied: wcwidth in /usr/local/lib/python3.6/dist-packages (from prompt-toolkit!\u003d3.0.0,!\u003d3.0.1,\u003c3.1.0,\u003e\u003d2.0.0-\u003eipython) (0.2.5)\nRequirement already satisfied: ptyprocess\u003e\u003d0.5 in /usr/local/lib/python3.6/dist-packages (from pexpect-\u003eipython) (0.7.0)\nWARNING: Running pip as the \u0027root\u0027 user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n"
+          }
+        ]
       },
       "apps": [],
       "runtimeInfos": {},
@@ -31,14 +37,14 @@
       "jobName": "paragraph_1650984714724_1725308014",
       "id": "paragraph_1650984714724_1725308014",
       "dateCreated": "2022-04-26 14:51:54.724",
-      "dateStarted": "2022-04-27 16:42:21.390",
-      "dateFinished": "2022-04-27 16:42:37.414",
+      "dateStarted": "2022-04-29 11:17:18.840",
+      "dateFinished": "2022-04-29 11:17:19.627",
       "status": "FINISHED"
     },
     {
       "text": "%python.ipython\n\nfrom kafka import KafkaConsumer\nimport json\nimport time\n\nbootstrap_servers\u003d\"kafka:9092\"\n\n\ntopic_name \u003d \"input\" #꼭 producer파일 확인하기!\n\nwhile True:\n    consumer \u003d KafkaConsumer(\n                topic_name,\n                bootstrap_servers\u003d[bootstrap_servers])\n\n    for message in consumer: \n        edit\u003d json.loads(message.value)\n        print(message.topic, message.partition, \n            message.offset, message.key, edit )",
       "user": "anonymous",
-      "dateUpdated": "2022-04-27 16:42:22.965",
+      "dateUpdated": "2022-04-29 11:13:02.956",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -63,9 +69,27 @@
       "jobName": "paragraph_1650984776394_1081121549",
       "id": "paragraph_1650984776394_1081121549",
       "dateCreated": "2022-04-26 14:52:56.395",
-      "dateStarted": "2022-04-27 16:42:23.894",
-      "dateFinished": "2022-04-26 15:06:23.318",
-      "status": "RUNNING"
+      "dateStarted": "2022-04-29 11:13:02.968",
+      "dateFinished": "2022-04-29 11:16:52.345",
+      "status": "ABORT"
+    },
+    {
+      "text": "%python.ipython\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 10:44:41.093",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651229081093_775735962",
+      "id": "paragraph_1651229081093_775735962",
+      "dateCreated": "2022-04-29 10:44:41.093",
+      "status": "READY"
     }
   ],
   "name": "kafka-consumer",

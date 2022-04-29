@@ -14,7 +14,6 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tg
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
-
 RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz && \
     tar -zxf zeppelin-0.10.1-bin-all.tgz && \
     mv zeppelin-0.10.1-bin-all /opt/zeppelin && \
@@ -23,9 +22,26 @@ RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-a
 RUN mkdir /opt/zeppelin/logs && \
     mkdir /opt/zeppelin/run
 
-RUN apt-get install python3.8 -y && \
-    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
-    ln -s /usr/bin/python3.8 /usr/bin/python
+
+RUN apt-get install -y python3-pip
+RUN apt-get install -y python3
+
+COPY assets/spark/requirements.txt .
+
+RUN pip3 install --upgrade pip && \
+    pip3 install --upgrade setuptools && \
+    pip3 install --no-cache-dir -r requirements.txt
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# download jars
+# org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-sql-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+# org.apache.kafka:kafka-clients:0.10.2.2
+RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/0.10.2.2/kafka-clients-0.10.2.2.jar && \
+    mv kafka-clients-0.10.2.2.jar /opt/spark/jars
 
 RUN mkdir /root/.pip && \
     set -x \
@@ -38,10 +54,12 @@ RUN mkdir /root/.pip && \
     echo 'format = columns'; \
     } > /root/.pip/pip.conf
 
+ENV PYSPARK_PYTHON=python3
 ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
 
 COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
 
