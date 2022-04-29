@@ -1,0 +1,355 @@
+{
+  "paragraphs": [
+    {
+      "text": "%pyspark\n\nfrom pyspark.sql.functions import *\nfrom pyspark.sql.types import *\nfrom pyspark import SparkConf\nfrom pyspark import SparkContext\nfrom pyspark import SparkConf\nfrom pyspark.sql import SparkSession\nfrom pyspark.sql.types import StructType\nfrom pyspark.sql.types import StructField\nfrom pyspark.sql.types import IntegerType\nfrom pyspark.sql.types import StringType",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 10:42:44.940",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651126796133_757012131",
+      "id": "paragraph_1651126796133_757012131",
+      "dateCreated": "2022-04-28 06:19:56.133",
+      "dateStarted": "2022-04-29 09:37:54.670",
+      "dateFinished": "2022-04-29 09:37:54.901",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nKAFKA_TOPIC \u003d \"input\"",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:54.969",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651126810599_838254222",
+      "id": "paragraph_1651126810599_838254222",
+      "dateCreated": "2022-04-28 06:20:10.599",
+      "dateStarted": "2022-04-29 09:37:54.986",
+      "dateFinished": "2022-04-29 09:37:55.207",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nKAFKA_SERVER \u003d \"kafka:9092\"",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:55.286",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651126816843_2057050628",
+      "id": "paragraph_1651126816843_2057050628",
+      "dateCreated": "2022-04-28 06:20:16.844",
+      "dateStarted": "2022-04-29 09:37:55.302",
+      "dateFinished": "2022-04-29 09:37:55.622",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nspark_session \u003d SparkSession \\\n    .builder \\\n    .appName(\"kafka-to-spark\") \\\n    .config(\"spark.some.config.option\", \"some-value\") \\\n    .getOrCreate()",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:55.703",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651126830344_1916489972",
+      "id": "paragraph_1651126830344_1916489972",
+      "dateCreated": "2022-04-28 06:20:30.344",
+      "dateStarted": "2022-04-29 09:37:55.720",
+      "dateFinished": "2022-04-29 09:37:55.939",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf \u003d spark_session \\\n    .readStream \\\n    .format(\"kafka\") \\\n    .option(\"kafka.bootstrap.servers\", \"kafka:9092\") \\\n    .option(\"subscribe\", \"input\") \\\n    .option(\"startingOffsets\",\"earliest\") \\\n    .load() \n    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:56.020",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651126859168_2090798744",
+      "id": "paragraph_1651126859168_2090798744",
+      "dateCreated": "2022-04-28 06:20:59.169",
+      "dateStarted": "2022-04-29 09:37:56.038",
+      "dateFinished": "2022-04-29 09:37:56.460",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf1 \u003d df.selectExpr(\"CAST(value AS STRING)\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:56.538",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651127479920_653165008",
+      "id": "paragraph_1651127479920_653165008",
+      "dateCreated": "2022-04-28 06:31:19.920",
+      "dateStarted": "2022-04-29 09:37:56.559",
+      "dateFinished": "2022-04-29 09:37:57.633",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\nschema \u003d StructType([ \\\nStructField(\"video_unique\",StringType()), \\\nStructField(\"num\",IntegerType()), \\\nStructField(\"chat_time\",TimestampType()), \\\nStructField(\"chat_name\",StringType()), \\\nStructField(\"chat_message\",StringType()), \\\n])\ndf.select( \\\ncol(\"key\").cast(\"string\"),\nfrom_json(col(\"value\").cast(\"string\"),schema))",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:57.659",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DataFrame[key: string, from_json(CAST(value AS STRING)): struct\u003cvideo_unique:string,num:int,chat_time:timestamp,chat_name:string,chat_message:string\u003e]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651127495681_96963218",
+      "id": "paragraph_1651127495681_96963218",
+      "dateCreated": "2022-04-28 06:31:35.681",
+      "dateStarted": "2022-04-29 09:37:57.678",
+      "dateFinished": "2022-04-29 09:37:57.949",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf2 \u003d df1.select(from_json(\"value\",schema).alias(\"data\")).select(\"data.*\")\ndf2",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:57.977",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "DataFrame[video_unique: string, num: int, chat_time: timestamp, chat_name: string, chat_message: string]"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651127099617_182296000",
+      "id": "paragraph_1651127099617_182296000",
+      "dateCreated": "2022-04-28 06:24:59.617",
+      "dateStarted": "2022-04-29 09:37:57.999",
+      "dateFinished": "2022-04-29 09:37:58.220",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%pyspark\ndf2 \\\n.selectExpr(\"CAST(\u0027video_unique\u0027 AS STRING) AS key\", \"to_json(struct(*)) AS value\") \\\n.writeStream \\\n.format(\u0027kafka\u0027) \\\n.option(\u0027kafka.bootstrap.servers\u0027, \u0027kafka:9092\u0027) \\\n.option(\"topic\", \"message\") \\\n.option(\"truncate\", False).option(\"checkpointLocation\", \"/tmp/dtn/checkpoint\") \\\n.start()",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-29 09:37:58.299",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cpyspark.sql.streaming.StreamingQuery at 0x7f494e4f7a50\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651127676777_651303024",
+      "id": "paragraph_1651127676777_651303024",
+      "dateCreated": "2022-04-28 06:34:36.777",
+      "dateStarted": "2022-04-29 09:37:58.320",
+      "dateFinished": "2022-04-29 09:37:58.702",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "trial",
+  "id": "2H1N1554Q",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
