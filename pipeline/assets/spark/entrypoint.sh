@@ -5,10 +5,10 @@ if [ "$SPARK_MODE" = "master" ]; then
 fi
 
 if [ "$SPARK_MODE" = "worker" ]; then
-    /opt/spark/sbin/start-worker.sh spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT}
+    /opt/spark/sbin/start-worker.sh ${SPARK_MASTER}
 fi
 
 if [ "$SPARK_MODE" = "zeppelin" ]; then
     cd /opt/zeppelin
-    ./bin/zeppelin.sh
+    /bin/bash ./bin/zeppelin.sh
 fi
