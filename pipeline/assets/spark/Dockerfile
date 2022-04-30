@@ -14,7 +14,6 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tg
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
-
 RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-all.tgz && \
     tar -zxf zeppelin-0.10.1-bin-all.tgz && \
     mv zeppelin-0.10.1-bin-all /opt/zeppelin && \
@@ -23,9 +22,42 @@ RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-a
 RUN mkdir /opt/zeppelin/logs && \
     mkdir /opt/zeppelin/run
 
-RUN apt-get install python3.8 -y && \
-    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
-    ln -s /usr/bin/python3.8 /usr/bin/python
+RUN apt-get remove --purge python3.6
+
+RUN apt-get install python3.8 -y
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 10
+
+RUN apt install python3.8-distutils -y
+RUN wget https://bootstrap.pypa.io/get-pip.py && \
+    python3.8 get-pip.py
+
+COPY assets/spark/requirements.txt .
+
+RUN pip3 install --upgrade pip && \
+    pip3 install --upgrade setuptools && \
+    pip3 install --no-cache-dir -r requirements.txt
+
+# download jars
+# org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-sql-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+# org.apache.kafka:kafka-clients:3.1.0
+RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.1.0/kafka-clients-3.1.0.jar && \
+    mv kafka-clients-3.1.0.jar /opt/spark/jars
+
+# org.apache.spark:spark-token-provider-kafka-0-10_2.12:3.1.2
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.1.2/spark-token-provider-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-token-provider-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.1.2/spark-streaming-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-streaming-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.2.1/spark-streaming-kafka-0-10_2.12-3.2.1.jar && \
+    mv spark-streaming-kafka-0-10_2.12-3.2.1.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
+    mv commons-pool2-2.11.1.jar /opt/spark/jars
 
 RUN mkdir /root/.pip && \
     set -x \
@@ -42,6 +74,7 @@ ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
+ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
 
 COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
 
