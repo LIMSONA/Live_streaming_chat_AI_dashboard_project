@@ -61,7 +61,7 @@ services:
       - ./data/zeppelin/logs:/logs
       # - ./data/zeppelin/data:/data
       - ./assets/zeppelin/notebook:/notebook
-      # - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      - ./assets/zeppelin/conf:/opt/zeppelin/conf
 
 networks:
   default:
