@@ -22,9 +22,14 @@ RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-a
 RUN mkdir /opt/zeppelin/logs && \
     mkdir /opt/zeppelin/run
 
+RUN apt-get remove --purge python3.6
 
-RUN apt-get install -y python3-pip
-RUN apt-get install -y python3
+RUN apt-get install python3.8 -y
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 10
+
+RUN apt install python3.8-distutils -y
+RUN wget https://bootstrap.pypa.io/get-pip.py && \
+    python3.8 get-pip.py
 
 COPY assets/spark/requirements.txt .
 
@@ -32,16 +37,27 @@ RUN pip3 install --upgrade pip && \
     pip3 install --upgrade setuptools && \
     pip3 install --no-cache-dir -r requirements.txt
 
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
 # download jars
 # org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
 RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar && \
     mv spark-sql-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
 
-# org.apache.kafka:kafka-clients:0.10.2.2
-RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/0.10.2.2/kafka-clients-0.10.2.2.jar && \
-    mv kafka-clients-0.10.2.2.jar /opt/spark/jars
+# org.apache.kafka:kafka-clients:3.1.0
+RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.1.0/kafka-clients-3.1.0.jar && \
+    mv kafka-clients-3.1.0.jar /opt/spark/jars
+
+# org.apache.spark:spark-token-provider-kafka-0-10_2.12:3.1.2
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.1.2/spark-token-provider-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-token-provider-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.1.2/spark-streaming-kafka-0-10_2.12-3.1.2.jar && \
+    mv spark-streaming-kafka-0-10_2.12-3.1.2.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.2.1/spark-streaming-kafka-0-10_2.12-3.2.1.jar && \
+    mv spark-streaming-kafka-0-10_2.12-3.2.1.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
+    mv commons-pool2-2.11.1.jar /opt/spark/jars
 
 RUN mkdir /root/.pip && \
     set -x \
@@ -54,7 +70,6 @@ RUN mkdir /root/.pip && \
     echo 'format = columns'; \
     } > /root/.pip/pip.conf
 
-ENV PYSPARK_PYTHON=python3
 ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
