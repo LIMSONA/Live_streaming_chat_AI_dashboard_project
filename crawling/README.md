@@ -1,6 +1,6 @@
 # 1. Package install
 ```
-pip install -r ./requirements.txt
+pip install -r ./crawling/requirements.txt
 ```
 
 ## 1-1. pip (1번 오류 시 선행)
