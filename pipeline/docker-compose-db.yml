@@ -7,7 +7,7 @@ services:
 #     image: influxdb:1.8.6
 #     container_name: influxdb
 #     ports:
-#       - 18086:8086 #influxDB 기본
+#       - 8086:8086 #influxDB 기본
 #       # - 8088:8088 #백업 및 복원 위해
 #     # environment:
 #     #   - INFLUXDB_ADMIN_USER_PASSWORD=bitnami123
@@ -54,14 +54,14 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
 
-  redis:
-    image: docker.io/bitnami/redis:6.0
-    volumes:
-      # - ./data/redis:/docker_sona
-      - ./data/redis:/bitnami/redis/data
-    environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+  # redis:
+  #   image: docker.io/bitnami/redis:6.0
+  #   volumes:
+  #     # - ./data/redis:/docker_sona
+  #     - ./data/redis:/bitnami/redis/data
+  #   environment:
+  #     # ALLOW_EMPTY_PASSWORD is recommended only for development.
+  #     - ALLOW_EMPTY_PASSWORD=yes
 
 networks:
   default:
