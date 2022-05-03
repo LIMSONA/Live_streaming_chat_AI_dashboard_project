@@ -12,6 +12,10 @@ RUN apt-get install -y python3
 RUN apt-get install -y wget
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
+RUN apt-get install openjdk-8-jdk -y
+
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
 
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     sh Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3 && \
