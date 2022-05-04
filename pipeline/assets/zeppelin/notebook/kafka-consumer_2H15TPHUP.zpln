@@ -3,6 +3,7 @@
     {
       "text": "%sh\npip3 install kafka-python python-dotenv jupyter-client grpcio protobuf ipython ipykernel \n",
       "user": "anonymous",
+<<<<<<< HEAD
       "dateUpdated": "2022-04-29 17:41:40.606",
       "progress": 0,
       "config": {
@@ -119,6 +120,9 @@
       "text": "%python.ipython\nspark",
       "user": "anonymous",
       "dateUpdated": "2022-04-28 01:48:20.414",
+=======
+      "dateUpdated": "2022-04-27 16:42:21.361",
+>>>>>>> feature_steven
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -136,9 +140,14 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
+<<<<<<< HEAD
       "jobName": "paragraph_1651110496452_223062898",
       "id": "paragraph_1651110496452_223062898",
       "dateCreated": "2022-04-28 01:48:16.453",
@@ -149,6 +158,19 @@
       "text": "%python.ipython\nsc.version",
       "user": "anonymous",
       "dateUpdated": "2022-04-28 01:48:27.055",
+=======
+      "jobName": "paragraph_1650984714724_1725308014",
+      "id": "paragraph_1650984714724_1725308014",
+      "dateCreated": "2022-04-26 14:51:54.724",
+      "dateStarted": "2022-04-27 16:42:21.390",
+      "dateFinished": "2022-04-27 16:42:37.414",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%python.ipython\n\nfrom kafka import KafkaConsumer\nimport json\nimport time\n\nbootstrap_servers\u003d\"kafka:9092\"\n\n\ntopic_name \u003d \"input\" #꼭 producer파일 확인하기!\n\nwhile True:\n    consumer \u003d KafkaConsumer(\n                topic_name,\n                bootstrap_servers\u003d[bootstrap_servers])\n\n    for message in consumer: \n        edit\u003d json.loads(message.value)\n        print(message.topic, message.partition, \n            message.offset, message.key, edit )",
+      "user": "anonymous",
+      "dateUpdated": "2022-04-27 16:42:22.965",
+>>>>>>> feature_steven
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -169,6 +191,7 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
+<<<<<<< HEAD
       "jobName": "paragraph_1651110500432_1225907871",
       "id": "paragraph_1651110500432_1225907871",
       "dateCreated": "2022-04-28 01:48:20.432",
@@ -178,6 +201,14 @@
       "dateCreated": "2022-04-29 10:44:41.093",
 >>>>>>> feature/spark-with-zeppelin
       "status": "READY"
+=======
+      "jobName": "paragraph_1650984776394_1081121549",
+      "id": "paragraph_1650984776394_1081121549",
+      "dateCreated": "2022-04-26 14:52:56.395",
+      "dateStarted": "2022-04-27 16:42:23.894",
+      "dateFinished": "2022-04-26 15:06:23.318",
+      "status": "RUNNING"
+>>>>>>> feature_steven
     }
   ],
   "name": "kafka-consumer",

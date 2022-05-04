@@ -1,0 +1,14 @@
+
+# FROM docker.io/bitnami/postgresql:10
+
+# FROM docker.io/bitnami/redis:6.0
+
+# FROM docker.io/bitnami/airflow-scheduler:2
+
+# FROM docker.io/bitnami/airflow-worker:2
+
+FROM docker.io/bitnami/airflow:2
+
+
+RUN pip install airflow-code-editor
+RUN pip install wheel
