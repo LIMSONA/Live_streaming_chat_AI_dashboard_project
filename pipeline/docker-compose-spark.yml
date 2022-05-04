@@ -31,12 +31,11 @@ services:
       replicas: 2
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=2
-    ports:
-      - 18080-18089:8081
+    # ports:
+    #   - 18080-18089:8081
     # volumes:
     #   - shared-workspace:/opt/workspace
     depends_on:
@@ -45,12 +44,11 @@ services:
   zeppelin:
     build:
       context: .
-      dockerfile: ./assets/zeppelin/docker/Dockerfile  
-    image: my-zeppelin:0.1
-    # image: my-spark:0.1
+      dockerfile: ./assets/spark/Dockerfile 
+    image: my-spark:0.1
     container_name: zeppelin
     environment:
-      # - SPARK_MODE=zeppelin
+      - SPARK_MODE=zeppelin
       - ZEPPELIN_PORT=8080
       - ZEPPELIN_LOG_DIR=/logs
       - ZEPPELIN_NOTEBOOK_DIR=/notebook
@@ -63,7 +61,7 @@ services:
       - ./data/zeppelin/logs:/logs
       # - ./data/zeppelin/data:/data
       - ./assets/zeppelin/notebook:/notebook
-      # - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      - ./assets/zeppelin/conf:/opt/zeppelin/conf
 
 networks:
   default:
