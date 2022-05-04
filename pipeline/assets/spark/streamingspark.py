@@ -4,6 +4,7 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession, functions
 
+<<<<<<< HEAD
 spark = SparkSession.builder\
     .appName("kafka-to-spark")\
     .config("spark.some.config.option", "some-value")\
@@ -25,6 +26,31 @@ StructField("num",IntegerType(),True),\
 StructField("chat_time",StringType(),True),\
 StructField("chat_id",StringType(),True),\
 StructField("chat_message",StringType(),True),
+=======
+spark_session = SparkSession \
+    .builder \
+    .appName("kafka-to-spark") \
+    .config("spark.some.config.option", "some-value") \
+    .getOrCreate()
+
+df = spark_session \
+    .readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "kafka:9092") \
+    .option("subscribe", "input") \
+    .option("startingOffsets", "earliest") \
+    .load()
+    
+df1 = df.selectExpr("CAST(value AS STRING)")
+
+schema = StructType([ \
+StructField("video_id",StringType(),True), \
+StructField("user_name",StringType(),True), \
+StructField("chat_id",StringType(),True), \
+StructField("chat_text",StringType(),True), \
+StructField("noun_token",ArrayType(StringType()),True), \
+StructField("chat_time", TimestampType(),True)
+>>>>>>> feature_steven
 ])
 
 df2= df1\
@@ -32,6 +58,7 @@ df2= df1\
     .select("parse_value.video_unique","parse_value.num","parse_value.chat_time",
             "parse_value.chat_id","parse_value.chat_message")
 
+<<<<<<< HEAD
 
 df2\
 .selectExpr("CAST('data' AS STRING) AS key", "to_json(struct(*)) AS value")\
@@ -42,3 +69,14 @@ df2\
 .option('topic', 'message')\
 .option("checkpointLocation", "/tmp/dtn/checkpoint")\
 .start().awaitTermination()
+=======
+df2 \
+.selectExpr("CAST('data' AS STRING) AS key", "to_json(struct(*)) AS value") \
+.writeStream    \
+.format('kafka') \
+.option('kafka.bootstrap.servers', 'kafka:9092') \
+.option("topic", "output") \
+.option("checkpointLocation", "/streaming/checkpointLocation") \
+.start() 
+.awaitTermination()
+>>>>>>> feature_steven

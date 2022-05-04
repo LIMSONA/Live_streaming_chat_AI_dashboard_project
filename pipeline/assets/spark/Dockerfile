@@ -22,6 +22,7 @@ RUN wget https://dlcdn.apache.org/zeppelin/zeppelin-0.10.1/zeppelin-0.10.1-bin-a
 RUN mkdir /opt/zeppelin/logs && \
     mkdir /opt/zeppelin/run
 
+<<<<<<< HEAD
 RUN apt-get remove --purge python3.6
 
 RUN apt-get install python3.8 -y
@@ -58,6 +59,11 @@ RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0
 
 RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
     mv commons-pool2-2.11.1.jar /opt/spark/jars
+=======
+RUN apt-get install python3.8 -y && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3 && \
+    ln -s /usr/bin/python3.8 /usr/bin/python
+>>>>>>> feature_steven
 
 RUN mkdir /root/.pip && \
     set -x \
@@ -74,7 +80,10 @@ ENV ZEPPELIN_HOME=/opt/zeppelin
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$ZEPPELIN_HOME/bin
+<<<<<<< HEAD
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
+=======
+>>>>>>> feature_steven
 
 COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
 
