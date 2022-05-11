@@ -3,7 +3,7 @@
     {
       "text": "%spark\n\nspark",
       "user": "anonymous",
-      "dateUpdated": "2022-04-29 18:58:03.517",
+      "dateUpdated": "2022-05-04 14:47:24.050",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -22,21 +22,12 @@
         "params": {},
         "forms": {}
       },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "\u001b[1m\u001b[34mres5\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m \u003d org.apache.spark.sql.SparkSession@5e3ab0ff\n"
-          }
-        ]
-      },
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1651258683517_1564371072",
-      "id": "paragraph_1651228260076_2027272013",
-      "dateCreated": "2022-04-29 18:58:03.517",
+      "jobName": "paragraph_1651675637872_558679689",
+      "id": "paragraph_1651675637872_558679689",
+      "dateCreated": "2022-05-04 14:47:17.872",
       "status": "READY"
     },
     {
@@ -313,9 +304,9 @@
       "status": "READY"
     },
     {
-      "text": "%spark\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType, TimestampType};\nval spark \u003d SparkSession\n  .builder()\n  .appName(\"kafka-to-spark\")\n  .config(\"spark.some.config.option\", \"some-value\")\n  .getOrCreate()\n\n\nval df \u003d spark.readStream\n        .format(\"kafka\")\n        .option(\"kafka.bootstrap.servers\", \"kafka:9092\")\n        .option(\"subscribe\", \"input\")\n        .option(\"startingOffsets\", \"earliest\") // From starting\n        .load()\n\nval df1 \u003d df.selectExpr(\"CAST(value AS STRING)\")\n\nval schema \u003d new StructType()\n      .add(\"video_unique\",StringType)\n      .add(\"num\",IntegerType)\n      .add(\"chat_time\",StringType)\n      .add(\"id\",IntegerType)\n      .add(\"chat_message\",StringType)\n      \nval df2 \u003d df1.select(from_json(col(\"value\"), schema).as(\"parse_value\"))\n  .select(\"parse_value.video_unique\",\"parse_value.num\",\"parse_value.chat_time\",\n            \"parse_value.id\",\"parse_value.chat_message\")\n\ndf2.selectExpr(\"CAST(id AS STRING) AS key\", \"to_json(struct(*)) AS value\")\n   .writeStream\n   .format(\"kafka\")\n   .outputMode(\"append\")\n   .option(\"kafka.bootstrap.servers\", \"kafka:9092\")\n   .option(\"topic\", \"message\")\n   .option(\"checkpointLocation\", \"/tmp/dtn/checkpoint\")\n   .start()",
+      "text": "%spark\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType, TimestampType};\nval spark \u003d SparkSession\n  .builder()\n  .appName(\"kafka-to-spark\")\n  .config(\"spark.some.config.option\", \"some-value\")\n  .getOrCreate()\n\n\nval df \u003d spark.readStream\n        .format(\"kafka\")\n        .option(\"kafka.bootstrap.servers\", \"kafka:9092\")\n        .option(\"subscribe\", \"input\")\n        .option(\"startingOffsets\", \"earliest\") // From starting\n        .load()\n\nval df1 \u003d df.selectExpr(\"CAST(value AS STRING)\")\n\nval schema \u003d new StructType()\n      .add(\"video_unique\",StringType)\n      .add(\"num\",IntegerType)\n      .add(\"chat_time\",StringType)\n      .add(\"id\",IntegerType)\n      .add(\"chat_message\",StringType)\n      \nval df2 \u003d df1.select(from_json(col(\"value\"), schema).as(\"parse_value\"))\n  .select(\"parse_value.video_unique\",\"parse_value.num\",\"parse_value.chat_time\",\n            \"parse_value.id\",\"parse_value.chat_message\")\n\ndf2.selectExpr(\"CAST(id AS STRING) AS key\", \"to_json(struct(*)) AS value\")\n   .writeStream\n   .format(\"kafka\")\n   .outputMode(\"append\")\n   .option(\"kafka.bootstrap.servers\", \"kafka:9092\")\n   .option(\"topic\", \"message\")\n   .option(\"checkpointLocation\", \"/tmp/dtn/checkpoint\")\n   .start()\n",
       "user": "anonymous",
-      "dateUpdated": "2022-04-29 18:58:03.518",
+      "dateUpdated": "2022-05-04 14:48:37.624",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -337,9 +328,63 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1651258683518_626631083",
-      "id": "paragraph_1651218730372_2093873072",
-      "dateCreated": "2022-04-29 18:58:03.518",
+      "jobName": "paragraph_1651675577397_1405919710",
+      "id": "paragraph_1651675577397_1405919710",
+      "dateCreated": "2022-05-04 14:46:17.397",
+      "status": "READY"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-04 14:48:47.593",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651675727593_758814855",
+      "id": "paragraph_1651675727593_758814855",
+      "dateCreated": "2022-05-04 14:48:47.593",
+      "status": "READY"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-04 14:48:51.052",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651675731051_123436068",
+      "id": "paragraph_1651675731051_123436068",
+      "dateCreated": "2022-05-04 14:48:51.051",
+      "status": "READY"
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-04 14:48:51.690",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1651675731690_805248656",
+      "id": "paragraph_1651675731690_805248656",
+      "dateCreated": "2022-05-04 14:48:51.690",
       "status": "READY"
     }
   ],
