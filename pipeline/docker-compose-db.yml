@@ -19,6 +19,7 @@ services:
   mongodb:
     image: mongo
     restart: always
+    container_name: mongodb
     environment:
       # MONGODB_ROOT_PASSWORD: example
       MONGODB_DATABASE: LiveCommerce
