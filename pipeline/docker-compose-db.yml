@@ -25,18 +25,20 @@ services:
       MONGODB_DATABASE: LiveCommerce
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - ./data/mongo:/data/db
     ports:
       - "27017:27017"
 
-  # mongo-express:
-  #   image: mongo-express
-  #   restart: always
-  #   ports:
-  #     - 18082:8081
-  #   environment:
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
-  #     ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGODB_HOST}/
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 18082:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGODB_HOST}/
 
 
 #airflow & PostgreSQL & Redis
@@ -44,16 +46,16 @@ services:
 #Airflow 컨테이너 - PostgreSQL와 Redis에 의존하여 데이터를 유지
 #데이터 손실을 방지하려면 PostgreSQL 데이터 및 Redis(TM) 데이터의 지속성을 위해 볼륨을 마운트
 
-  postgresql:
-    image: bitnami/postgresql:10
-    volumes:
-      - ./data/postgresql:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_DATABASE=bitnami_airflow
-      - POSTGRESQL_USERNAME=bn_airflow
-      - POSTGRESQL_PASSWORD=bitnami1
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+  # postgresql:
+  #   image: bitnami/postgresql:10
+  #   volumes:
+  #     - ./data/postgresql:/bitnami/postgresql
+  #   environment:
+  #     - POSTGRESQL_DATABASE=bitnami_airflow
+  #     - POSTGRESQL_USERNAME=bn_airflow
+  #     - POSTGRESQL_PASSWORD=bitnami1
+  #     # ALLOW_EMPTY_PASSWORD is recommended only for development.
+  #     - ALLOW_EMPTY_PASSWORD=yes
 
   # redis:
   #   image: docker.io/bitnami/redis:6.0

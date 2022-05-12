@@ -7,11 +7,10 @@ services:
   logstash:
     env_file:
       - .env
-    image: docker.elastic.co/logstash/logstash-oss:8.1.2
     build:
       context: .
-      dockerfile: pipeline/assets/logstash/Dockerfile.logstash #pipeline/assets/logstash/Dockerfile.logstash
-    #image: my_logstash:0.1
+      dockerfile: assets/logstash/Dockerfile.logstash 
+    image: my_logstash:0.1
     container_name: logstash
     stdin_open: true # docker run -i
     tty: true        # docker run -t
@@ -26,7 +25,6 @@ services:
       - ./assets/logstash/config:/usr/share/logstash/config
       - ./assets/logstash/pipeline:/usr/share/logstash/pipeline
       - ./data/logstash:/usr/share/logstash/data
-      # - ./assets/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
 
 networks:
   default:
