@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  grafana:
+    image: "grafana/grafana:${GRAF_TAG-latest}"
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./grafana:/var/lib/grafana"
+
+  influxdb:
+    image: "influxdb:${INFL_TAG-latest}"
+    ports:
+      - "8086:8086"
+    volumes:
+      - "./influxdb/influxdb:/var/lib/influxdb"
+
+networks:
+  default:
+    name: hy22-external-network
+    external: true
