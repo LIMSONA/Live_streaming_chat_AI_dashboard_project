@@ -10,7 +10,7 @@ for line in lines:
     line = line.replace('\n', '')
     stopwords.append(line)
 f.close()   
-
+8
 class c_token:    
 # 불용어 파일 불러오기 ==> 밖에서 지정해저야 오류 안생김                         
          
