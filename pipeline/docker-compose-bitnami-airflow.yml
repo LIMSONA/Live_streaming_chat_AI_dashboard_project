@@ -42,6 +42,31 @@ services:
     ports:
       - 8082:8080
 
+#airflow & PostgreSQL & Redis
+#캐싱전략?? https://rumor1993.tistory.com/m/86
+#Airflow 컨테이너 - PostgreSQL와 Redis에 의존하여 데이터를 유지
+#데이터 손실을 방지하려면 PostgreSQL 데이터 및 Redis(TM) 데이터의 지속성을 위해 볼륨을 마운트
+
+  postgresql:
+    image: bitnami/postgresql:10
+    volumes:
+      - ./data/postgresql:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_airflow
+      - POSTGRESQL_USERNAME=bn_airflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  redis:
+    image: docker.io/bitnami/redis:6.0
+    volumes:
+      # - ./data/redis:/docker_sona
+      - ./data/redis:/bitnami/redis/data
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+
 networks:
   default:
     name: hy22-external-network
