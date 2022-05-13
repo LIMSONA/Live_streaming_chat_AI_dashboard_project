@@ -40,7 +40,11 @@ class c_crawling:
                     t_chat_message= ct.preprocessing(c.message)
                     data= self.save_json(video_id, num,
                                          c.datetime, c.author.name,
+<<<<<<< HEAD
                                          t_chat_message)#
+=======
+                                         t_chat_message)#c.message
+>>>>>>> feature_eunkyung
                     num +=1 #하나씩 커지게
                     ck.pro_kafka(topic_name, data) #카프카로 태우기
                     

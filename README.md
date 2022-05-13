@@ -14,7 +14,25 @@ kafka-topics.sh --list --bootstrap-server kafka:9092
 3. 카프카 컨슈머 조회
 kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic input
 
+<<<<<<< HEAD
 ##zepplin
 1. jar 파일 설정
 오른쪽 상단위 계정을 누른 후 > interpreter 메뉴 > 검색 창에 spark 검색 >
 edit 버튼 눌러서 'jar package' 부분에 **org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2** 추가하기 > save 
+=======
+## logstash / mongodb
+1. 데이터 경로설정
+- ./data/mongo:/data/db
+
+2. mongo shell에서 안에서 권한설정
+- use LiveCommerce
+
+- db.createUser(
+  {
+    user: "ek",
+    pwd: "ek",
+    roles: [ { role: "readWrite", db: "LiveCommerce" } ]
+  }
+)
+
+>>>>>>> feature_eunkyung
