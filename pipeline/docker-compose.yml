@@ -57,7 +57,6 @@ services:
       file: docker-compose-bitnami-airflow.yml
       service: airflow-worker
 
-  # 방향성 비순환 그래프를 workflow로 표현
   airflow:
     extends:
       file: docker-compose-bitnami-airflow.yml
