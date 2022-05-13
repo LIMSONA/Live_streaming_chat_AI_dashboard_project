@@ -2,18 +2,17 @@ version: '3'
 
 services:
 
-# #influxDB
-#   influxdb:
-#     image: influxdb:1.8.6
-#     container_name: influxdb
-#     ports:
-#       - 8086:8086 #influxDB 기본
-#       # - 8088:8088 #백업 및 복원 위해
-#     # environment:
-#     #   - INFLUXDB_ADMIN_USER_PASSWORD=bitnami123
-#     #   - INFLUXDB_ADMIN_USER_TOKEN=admintoken123
-#     volumes:
-#       - ./data/influxdb:/var/lib/influxdb
+  influxdb:
+    image: influxdb:1.8.6
+    container_name: influxdb
+    ports:
+      - 8086:8086 #influxDB 기본
+      # - 8088:8088 #백업 및 복원 위해
+    # environment:
+    #   - INFLUXDB_ADMIN_USER_PASSWORD=bitnami123
+    #   - INFLUXDB_ADMIN_USER_TOKEN=admintoken123
+    volumes:
+      - ./data/influxdb:/var/lib/influxdb
 
 #mongoDB
   mongodb:
