@@ -1,1 +1,29 @@
 jupyter
+
+#기본적인 패키지
+numpy
+pandas
+matplotlib
+seaborn
+re
+urllib.request
+collections
+bz2
+gluonnlp
+sentencepiece
+mxnet
+tqdm
+
+#토치관련
+sklearn.model_selection
+torch
+
+#자연어 관련
+nltk
+konlpy
+konlp
+kobert
+transformers
+
+#텐서관련
+tensorflow
