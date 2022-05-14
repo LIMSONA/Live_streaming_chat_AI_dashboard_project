@@ -14,3 +14,14 @@ qa_udf = udf(lambda x: qa.predict(x), StringType())
 df3 = df2 \
 .withColumn("qa_score", qa_udf(col('chat_message')))
 ```
+```
+4. pyspark csv test
+# 라이브러리
+from pyspark.sql import SparkSession
+# Spark v3.1.2
+spark = SparkSession.builder.master("local").appName("SparkSQL").getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
+# CSV(pyspark 위치랑 동일한 선)
+df = spark.read.option("header", True).csv("./sample_csv_data/total_cr_naver.csv")
+df.show()
+```
