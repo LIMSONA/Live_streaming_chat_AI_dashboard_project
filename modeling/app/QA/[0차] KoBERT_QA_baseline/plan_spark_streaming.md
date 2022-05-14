@@ -25,3 +25,16 @@ spark.sparkContext.setLogLevel("ERROR")
 df = spark.read.option("header", True).csv("./sample_csv_data/total_cr_naver.csv")
 df.show()
 ```
+```
+5. pyspark udf test
+# 일단 샘플만들어볼까??
+from pyspark.sql.functions import udf    ⇒ udf 사용하기 위해서 
+from pyspark.sql.types import *  ⇒ StringType()등 여러 type 사용하기 위해서
+from pyspark.sql.functions import col   ⇒ col 사용하기 위해서
+
+# 불러온 위 df중 comment 열만 df2로 지정하기
+df2=df.select("comment")
+def one(x): return "one"  ⇒ 샘플 사용자정의함수
+one_udf= udf(lambda x: one(x), StringType())
+df2.withColumn("comment", one_udf(col("comment"))).show()
+```
