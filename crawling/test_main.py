@@ -29,10 +29,9 @@ cr = cr_crawling.c_crawling() # crawling 클래스
 kafka_topic= ['input']
 
 # 유튜브 크롤링 test
-# video_url = "https://www.youtube.com/watch?v=py_phbQxy5Y"
 
-# video_url = str(input())
-video_url= "https://www.youtube.com/watch?v=py_phbQxy5Y"
+video_url = str(input())
+# video_url= "https://www.youtube.com/watch?v=py_phbQxy5Y"
 if "youtube" in video_url:
     print("유튜브방송!")
     cr.youtube_kafka(video_url, kafka_topic[0])
