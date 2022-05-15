@@ -3,3 +3,4 @@ logs
 .vscode
 .ipynb_checkpoints
 .Trash*
+.cache
