@@ -9,7 +9,7 @@ class c_token:
         re_string = re.compile("["
             u"\U00010000-\U0010FFFF"  #BMP characters 이외
                             "]+", flags=re.UNICODE).sub(r'', input_str)
-        return print(re_string)
+        return re_string
 
 
 # import re
