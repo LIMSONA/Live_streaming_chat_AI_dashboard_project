@@ -59,6 +59,9 @@ RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0
 RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
     mv commons-pool2-2.11.1.jar /opt/spark/jars
 
+RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar && \
+    mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/spark/jars
+
 RUN mkdir /root/.pip && \
     set -x \
     && { \
