@@ -93,6 +93,7 @@ webencodings==0.5.1
 widgetsnbextension==3.6.0
 scikit-learn
 torch==1.10.1 --no-cache-dir
+torchvision==0.12.0 --no-cache-dir
 gluonnlp
 mxnet
 git+https://git@github.com/SKTBrain/KoBERT.git@master
