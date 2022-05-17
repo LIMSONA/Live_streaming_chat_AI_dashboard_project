@@ -67,8 +67,12 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
 
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+
 networks:
-  default:
-    name: hy22-external-network
-    external: true
+  hy22-external-network : 
+  external: true
 

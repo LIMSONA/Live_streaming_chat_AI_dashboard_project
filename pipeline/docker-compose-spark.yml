@@ -63,7 +63,11 @@ services:
       - ./assets/zeppelin/notebook:/notebook
       - ./assets/zeppelin/conf:/opt/zeppelin/conf
 
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+
 networks:
-  default:
-    name: hy22-external-network
-    external: true
+  hy22-external-network : 
+  external: true
