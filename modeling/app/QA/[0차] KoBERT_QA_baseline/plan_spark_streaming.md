@@ -1,13 +1,20 @@
 ## 질문분류 모델 spark_streaming에 추가할 내용
 ```
+0. 라이브러리 import
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import udf   
+from pyspark.sql.types import * 
+from pyspark.sql.functions import col
+```
+```
 1. 파일 불러오고 import
 `streamingspark.py과 같은 위치`  
-sc.addFile("KoBERT_QA_v.0.0.2_sona.py")
-import KoBERT_QA_v.0.0.2_sona as qa
+sc.addFile("./QA.py")
+import QA as qa
 ```
 ```
 2. udf 지정
-qa_udf = udf(lambda x: qa.predict(x), StringType())
+qa_udf = udf(lambda x: qa.predict_softmax(x), StringType())
 ```
 ```
 3. 나중에 'qa_score'열로 붙여서 나올 수 있도록
