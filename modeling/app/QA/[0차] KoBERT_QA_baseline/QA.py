@@ -72,13 +72,13 @@ learning_rate = 5e-5
 
 #저장된 가중치 가져오기
 model_pt = BERTClassifier(bertmodel,  dr_rate=0.5)
-model_pt.load_state_dict(torch.load('KoBERT_QA_v.0.0.2_sona.pt'))
+model_pt.load_state_dict(torch.load('QA.pt'))
 model_pt.to(device)
 
 tokenizer = get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
-# 예측하기
+# 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0)
 def predict(predict_sentence):
 
     data = [predict_sentence, '0']
@@ -95,16 +95,47 @@ def predict(predict_sentence):
 
         valid_length= valid_length
         label = label.long().to(device)
-
         out = model_pt(token_ids, valid_length, segment_ids)
+        test_eval=[]
+        for i in out:
+            logits=i
+            logits = logits.detach().cpu().numpy()
+            idx= np.argmax(logits)
+            
+            return idx
 
+
+# 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0에 대한 확률) 
+def softmax(vals, idx):
+    valscpu = vals.cpu().detach().squeeze(0)
+    a = 0
+    for i in valscpu:
+        a += np.exp(i)
+    return ((np.exp(valscpu[idx]))/a).item()
+        
+        
+def predict_softmax(predict_sentence):
+
+    data = [predict_sentence, '0']
+    dataset_another = [data]
+
+    another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
+    test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
+    
+    model_pt.eval()
+
+    for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
+        token_ids = token_ids.long().to(device)
+        segment_ids = segment_ids.long().to(device)
+
+        valid_length= valid_length
+        label = label.long().to(device)
+        out = model_pt(token_ids, valid_length, segment_ids)
 
         test_eval=[]
         for i in out:
             logits=i
             logits = logits.detach().cpu().numpy()
-            # 고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0
-            return (np.argmax(logits))
+            idx=np.argmax(logits)
             
-                        
-# df["qa_score"]= df["chat_message"].map(lambda x: predict(x))
+            return softmax(out,idx)
