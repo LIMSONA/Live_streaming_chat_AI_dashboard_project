@@ -27,7 +27,11 @@ services:
     #   HTTP_PORT: "8080"
     #   ENABLE_METRICS: 'true' 
 
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+
 networks:
-  default:
-    name: hy22-external-network
-    external: true
+  hy22-external-network : 
+  external: true

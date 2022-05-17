@@ -40,7 +40,11 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGODB_HOST}/
 
 
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+
 networks:
-  default:
-    name: hy22-external-network
-    external: true
+  hy22-external-network : 
+  external: true
