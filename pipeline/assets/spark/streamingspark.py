@@ -37,7 +37,7 @@ df2\
 .selectExpr("CAST('data' AS STRING) AS key", "to_json(struct(*)) AS value")\
 .writeStream\
 .format('kafka')\
-.outputMode("append")\
+.outputMode("Append")\
 .option('kafka.bootstrap.servers', 'kafka:9092')\
 .option('topic', 'message')\
 .option("checkpointLocation", "/tmp/dtn/checkpoint")\
