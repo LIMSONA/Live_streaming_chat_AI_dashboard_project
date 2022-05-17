@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  influxdb:
+    image: influxdb:1.7
+    container_name: influxdb_default
+    ports:
+      - 8086:8086
+      - 8083:8083
+    volumes:
+      - ./data/influxdb:/var/lib/influxdb
+
+networks:
+  default:
+    name: hy22-external-network
+    external: true
+
+volumes:
+  influxdb-volume:
+    external: true
