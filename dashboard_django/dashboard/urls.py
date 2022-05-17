@@ -13,9 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from .views import index, LiveCommerce, template_test
 
 urlpatterns = [
+    #path(주소, 뷰, 주소별명)
     path('admin/', admin.site.urls),
+    path('LiveCommerce/', LiveCommerce), #뷰 접속 주소
+    path('test/', template_test),
+    path('',index)
 ]
+
+
+
+
+
+
