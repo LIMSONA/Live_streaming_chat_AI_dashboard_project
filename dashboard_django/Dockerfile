@@ -1,5 +1,4 @@
 FROM python:3.8.10-alpine
-
 #RUN apt install -y apk
 
 RUN mkdir -p /usr/src/app
