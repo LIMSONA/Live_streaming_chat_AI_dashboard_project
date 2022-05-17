@@ -30,7 +30,11 @@ services:
     command: python3 ./test_main.py
     # command: bash
 
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+
 networks:
-  default:
-    name: hy22-external-network
-    external: true
+  hy22-external-network : 
+  external: true
