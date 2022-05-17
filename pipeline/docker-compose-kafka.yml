@@ -46,6 +46,5 @@ services:
   #   restart: always
 
 networks:
-  default:
-    name: hy22-external-network
+  hy22-external-network:
     external: true
