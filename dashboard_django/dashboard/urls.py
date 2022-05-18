@@ -22,9 +22,9 @@ from .views import index, LiveCommerce, template_test
 
 urlpatterns = [
     #path(주소, 뷰, 주소별명)
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('LiveCommerce/', LiveCommerce), #뷰 접속 주소
-    path('test/', template_test),
+    #path('test/', template_test),
     path('',index)
 ]
 
