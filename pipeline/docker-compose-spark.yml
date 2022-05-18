@@ -11,13 +11,13 @@ services:
     image: my-spark:0.1
     container_name: spark-master
     ports:
-      - 8080:8080 # master webui
+      - 8083:8083 # master webui
       - 7077:7077 # master port
     environment:
       - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
-      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_MASTER_WEBUI_PORT=8082
     volumes: 
       - ./assets/spark:/spark-work
 
@@ -34,34 +34,34 @@ services:
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=2
-    # ports:
-    #   - 18080-18089:8081
-    # volumes:
-    #   - shared-workspace:/opt/workspace
+     ports:
+       - 18080-18089:8081
+     volumes:
+       - shared-workspace:/opt/workspace
     depends_on:
-      - spark-master
+       - spark-master
 
-  zeppelin:
-    build:
-      context: .
-      dockerfile: ./assets/spark/Dockerfile
-    image: my-spark:0.1
-    container_name: zeppelin
-    environment:
-      - SPARK_MODE=zeppelin
-      - ZEPPELIN_PORT=8080
-      - ZEPPELIN_LOG_DIR=/logs
-      - ZEPPELIN_NOTEBOOK_DIR=/notebook
-      - SPARK_MASTER=spark://spark-master:7077
-      # - USE_HADOOP=false
-      # - SPARK_SUBMIT_OPTIONS=--total-executor-cores 4 --name zeppelin
-    ports:
-      - 18090:8080
-    volumes:
-      - ./data/zeppelin/logs:/logs
-      # - ./data/zeppelin/data:/data
-      - ./assets/zeppelin/notebook:/notebook
-      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+          zeppelin:
+            build:
+              context: .
+              dockerfile: ./assets/spark/Dockerfile
+            image: my-spark:0.1
+            container_name: zeppelin
+            environment:
+              - SPARK_MODE=zeppelin
+              - ZEPPELIN_PORT=8080
+              - ZEPPELIN_LOG_DIR=/logs
+              - ZEPPELIN_NOTEBOOK_DIR=/notebook
+              - SPARK_MASTER=spark://spark-master:7077
+       - USE_HADOOP=false
+       - SPARK_SUBMIT_OPTIONS=--total-executor-cores 4 --name zeppelin
+          ports:
+            - 18090:8080
+          volumes:
+            - ./data/zeppelin/logs:/logs
+            # - ./data/zeppelin/data:/data
+            - ./assets/zeppelin/notebook:/notebook
+            - ./assets/zeppelin/conf:/opt/zeppelin/conf
 
 # networks:
 #   default:
@@ -70,4 +70,4 @@ services:
 
 networks:
   hy22-external-network : 
-  external: true
+    external: true
