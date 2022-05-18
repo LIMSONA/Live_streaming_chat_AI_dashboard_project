@@ -29,12 +29,11 @@ services:
       - ./:/usr/src/app
     command: python3 ./test_main.py
     # command: bash
-
-# networks:
-#   default:
-#     name: hy22-external-network
-#     external: true
+    networks:
+      - hy22-external-network
 
 networks:
-  hy22-external-network : 
-  external: true
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true

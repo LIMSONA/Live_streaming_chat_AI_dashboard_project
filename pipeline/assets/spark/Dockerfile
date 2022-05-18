@@ -99,5 +99,6 @@ ENV SPARK_APP_NAME=zeppelin
 
 WORKDIR /opt/spark
 
-RUN ["chmod", "+x", "/usr/local/bin/entrypoint.sh"]
+RUN ["chmod", "+x", "/entrypoint.sh"]
+
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]

@@ -7,17 +7,11 @@ services:
       - 3000:3000
     volumes:
       - ./data/grafana:/var/lib/grafana
-
-# networks:
-#   default:
-#     name: hy22-external-network
-#     external: true
+    networks:
+      - hy22-external-network
 
 networks:
-  default:
-    name: hy22-external-network
+  hy22-external-network :
+    driver: bridge
     external: true
-
-volumes:
-  grafana-volume:
-    external: true
+    internal: true
