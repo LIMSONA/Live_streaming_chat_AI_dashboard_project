@@ -10,6 +10,8 @@ services:
       - KAFKA_SERVER=${KAFKA_SERVER:-kafka:9092}
     volumes:
       - ../crwaling:/usr/src/app
+    networks:
+      - hy22-external-network
     command: python3 ./test_main.py
     # command: bash
 
@@ -20,12 +22,3 @@ networks:
     external: true
     internal: true
 
-
-# networks:
-#   default:
-#     name: hy22-external-network
-#     external: true
-
-# networks:
-#   hy22-external-network : 
-#     external: true
