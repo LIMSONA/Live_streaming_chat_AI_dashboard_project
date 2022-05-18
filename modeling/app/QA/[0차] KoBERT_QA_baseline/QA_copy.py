@@ -10,6 +10,8 @@ from kobert.utils import get_tokenizer
 from kobert.pytorch_kobert import get_pytorch_kobert_model
 from transformers import AdamW
 from transformers.optimization import get_cosine_schedule_with_warmup 
+import re
+
 
 #GPU 사용 시
 device = torch.device("cuda:0")
@@ -78,7 +80,7 @@ model_pt.to(device)
 tokenizer = get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
-# 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0)
+# # 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0)
 # def predict(predict_sentence):
 
 #     data = [predict_sentence, '0']
@@ -139,3 +141,7 @@ def predict_softmax(predict_sentence):
             idx=np.argmax(logits)
             
             return softmax(out,idx)
+        
+a=input()        
+while a!="1":
+    print(predict_softmax(a))
