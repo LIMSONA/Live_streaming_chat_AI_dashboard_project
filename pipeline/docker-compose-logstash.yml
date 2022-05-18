@@ -25,18 +25,11 @@ services:
       - ./assets/logstash/config:/usr/share/logstash/config
       - ./assets/logstash/pipeline:/usr/share/logstash/pipeline
       - ./data/logstash:/usr/share/logstash/data
+    networks:
+      - hy22-external-network
 
 networks:
   hy22-external-network :
     driver: bridge
     external: true
     internal: true
-
-# networks:
-#   default:
-#     name: hy22-external-network
-#     external: true
-
-# networks:
-#   hy22-external-network : 
-#   external: true

@@ -11,6 +11,8 @@ services:
     volumes:
       - ./data/zookeeper/data:/data
       - ./data/zookeeper/logs:/datalog
+    networks:
+      - hy22-external-network
 
 # 카프카 -standalone
   kafka:
@@ -30,6 +32,9 @@ services:
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
+
+    networks:
+      - hy22-external-network
 
 
 networks:

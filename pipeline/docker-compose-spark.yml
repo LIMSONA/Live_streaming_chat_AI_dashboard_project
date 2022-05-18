@@ -20,6 +20,8 @@ services:
       - SPARK_MASTER_WEBUI_PORT=8080
     volumes: 
       - ./assets/spark:/spark-work
+    networks:
+      - hy22-external-network
 
 # 스파크 워커2개
   spark-worker:
@@ -40,6 +42,8 @@ services:
     #   - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+    networks:
+      - hy22-external-network
 
   zeppelin:
     build:
@@ -62,18 +66,11 @@ services:
       # - ./data/zeppelin/data:/data
       - ./assets/zeppelin/notebook:/notebook
       - ./assets/zeppelin/conf:/opt/zeppelin/conf
+    networks:
+      - hy22-external-network
 
 networks:
   hy22-external-network :
     driver: bridge
     external: true
     internal: true
-
-# networks:
-#   default:
-#     name: hy22-external-network
-#     external: true
-
-# networks:
-#   hy22-external-network : 
-#     external: true
