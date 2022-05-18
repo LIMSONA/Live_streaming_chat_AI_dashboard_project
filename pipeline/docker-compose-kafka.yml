@@ -32,24 +32,17 @@ services:
       - ./data/kafka/data:/kafka
 
 
-# bash ./burrow-build.sh
-  # burrow: 
-  #   image: hy22-burrow:0.1
-  #   volumes:
-  #     - ./assets/burrow:/etc/burrow/
-  #     - ./data/burrow:/var/tmp/burrow
-  #   expose:
-  #     - 8000
-  #   depends_on:
-  #     - kafka
-  #     - zookeeper
-  #   restart: always
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true
 
 # networks:
 #   default:
 #     name: hy22-external-network
 #     external: true
 
-networks:
-  hy22-external-network : 
-  external: true
+# networks:
+#   hy22-external-network : 
+#   external: true

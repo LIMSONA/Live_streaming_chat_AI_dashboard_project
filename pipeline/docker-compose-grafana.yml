@@ -27,11 +27,17 @@ services:
     #   HTTP_PORT: "8080"
     #   ENABLE_METRICS: 'true' 
 
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true
+
 # networks:
 #   default:
 #     name: hy22-external-network
 #     external: true
 
-networks:
-  hy22-external-network : 
-  external: true
+# networks:
+#   hy22-external-network : 
+#   external: true
