@@ -11,6 +11,8 @@ services:
     volumes:
       - ./data/zookeeper/data:/data
       - ./data/zookeeper/logs:/datalog
+    networks:
+      - hy22-external-network
 
 # 카프카 -standalone
   kafka:
@@ -30,9 +32,9 @@ services:
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
-
-
-# bash ./burrow-build.sh
+    networks:
+      - hy22-external-network
+  # bash ./burrow-build.sh
   # burrow: 
   #   image: hy22-burrow:0.1
   #   volumes:
@@ -50,6 +52,9 @@ services:
 #     name: hy22-external-network
 #     external: true
 
+
 networks:
-  hy22-external-network:
+  hy22-external-network : 
+    driver: bridge
     external: true
+    internal: true
