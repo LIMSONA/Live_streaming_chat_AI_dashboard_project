@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+
+# 스파크
+# 스파크 마스터
+  spark-master:
+    build:
+      context: .
+      dockerfile: ./assets/spark_test/Dockerfile 
+    image: my-spark_test:0.1
+    container_name: spark-master_test
+    ports:
+      - 18083:18083 # master webui
+      - 17077:17077 # master port
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master_test
+      - SPARK_MASTER_PORT=17077
+      - SPARK_MASTER_WEBUI_PORT=18082
+      - NVIDIA_VISIBLE_DEVICE=0
+    volumes: 
+      - ./assets/spark_test:/spark-work_test
+    networks:
+      - hy22-external-network
+
+# 스파크 워커2개
+  spark-worker:
+    build:
+      context: .
+      dockerfile: ./assets/spark_test/Dockerfile 
+    image: my-spark_test:0.1
+    deploy:
+      replicas: 1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER=spark://spark-master_test:7077
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+
+    depends_on:
+      - spark-master_test
+    networks:
+      - hy22-external-network
+
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true
