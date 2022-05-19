@@ -11,15 +11,17 @@ services:
     image: my-spark:0.1
     container_name: spark-master
     ports:
-      - 8080:8080 # master webui
+      - 8083:8083 # master webui
       - 7077:7077 # master port
     environment:
       - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
-      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_MASTER_WEBUI_PORT=8082
     volumes: 
       - ./assets/spark:/spark-work
+    networks:
+      - hy22-external-network
 
 # 스파크 워커2개
   spark-worker:
@@ -28,29 +30,29 @@ services:
       dockerfile: ./assets/spark/Dockerfile 
     image: my-spark:0.1
     deploy:
-      replicas: 2
+      replicas: 1
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=2
-    # ports:
-    #   - 18080:8082
-    # volumes:
-    #   - shared-workspace:/opt/workspace
+        #     ports:
+        #       - 18080-18089:8081
+        #     volumes:
+        #       - shared-workspace:/opt/workspace
     depends_on:
       - spark-master
+    networks:
+      - hy22-external-network
 
   zeppelin:
     build:
       context: .
-      dockerfile: ./assets/zeppelin/docker/Dockerfile  
-    image: my-zeppelin:0.1
-    # image: my-spark:0.1
+      dockerfile: ./assets/spark/Dockerfile
+    image: my-spark:0.1
     container_name: zeppelin
     environment:
-      # - SPARK_MODE=zeppelin
+      - SPARK_MODE=zeppelin
       - ZEPPELIN_PORT=8080
       - ZEPPELIN_LOG_DIR=/logs
       - ZEPPELIN_NOTEBOOK_DIR=/notebook
@@ -63,9 +65,12 @@ services:
       - ./data/zeppelin/logs:/logs
       # - ./data/zeppelin/data:/data
       - ./assets/zeppelin/notebook:/notebook
-      # - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+    networks:
+      - hy22-external-network
 
 networks:
-  default:
-    name: hy22-external-network
+  hy22-external-network :
+    driver: bridge
     external: true
+    internal: true

@@ -1,0 +1,88 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark\n\nimport sqlContext.implicits._\nimport java.sql.Timestamp\nimport com.influxdb.annotations.{Column, Measurement}\nimport com.influxdb.client.InfluxDBClientFactory\nimport com.influxdb.query.FluxRecord\n\nprintln(\"Spark version:\" + sc.version)\nprintln(\"Scala version:\" + util.Properties.versionString)",
+      "user": "anonymous",
+      "dateUpdated": "2022-05-11 06:32:00.956",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u003cconsole\u003e:31: \u001b[31merror: \u001b[0mobject influxdb is not a member of package com\n       import com.influxdb.annotations.{Column, Measurement}\n                  ^\n\u003cconsole\u003e:32: \u001b[31merror: \u001b[0mobject influxdb is not a member of package com\n       import com.influxdb.client.InfluxDBClientFactory\n                  ^\n\u003cconsole\u003e:33: \u001b[31merror: \u001b[0mobject influxdb is not a member of package com\n       import com.influxdb.query.FluxRecord\n                  ^\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652242632899_1966206040",
+      "id": "paragraph_1652242632899_1966206040",
+      "dateCreated": "2022-05-11 04:17:12.899",
+      "dateStarted": "2022-05-11 06:32:00.993",
+      "dateFinished": "2022-05-11 06:32:01.236",
+      "status": "ERROR"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652242662089_220923999",
+      "id": "paragraph_1652242662089_220923999",
+      "dateCreated": "2022-05-11 04:17:42.089",
+      "status": "READY"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1652242823648_765448227",
+      "id": "paragraph_1652242823648_765448227",
+      "dateCreated": "2022-05-11 04:20:23.648",
+      "status": "READY"
+    }
+  ],
+  "name": "influxdb",
+  "id": "2H5R8B9KR",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.10.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

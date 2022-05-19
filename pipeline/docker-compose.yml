@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  spark-master:
+    extends:
+      file: docker-compose-spark.yml
+      service: spark-master
+
+  spark-worker:
+    extends:
+      file: docker-compose-spark.yml
+      service: spark-worker
+
+  zeppelin:
+    extends:
+      file: docker-compose-spark.yml
+      service: zeppelin
+
+  zookeeper:
+    extends:
+      file: docker-compose-kafka.yml
+      service: zookeeper
+
+  kafka:
+    extends:
+      file: docker-compose-kafka.yml
+      service: kafka
+
+  influxdb:
+    extends:
+      file: docker-compose-db.yml
+      service: influxdb
+
+  mongodb:
+    extends:
+      file: docker-compose-db.yml
+      service: mongodb
+
+  postgresql:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: postgresql
+
+  redis:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: redis
+
+  airflow-scheduler:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow-scheduler
+
+  airflow-worker:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow-worker
+
+  airflow:
+    extends:
+      file: docker-compose-bitnami-airflow.yml
+      service: airflow
+
