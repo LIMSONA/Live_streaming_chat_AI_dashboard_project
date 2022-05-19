@@ -7,11 +7,9 @@ services:
   logstash:
     env_file:
       - .env
-    # image: docker.io/bitnami/logstash:8
-    # image: docker.elastic.co/logstash/logstash-oss:8.1.2
     build:
       context: .
-      dockerfile: ./assets/logstash/Dockerfile.logstash
+      dockerfile: assets/logstash/Dockerfile.logstash 
     image: my_logstash:0.1
     container_name: logstash
     stdin_open: true # docker run -i
@@ -19,17 +17,19 @@ services:
     ports:
       - 5044:5044 #기본포트
     # environment:
-      # https://www.elastic.co/guide/en/logstash/current/docker-config.html
-      # - PIPELINE_WORKERS=value
-      # - LOG_LEVEL=
-      # - MONITORING_ENABLED=
+    #   https://www.elastic.co/guide/en/logstash/current/docker-config.html
+    #   - PIPELINE_WORKERS=value
+    #   - LOG_LEVEL=
+    #   - MONITORING_ENABLED=
     volumes:
       - ./assets/logstash/config:/usr/share/logstash/config
       - ./assets/logstash/pipeline:/usr/share/logstash/pipeline
       - ./data/logstash:/usr/share/logstash/data
-      # - ./assets/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+    networks:
+      - hy22-external-network
 
 networks:
-  default:
-    name: hy22-external-network
+  hy22-external-network :
+    driver: bridge
     external: true
+    internal: true

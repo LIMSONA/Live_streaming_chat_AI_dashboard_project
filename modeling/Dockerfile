@@ -23,10 +23,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 
 ENV PATH /opt/miniconda3/bin:$PATH
 
-# 소스코드 복사
-COPY ./app .
-
-
 RUN pip install --upgrade pip
 RUN conda config --add channels conda-forge
 RUN conda update -n base -c conda-forge conda
@@ -37,10 +33,12 @@ RUN echo "conda activate conda" >> ~/.bashrc
 
 RUN /bin/bash -c "source activate conda && pip3 install --upgrade pip"
 RUN /bin/bash -c "source activate conda && pip3 install --upgrade setuptools"
-RUN /bin/bash -c "source activate conda && pip3 install --no-cache-dir -r requirements.txt"
+
+COPY ./app .
+RUN /bin/bash -c "source activate conda && pip3 install --no-cache-dir -r /usr/src/app/requirements.txt"
 # RUN /bin/bash -c "source activate conda && pip3 install ir"
 # RUN /bin/bash -c "source activate conda && pip3 install julia"
-RUN /bin/bash -c "source activate conda && pip3 install sparkmagic"
+# RUN /bin/bash -c "source activate conda && pip3 install sparkmagic"
 WORKDIR /opt/miniconda3/lib/python3.9/site-packages
 RUN /bin/bash -c "source activate conda && jupyter-kernelspec install sparkmagic/kernels/sparkkernel"
 RUN /bin/bash -c "source activate conda && jupyter-kernelspec install sparkmagic/kernels/sparkrkernel"

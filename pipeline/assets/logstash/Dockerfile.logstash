@@ -1,3 +1,11 @@
 FROM docker.elastic.co/logstash/logstash-oss:8.1.2
 
 RUN bin/logstash-plugin install --version=3.1.5 logstash-output-mongodb
+
+RUN bin/logstash-plugin install --version=5.0.2 logstash-output-influxdb
+
+RUN chown -R logstash.logstash /usr/share/logstash
+
+RUN chmod 777 /usr/share/logstash/data
+
+
