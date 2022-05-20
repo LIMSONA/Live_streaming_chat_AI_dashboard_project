@@ -19,24 +19,38 @@ services:
       - SPARK_MASTER_PORT=17077
       - SPARK_MASTER_WEBUI_PORT=18082
       - NVIDIA_VISIBLE_DEVICE=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     volumes: 
       - ./assets/spark_test:/spark-work_test
     networks:
       - hy22-external-network
 
-# 스파크 워커2개
+# 스파크 워커1개
   spark-worker_test:
     build:
       context: .
       dockerfile: ./assets/spark_test/Dockerfile 
     image: my-spark_test:0.1
-    deploy:
-      replicas: 1
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER=spark://spark-master_test:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=2
+      - NVIDIA_VISIBLE_DEVICE=0
+    deploy:
+      replicas: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
     depends_on:
       - spark-master_test

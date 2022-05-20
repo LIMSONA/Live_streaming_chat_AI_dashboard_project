@@ -1,3 +1,11 @@
+## spark GPU test image
+**`수정 파일`** : dockerfile, docker-compose, requirements.txt, entrypoint.sh 
+```
+1. jupyter docker에서 사용한 nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu18.04 이미지 사용
+2. 필요한 모듈 추가 (git, apt-get update 등)
+3. zeplin, conda 모듈 제거 
+4. 포트번호 앞에 1 붙여서 변경
+```
 
 ## /opt/spark/conf/spark-env.sh
 
