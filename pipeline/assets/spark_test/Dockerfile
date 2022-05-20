@@ -7,6 +7,7 @@ RUN apt install -y wget
 RUN apt install -y tar
 RUN apt install -y mlocate
 RUN apt install -y net-tools iputils-ping
+RUN apt install -y python3-pip
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
 RUN apt-get install openjdk-8-jdk -y
@@ -27,9 +28,9 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && \
 
 COPY assets/spark_test/requirements.txt .
 
-RUN pip3 install --upgrade pip && \
-    pip3 install --upgrade setuptools && \
-    pip3 install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade && \
+    pip install --upgrade setuptools && \
+    pip install --no-cache-dir -r requirements.txt
 
 # download jars
 # org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
