@@ -1,13 +1,17 @@
 FROM nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu18.04
 
 RUN apt update
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    vim \
+    apt-utils \
+    && rm -rf /var/lib/apt/lists/*
 RUN apt install -y vim 
-RUN apt install -y wget
+RUN apt-get install -y wget
 RUN apt install -y tar
 RUN apt install -y mlocate
-RUN apt install -y net-tools iputils-ping
-RUN apt install -y python3-pip
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y python3-pip
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
 RUN apt-get install openjdk-8-jdk -y
