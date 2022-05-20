@@ -1,0 +1,1 @@
+docker stop jupyter-notebook && docker rm jupyter-notebook && docker image rmi my-cuda:0.1
