@@ -2,7 +2,7 @@ FROM nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu18.04
 
 RUN apt update
 RUN apt-get update
-RUN apt-get install -y apt-utils
+RUN apt install -y apt-utils
 RUN apt install -y vim 
 RUN apt install -y wget
 RUN apt install -y tar
@@ -18,17 +18,17 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tg
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
 
-RUN apt autoremove --purge python3.6
+RUN apt autoremove -y --purge python3.6
 RUN apt-get install python3.8 -y
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
 
 RUN apt install python3.8-distutils -y
-RUN wget https://bootstrap.pypa.io/get-pip.py && \
-    python3.8 get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python3.8 get-pip.py
 
 COPY assets/spark_test/requirements.txt .
 
-RUN pip install --upgrade && \
+RUN pip333 install --upgrade && \
     pip install --upgrade setuptools && \
     pip install --no-cache-dir -r requirements.txt
 
