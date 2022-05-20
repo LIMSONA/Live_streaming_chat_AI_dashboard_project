@@ -4,7 +4,7 @@ services:
 
 # 스파크
 # 스파크 마스터
-  spark-master:
+  spark-master_test:
     build:
       context: .
       dockerfile: ./assets/spark_test/Dockerfile 
@@ -25,7 +25,7 @@ services:
       - hy22-external-network
 
 # 스파크 워커2개
-  spark-worker:
+  spark-worker_test:
     build:
       context: .
       dockerfile: ./assets/spark_test/Dockerfile 
