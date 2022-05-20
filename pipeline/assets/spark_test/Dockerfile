@@ -1,7 +1,10 @@
 FROM nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu18.04
 
 RUN apt update
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    vim \
+    apt-utils \
+    && rm -rf /var/lib/apt/lists/*
 RUN apt install -y vim 
 RUN apt install -y wget
 RUN apt install -y tar
