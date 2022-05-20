@@ -14,6 +14,7 @@ RUN apt-get install -y libkrb5-dev
 RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
 RUN tar xvf Python-3.8.5.tar.xz
 WORKDIR /Python-3.8.5
+RUN apt install build-essential
 RUN apt install zlib1g-dev
 RUN ./configure
 RUN make
