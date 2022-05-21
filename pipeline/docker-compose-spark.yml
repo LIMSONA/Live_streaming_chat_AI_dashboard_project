@@ -4,68 +4,57 @@ services:
 
 # 스파크
 # 스파크 마스터
-  spark-master:
+  spark-master-sona:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.1
-    container_name: spark-master
+    image: my-spark:0.2
+    container_name: spark-master-sona
     ports:
-      - 8083:8083 # master webui
-      - 7077:7077 # master port
+      - 18083:18083 # master webui
+      - 17077:17077 # master port
     environment:
       - SPARK_MODE=master
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
-      - SPARK_MASTER_WEBUI_PORT=8082
+      - SPARK_MASTER_HOST=spark-master-sona
+      - SPARK_MASTER_PORT=17077
+      - SPARK_MASTER_WEBUI_PORT=18083
+      - NVIDIA_VISIBLE_DEVICE=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+
     volumes: 
       - ./assets/spark:/spark-work
     networks:
       - hy22-external-network
 
-# 스파크 워커2개
-  spark-worker:
+# 스파크 워커1개
+  spark-worker-sona:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.1
-    deploy:
-      replicas: 1
+    image: my-spark:0.2
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_MASTER=spark://spark-master:17077
       - SPARK_WORKER_MEMORY=2G
-      - SPARK_WORKER_CORES=2
-        #     ports:
-        #       - 18080-18089:8081
-        #     volumes:
-        #       - shared-workspace:/opt/workspace
+      - SPARK_WORKER_CORES=1
+      - NVIDIA_VISIBLE_DEVICE=0
+    deploy:
+      replicas: 1
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]    
     depends_on:
-      - spark-master
-    networks:
-      - hy22-external-network
-
-  zeppelin:
-    build:
-      context: .
-      dockerfile: ./assets/spark/Dockerfile
-    image: my-spark:0.1
-    container_name: zeppelin
-    environment:
-      - SPARK_MODE=zeppelin
-      - ZEPPELIN_PORT=8080
-      - ZEPPELIN_LOG_DIR=/logs
-      - ZEPPELIN_NOTEBOOK_DIR=/notebook
-      - SPARK_MASTER=spark://spark-master:7077
-      # - USE_HADOOP=false
-      # - SPARK_SUBMIT_OPTIONS=--total-executor-cores 4 --name zeppelin
-    ports:
-      - 18090:8080
-    volumes:
-      - ./data/zeppelin/logs:/logs
-      # - ./data/zeppelin/data:/data
-      - ./assets/zeppelin/notebook:/notebook
-      - ./assets/zeppelin/conf:/opt/zeppelin/conf
+      - spark-master-sona
     networks:
       - hy22-external-network
 
@@ -74,3 +63,4 @@ networks:
     driver: bridge
     external: true
     internal: true
+
