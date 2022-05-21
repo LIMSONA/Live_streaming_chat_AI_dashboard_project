@@ -101,9 +101,10 @@ mxnet
 git+https://git@github.com/SKTBrain/KoBERT.git@master
 konlpy==0.6.0
 nltk
-pyspark==3.2.1
+pyspark
 gensim==3.8.3
 tensorflow==2.2.0
 numpy==1.19.0
 fasttext
+py4j
 

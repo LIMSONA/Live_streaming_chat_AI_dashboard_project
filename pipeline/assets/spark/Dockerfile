@@ -21,7 +21,9 @@ RUN apt-get install zlib1g-dev
 RUN ./configure
 RUN make
 RUN make altinstall
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10
+
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
+ENV PYSPARK_PYTHON=python
 
 # RUN apt install python3.8-distutils -y
 # RUN wget https://bootstrap.pypa.io/get-pip.py && \
