@@ -17,6 +17,7 @@ cffi
 charset-normalizer
 colorama
 cryptography
+cython
 debugpy
 decorator==5.1.1
 defusedxml==0.7.1
@@ -77,18 +78,17 @@ qtconsole
 QtPy==2.0.1
 requests
 requests-kerberos==0.14.0
-ruamel-yaml-conda
 Send2Trash==1.8.0
 six
 soupsieve
 sparkmagic==0.19.2
 stack-data==0.2.0
 tenacity==8.0.1
-terminado==0.13.3
+terminado
 tinycss2==1.1.1
 tornado==6.1
 tqdm
-traitlets==5.1.1
+traitlets
 urllib3
 wcwidth==0.2.5
 webencodings==0.5.1
@@ -100,7 +100,7 @@ gluonnlp
 mxnet
 git+https://git@github.com/SKTBrain/KoBERT.git@master
 konlpy==0.6.0
-nltk==3.7
+nltk
 pyspark==3.2.1
 gensim==3.8.3
 tensorflow==2.2.0
