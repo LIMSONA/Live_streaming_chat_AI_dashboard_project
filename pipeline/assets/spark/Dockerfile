@@ -2,16 +2,16 @@ FROM nvidia/cuda:11.4.0-cudnn8-runtime-ubuntu18.04
 
 RUN apt update && apt list --upgradable
 RUN apt-get update
-RUN apt install -y vim 
-RUN apt install -y wget
-RUN apt install -y tar
-RUN apt install -y net-tools iputils-ping
+RUN apt-get install -y vim 
+RUN apt-get install -y wget
+RUN apt-get install -y tar
+RUN apt-get install -y net-tools iputils-ping
 
 RUN apt-get install openjdk-8-jdk -y
 RUN apt-get install -y inetutils-ping
-RUN apt-get install -y python3-pip
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
+RUN apt-get install -y python3-pip
 
 RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
 RUN tar xvf Python-3.8.5.tar.xz
@@ -23,15 +23,19 @@ RUN make
 RUN make altinstall
 RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10
 
+# RUN apt install python3.8-distutils -y
+# RUN wget https://bootstrap.pypa.io/get-pip.py && \
+#    python3.8 get-pip.py
+
+COPY ./requirements.txt .
+
+RUN pip3 install --upgrade pip  
+RUN pip install --upgrade setuptools 
+RUN pip install --no-cache-dir -r requirements.txt
+
 RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
 RUN mv spark-3.1.2-bin-hadoop3.2/ /opt/spark
-
-COPY assets/spark/requirements.txt .
-
-RUN pip3 install --upgrade pip
-RUN pip3 install --upgrade setuptools 
-RUN pip3 install --no-cache-dir -r requirements.txt
 
 # download jars
 # org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
@@ -74,7 +78,7 @@ ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
 
-COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENV SPARK_NO_DAEMONIZE=1
 ENV SPARK_MODE=master
@@ -91,7 +95,7 @@ ENV USE_HADOOP=false
 
 WORKDIR /opt/spark
 
-RUN ["chmod", "+x", "/entrypoint.sh"]
+#RUN ["chmod", "+x", "/entrypoint.sh"]
 
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+#ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
