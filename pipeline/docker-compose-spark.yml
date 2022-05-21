@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.2
+    image: sona-spark:0.1
     container_name: spark-master-sona
     ports:
       - 18083:18083 # master webui
@@ -27,21 +27,22 @@ services:
               count: 1
               capabilities: [gpu]
 
-
     volumes: 
       - ./assets/spark:/spark-work
     networks:
       - hy22-external-network
+
 
 # 스파크 워커1개
   spark-worker-sona:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.2
+    image: sona-spark:0.1
+    container_name: spark-worker-sona
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER=spark://spark-master:17077
+      - SPARK_MASTER=spark://spark-master-sona:17077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=1
       - NVIDIA_VISIBLE_DEVICE=0

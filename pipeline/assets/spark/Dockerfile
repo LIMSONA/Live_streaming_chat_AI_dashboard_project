@@ -26,8 +26,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.
 # RUN apt install python3.8-distutils -y
 # RUN wget https://bootstrap.pypa.io/get-pip.py && \
 #    python3.8 get-pip.py
-
-COPY ./requirements.txt .
+COPY assets/spark/requirements.txt .
 
 RUN pip3 install --upgrade pip  
 RUN pip install --upgrade setuptools 
@@ -78,7 +77,7 @@ ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
 
-COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENV SPARK_NO_DAEMONIZE=1
 ENV SPARK_MODE=master
@@ -93,9 +92,10 @@ ENV SPARK_WORKER_WEBUI_PORT=18081
 
 ENV USE_HADOOP=false
 
-WORKDIR /opt/spark
+#WORKDIR /opt/spark
+#WORKDIR /usr/local/bin/
 
-#RUN ["chmod", "+x", "/entrypoint.sh"]
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-#ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
