@@ -14,29 +14,26 @@ RUN apt-get install -y libkrb5-dev
 
 #WORKDIR /usr/bin
 #RUN apt -y autoremove python3.6
-#RUN apt-get install -y python3-pip
 
 #WORKDIR /
 RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
 RUN tar xvf Python-3.8.5.tar.xz
 WORKDIR /Python-3.8.5
-RUN apt -y install build-essential libreadline-gplv2-dev libncursesw5-devlibssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
-RUN apt-get install zlib1g-dev
+RUN apt -y install build-essential libffi-dev 
+RUN apt-get -y install zlib1g-dev liblzma-dev libsqlite3-dev libgdbm-dev libc6-dev libbz2-dev
 RUN ./configure
 RUN make
 RUN make altinstall
 
 RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
 
+RUN apt-get install -y python3-pip && cd ..
+
 # RUN apt install python3.8-distutils -y
-# RUN wget https://bootstrap.pypa.io/get-pip.py && \
-#    python3.8 get-pip.py
-#WORKDIR /
+#RUN wget https://bootstrap.pypa.io/get-pip.py && python3.8 get-pip.py
+
 COPY assets/spark/requirements.txt .
 
-RUN pip3 install --upgrade pip  
-RUN pip install --upgrade setuptools 
-RUN pip install --no-cache-dir -r requirements.txt
 
 RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz
 RUN tar -xvf spark-3.1.2-bin-hadoop3.2.tgz
@@ -78,6 +75,10 @@ RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/
 #     echo 'format = columns'; \
 #     } > /root/.pip/pip.conf
 
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --no-cache-dir -r requirements.txt
+
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
@@ -99,8 +100,7 @@ ENV SPARK_WORKER_WEBUI_PORT=18081
 ENV USE_HADOOP=false
 ENV PYSPARK_PYTHON=python
 ENV PYTHONENCODING=utf8
-ENV PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
-
+ENV PYTHONPATH=$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$PYTHONPATH
 
 # #WORKDIR /opt/spark
 # #WORKDIR /usr/local/bin/
