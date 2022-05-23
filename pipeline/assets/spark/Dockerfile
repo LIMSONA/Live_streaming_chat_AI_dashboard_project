@@ -26,11 +26,18 @@ RUN make
 RUN make altinstall
 
 RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
+RUN apt-get install -y python-pip && cd ..
 
-RUN apt-get install -y python3-pip && cd ..
 
-# RUN apt install python3.8-distutils -y
-#RUN wget https://bootstrap.pypa.io/get-pip.py && python3.8 get-pip.py
+#RUN apt install -y python python3 python3-distutils 
+#RUN wget https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+#RUN python get-pip.py 
+#RUN rm get-pip.py
+
+# RUN apt install python3-distutils -y
+# RUN wget https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
+#WORKDIR  cd /usr/bin
+#RUN rm python && ln -s python3 python
 
 COPY assets/spark/requirements.txt .
 
@@ -64,20 +71,20 @@ RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/
 RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar && \
     mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/spark/jars
 
-# RUN mkdir /root/.pip && \
-#     set -x \
-#     && { \
-#     echo '[global]'; \
-#     echo 'timeout = 60'; \
-#     echo '[freeze]'; \
-#     echo 'timeout = 10'; \
-#     echo '[list]'; \
-#     echo 'format = columns'; \
-#     } > /root/.pip/pip.conf
+RUN mkdir /root/.pip && \
+    set -x \
+     && { \
+    echo '[global]'; \
+    echo 'timeout = 60'; \
+    echo '[freeze]'; \
+    echo 'timeout = 10'; \
+    echo '[list]'; \
+    echo 'format = columns'; \
+    } > /root/.pip/pip.conf
 
 RUN pip3 install --upgrade pip
-RUN pip install --upgrade setuptools
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
