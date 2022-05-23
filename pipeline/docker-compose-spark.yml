@@ -29,6 +29,7 @@ services:
 
     volumes: 
       - ./assets/spark:/spark-work
+      - ./assets/model:/spark-work/model
     networks:
       - hy22-external-network
 
