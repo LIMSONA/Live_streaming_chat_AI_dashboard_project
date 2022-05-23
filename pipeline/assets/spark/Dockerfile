@@ -76,8 +76,8 @@ RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/
 #     } > /root/.pip/pip.conf
 
 RUN pip3 install --upgrade pip
-RUN pip3 install --upgrade setuptools
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade setuptools
+RUN pip install --no-cache-dir -r requirements.txt
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
