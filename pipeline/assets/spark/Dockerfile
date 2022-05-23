@@ -11,23 +11,28 @@ RUN apt-get install openjdk-8-jdk -y
 RUN apt-get install -y inetutils-ping
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
+
+WORKDIR /usr/bin
+RUN apt -y autoremove python3.6
 RUN apt-get install -y python3-pip
 
+WORKDIR /
 RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
 RUN tar xvf Python-3.8.5.tar.xz
 WORKDIR /Python-3.8.5
-RUN apt install build-essential
+RUN apt -y install build-essential
 RUN apt-get install zlib1g-dev
 RUN ./configure
 RUN make
 RUN make altinstall
 
 RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
-ENV PYSPARK_PYTHON=python
+#ENV PYSPARK_PYTHON=python
 
 # RUN apt install python3.8-distutils -y
 # RUN wget https://bootstrap.pypa.io/get-pip.py && \
 #    python3.8 get-pip.py
+WORKDIR /
 COPY assets/spark/requirements.txt .
 
 RUN pip3 install --upgrade pip  
