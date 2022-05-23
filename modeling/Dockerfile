@@ -19,7 +19,7 @@ RUN apt install zlib1g-dev
 RUN ./configure
 RUN make
 RUN make altinstall
-# RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3 10
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
