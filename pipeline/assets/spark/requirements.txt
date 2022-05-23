@@ -106,5 +106,5 @@ gensim==3.8.3
 tensorflow==2.2.0
 numpy==1.19.0
 fasttext
-py4j
-
+py4j==0.10.9
+pyarrow==1.0.0
