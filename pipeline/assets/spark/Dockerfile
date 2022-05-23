@@ -22,12 +22,15 @@ RUN tar xvf Python-3.8.5.tar.xz
 WORKDIR /Python-3.8.5
 RUN apt -y install build-essential
 RUN apt-get install zlib1g-dev
-RUN ./configure
+RUN ./configure --enable-optimizations
 RUN make
-RUN make altinstall
+RUN make install
 
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
-#ENV PYSPARK_PYTHON=python
+#RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
+ENV PYSPARK_PYTHON=python3
+ENV PYTHONENCODING=utf8
+
+
 
 # RUN apt install python3.8-distutils -y
 # RUN wget https://bootstrap.pypa.io/get-pip.py && \
@@ -98,6 +101,8 @@ ENV SPARK_WORKER_MEMORY=1g
 ENV SPARK_WORKER_WEBUI_PORT=18081
 
 ENV USE_HADOOP=false
+
+
 
 #WORKDIR /opt/spark
 #WORKDIR /usr/local/bin/
