@@ -3,18 +3,15 @@
 
 import re
 
-class c_token:  
-        def preprocessing(input_str):
-            re_string = re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣!?.,]+',"", str(input_str))
-            return re_string    
-                      
+class c_token:                    
     # 이모지만 제거 정규식 전처리
-    # def preprocessing(self, input_str):
-    #     re_string = re.compile("["
-    #         u"\U00010000-\U0010FFFF"  #BMP characters 이외
-    #                         "]+", flags=re.UNICODE).sub(r'', input_str)
-        # return re_string
-        
+    def preprocessing(self, input_str):
+        re_string = re.compile("["
+            u"\U00010000-\U0010FFFF"  #BMP characters 이외
+                            "]+", flags=re.UNICODE).sub(r'', input_str)
+        return re_string
+
+
 # import re
 # from konlpy.tag import Okt
 # from jamo import h2j, j2hcj #초성/중성/종성분리
