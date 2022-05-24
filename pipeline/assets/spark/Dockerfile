@@ -6,8 +6,8 @@ RUN apt-get install -y vim
 RUN apt-get install -y wget
 RUN apt-get install -y tar
 RUN apt-get install -y net-tools iputils-ping 
-# RUN apt install -y openssl openssl-dev
-
+RUN apt install -y openssl libssl-dev
+RUN apt-get install openjdk-8-jdk -y
 RUN apt-get install -y inetutils-ping
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
