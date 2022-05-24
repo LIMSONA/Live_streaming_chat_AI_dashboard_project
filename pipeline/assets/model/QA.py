@@ -104,12 +104,8 @@ def predict(predict_sentence):
                 
                 return int(idx)
     except:
-<<<<<<< HEAD
         return 0  
 
-=======
-        return int(0)
->>>>>>> bcc85db0c04dd7de9c7a90b115a41538763a9868
 
 
 # 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0에 대한 확률) 
