@@ -80,29 +80,31 @@ tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
 # 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0)
 def predict(predict_sentence):
+    try:
+        data = [predict_sentence, '0']
+        dataset_another = [data]
 
-    data = [predict_sentence, '0']
-    dataset_another = [data]
+        another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
+        test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
+        
+        model_pt.eval()
 
-    another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
-    test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
-    
-    model_pt.eval()
+        for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
+            token_ids = token_ids.long().to(device)
+            segment_ids = segment_ids.long().to(device)
 
-    for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
-        token_ids = token_ids.long().to(device)
-        segment_ids = segment_ids.long().to(device)
-
-        valid_length= valid_length
-        label = label.long().to(device)
-        out = model_pt(token_ids, valid_length, segment_ids)
-        test_eval=[]
-        for i in out:
-            logits=i
-            logits = logits.detach().cpu().numpy()
-            idx= np.argmax(logits)
-            
-            return idx
+            valid_length= valid_length
+            label = label.long().to(device)
+            out = model_pt(token_ids, valid_length, segment_ids)
+            test_eval=[]
+            for i in out:
+                logits=i
+                logits = logits.detach().cpu().numpy()
+                idx= np.argmax(logits)
+                
+                return idx
+    except:
+        return 0
 
 
 # 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0에 대한 확률) 
