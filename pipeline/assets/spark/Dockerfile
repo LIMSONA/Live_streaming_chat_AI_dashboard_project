@@ -5,16 +5,17 @@ RUN apt-get update
 RUN apt-get install -y vim 
 RUN apt-get install -y wget
 RUN apt-get install -y tar
-RUN apt-get install -y net-tools iputils-ping
+RUN apt-get install -y net-tools iputils-ping 
+# RUN apt install -y openssl openssl-dev
 
-RUN apt-get install openjdk-8-jdk -y
 RUN apt-get install -y inetutils-ping
 RUN apt-get install -y git
 RUN apt-get install -y libkrb5-dev
 
 #WORKDIR /usr/bin
 #RUN apt -y autoremove python3.6
-
+RUN apt-get install -y python3-pip
+#RUN apt-get remove --purge python3.6
 #WORKDIR /
 RUN wget https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tar.xz
 RUN tar xvf Python-3.8.5.tar.xz
@@ -25,8 +26,7 @@ RUN ./configure
 RUN make
 RUN make altinstall
 
-RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 
-RUN apt-get install -y python-pip && cd ..
+RUN update-alternatives --install /usr/bin/python python /usr/local/bin/python3.8 10 &&  cd ..
 
 
 #RUN apt install -y python python3 python3-distutils 
@@ -71,20 +71,20 @@ RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/
 RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar && \
     mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/spark/jars
 
-RUN mkdir /root/.pip && \
-    set -x \
-     && { \
-    echo '[global]'; \
-    echo 'timeout = 60'; \
-    echo '[freeze]'; \
-    echo 'timeout = 10'; \
-    echo '[list]'; \
-    echo 'format = columns'; \
-    } > /root/.pip/pip.conf
+#RUN mkdir /root/.pip && \
+#    set -x \
+#     && { \
+#    echo '[global]'; \
+#    echo 'timeout = 60'; \
+#    echo '[freeze]'; \
+#    echo 'timeout = 10'; \
+#    echo '[list]'; \
+#    echo 'format = columns'; \
+#    } > /root/.pip/pip.conf
 
-RUN pip3 install --upgrade pip
-RUN pip3 install --upgrade setuptools
-RUN pip3 install --no-cache-dir -r requirements.txt
+#RUN pip3 install --upgrade pip
+#RUN pip3 install --upgrade setuptools
+#RUN pip install --no-cache-dir -r requirements.txt
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
