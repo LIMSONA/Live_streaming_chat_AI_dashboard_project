@@ -102,9 +102,10 @@ def predict(predict_sentence):
                 logits = logits.detach().cpu().numpy()
                 idx= np.argmax(logits)
                 
-                return idx
+                return int(idx)
     except:
-        return 0
+        return 0  
+
 
 
 # 예측하기 (고객 질문: 1, 상담원 질문: 2, 고객 및 상담원 대답: 0에 대한 확률) 
