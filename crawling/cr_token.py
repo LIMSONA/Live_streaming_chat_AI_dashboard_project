@@ -5,7 +5,7 @@ import re
 
 class c_token:                   
     
-    def preprocessing(input_str):
+    def preprocessing(self,input_str):
         re_string = re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣!?.,]+',"", str(input_str))
         return re_string 
 
