@@ -30,6 +30,9 @@ services:
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
+    extra_hosts:
+      - kafka:20.232.136.207
+      - mongodb:20.232.136.207
 
 
 # bash ./burrow-build.sh
