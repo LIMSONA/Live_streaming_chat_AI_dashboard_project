@@ -11,13 +11,13 @@ services:
     image: sona-spark:0.3
     container_name: spark-master-sona
     ports:
-      - 18083:18083 # master webui
-      - 17077:17077 # master port
+      - 18083:8080 # master webui
+      - 17077:7077 # master port
     environment:
       - SPARK_MODE=master
       - SPARK_MASTER_HOST=spark-master-sona
-      - SPARK_MASTER_PORT=17077
-      - SPARK_MASTER_WEBUI_PORT=18083
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
       - NVIDIA_VISIBLE_DEVICE=0
     deploy:
       resources:
@@ -30,6 +30,7 @@ services:
     volumes: 
       - ./assets/spark:/spark-work
       - ./assets/model:/spark-work/model
+      - ./assets/spark/conf:/opt/spark/conf
     networks:
       - hy22-external-network
 
@@ -43,7 +44,7 @@ services:
     # container_name: spark-worker-sona
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER=spark://spark-master-sona:17077
+      - SPARK_MASTER=spark://spark-master-sona:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=3
       - NVIDIA_VISIBLE_DEVICE=0
@@ -57,6 +58,11 @@ services:
               capabilities: [gpu]    
     depends_on:
       - spark-master-sona
+    volumes: 
+      # - ./assets/spark:/spark-work
+      # - ./assets/model:/spark-work/model
+      - ./assets/spark/conf:/opt/spark/conf
+
     networks:
       - hy22-external-network
 
