@@ -1,6 +1,7 @@
 from kafka import KafkaProducer, KafkaConsumer
 from json import dumps, loads
 import time
+from datetime import datetime
 
 bootstrap_servers="kafka:9092"
 class c_kafka: 
@@ -13,8 +14,10 @@ class c_kafka:
         print("카프카 프로듀서 열림")
         
     def pro_kafka(self, topic_name, get_data):
-        print("메세지 전송중 ...")
-        print(get_data)
+        now = datetime.now()
+        print("현재 시간 : ", now.time())
+       # print("메세지 전송중 ...")
+       # print(get_data)
         self.producer.send(topic_name, value=get_data)
         print('보냈음')
         self.producer.flush()
