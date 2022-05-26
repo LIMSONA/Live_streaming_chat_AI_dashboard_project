@@ -57,7 +57,7 @@ def jamo_split(word, end_char="_"):
     
     
 # 예측 
-def test_result(s, embedded_model, lstm_model):
+def test_result(s):
     test_word = jamo_split(s)
     test_word_split = test_word.split()
     fast_vec = []
