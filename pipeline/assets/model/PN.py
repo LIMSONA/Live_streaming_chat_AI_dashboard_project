@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[3]:
+
+
 # 필요라이브러리 임포트
 import torch
 from torch import nn
@@ -79,6 +85,10 @@ model_pt.to(device)
 tokenizer= get_tokenizer()
 tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
+
+# In[5]:
+
+
 # 예측하기 (부정채팅: 1, 일반채팅: 0)
 
 def softmax(arr):
@@ -112,14 +122,16 @@ def predict(predict_sentence):
                 logits = logits.detach().cpu().numpy()
                 # 부정채팅: 1, 일반채팅: 0
                 if softmax(logits)[1] >= 0.95:
-                    test_eval.append(int(1))
+                    return int(1)
                 else:
-                    test_eval.append(int(0))
-            
-            print(test_eval[0])        
+                    return int(0)
+
+#                 else:
+#                     test_eval.append(int(0))
+            # print(test_eval[0])        
             # return test_eval[0]
             # return softmax(logits)[1]        
+            
     except:
-        return 00
+        return 0
 
-        
