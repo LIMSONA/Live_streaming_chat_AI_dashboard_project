@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 import re
 import json
 from konlpy.tag import Okt
@@ -12,6 +13,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 import warnings
 
+os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 warnings.filterwarnings(action='ignore')
 tokenizer = Tokenizer()
 
