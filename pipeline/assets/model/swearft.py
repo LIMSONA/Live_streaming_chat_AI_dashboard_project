@@ -58,23 +58,28 @@ def jamo_split(word, end_char="_"):
     
 # 예측 
 def test_result(s):
-    test_word = jamo_split(s)
-    test_word_split = test_word.split()
-    fast_vec = []
-    for index in range(len(test_word_split)):
-        if index < len(test_word_split):
-            fast_vec.append(embedded_model[test_word_split[index]])
+    try:
+        if s == "" or s.isspace():
+            return 0
         else:
-            fast_vec.append(np.array([0]*100))
-    fast_vec = np.array(fast_vec)
-    fast_vec=fast_vec.reshape(1, fast_vec.shape[0], fast_vec.shape[1])
-    # 학습 데이터와 마찬가지로 3차원으로 크기 조절
-    test_pre = lstm_model.predict_classes([fast_vec]) # 비속어 판별
-    if test_pre[0][0] == 1:
-        return '{0} 비속어 포함!!'.format(test_pre[0][0])
-    else:
-        return '{0} 비속어 없어요 ^.^'.format(test_pre[0][0])
-    
-    
+            test_word = jamo_split(s)
+            test_word_split = test_word.split()
+            fast_vec = []
+            for index in range(len(test_word_split)):
+                if index < len(test_word_split):
+                    fast_vec.append(embedded_model[test_word_split[index]])
+                else:
+                    fast_vec.append(np.array([0]*100))
+            fast_vec = np.array(fast_vec)
+            fast_vec=fast_vec.reshape(1, fast_vec.shape[0], fast_vec.shape[1])
+            # 학습 데이터와 마찬가지로 3차원으로 크기 조절
+            test_pre = lstm_model.predict_classes([fast_vec]) # 비속어 판별
+            if test_pre[0][0] == 1:
+                return '{0} 비속어 포함!!'.format(test_pre[0][0])
+            else:
+                return '{0} 비속어 없어요 ^.^'.format(test_pre[0][0])
+    except:
+        return "무슨 문장인지 모르겠어요~"
+              
     # test_result(comment, embedded_model, lstm_model)
     
