@@ -32,11 +32,20 @@ df2= df1\
     .select("parse_value.video_unique","parse_value.num","parse_value.chat_time",
             "parse_value.chat_id","parse_value.chat_message")
 
+
+# 비속어 모델
+sc.addFile("/spark-work/model/swearft.py")
+import swearft as swearft
+swearft_udf = udf(lambda x: swearft.test_result(x), StringType())
+
 # 질문 모델
 sc.addFile("/spark-work/model/QA.py")
 import QA as qa
 qa_udf = udf(lambda x: qa.predict(x), IntegerType())
-df3=df2.withColumn("qa_score", qa_udf(col('chat_message')))
+
+# df 추가
+df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))\
+    .withColumn("qa_score", qa_udf(col('chat_message')))
 
 
 df3\
@@ -48,3 +57,4 @@ df3\
 .option('topic', 'message')\
 .option("checkpointLocation", "/tmp/dtn/checkpoint")\
 .start().awaitTermination()
+
