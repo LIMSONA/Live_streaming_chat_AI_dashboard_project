@@ -55,6 +55,8 @@ class c_crawling:
     def naver_kafka(self, video_url, topic_name):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
         options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행시 에러메시지 해결
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         video_id = video_url.split("/")[-1]
