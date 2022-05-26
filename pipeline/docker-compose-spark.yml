@@ -8,14 +8,14 @@ services:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: sona-spark:0.3
-    container_name: spark-master-sona
+    image: my-spark:0.2
+    container_name: spark-master
     ports:
-      - 18083:8080 # master webui
-      - 17077:7077 # master port
+      - 8080:8080 # master webui
+      - 7077:7077 # master port
     environment:
       - SPARK_MODE=master
-      - SPARK_MASTER_HOST=spark-master-sona
+      - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
       - SPARK_MASTER_WEBUI_PORT=8080
       - NVIDIA_VISIBLE_DEVICE=0
@@ -35,16 +35,15 @@ services:
       - hy22-external-network
 
 
-# 스파크 워커333개
-  spark-worker-sona:
+# 스파크 워커 3개
+  spark-worker:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: sona-spark:0.3
-    # container_name: spark-worker-sona
+    image: my-spark:0.2
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER=spark://spark-master-sona:7077
+      - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=3
       - NVIDIA_VISIBLE_DEVICE=0
