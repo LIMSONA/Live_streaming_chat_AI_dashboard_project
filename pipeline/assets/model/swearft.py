@@ -76,12 +76,22 @@ def test_result(s):
             fast_vec=fast_vec.reshape(1, fast_vec.shape[0], fast_vec.shape[1])
             # 학습 데이터와 마찬가지로 3차원으로 크기 조절
             test_pre = lstm_model.predict_classes([fast_vec]) # 비속어 판별
+            
+            # if test_pre[0][0] == 1:
+            #     return '{0} 비속어 포함!!'.format(test_pre[0][0])
+            # else:
+            #     return '{0} 비속어 없어요 ^.^'.format(test_pre[0][0])
+            
+            # 정수형으로 나와야해서 수정함
             if test_pre[0][0] == 1:
-                return '{0} 비속어 포함!!'.format(test_pre[0][0])
+                return test_pre[0][0]
             else:
-                return '{0} 비속어 없어요 ^.^'.format(test_pre[0][0])
+                return test_pre[0][0]
     except:
-        return "무슨 문장인지 모르겠어요~"
+        # return "무슨 문장인지 모르겠어요~"
+        
+        # 비속어로 처리해야 에러들이 필터링 되어 보이지 않으니까
+        return 1 
               
     # test_result(comment, embedded_model, lstm_model)
     
