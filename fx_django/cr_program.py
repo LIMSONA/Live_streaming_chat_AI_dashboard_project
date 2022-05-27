@@ -1,10 +1,7 @@
-import pytchat
-import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime as dt
+from bs4 import BeautifulSoup
 import requests
-from bs4 import BeautifulSoup 
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -14,14 +11,16 @@ options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행�
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 def youtube_program(video_url):
-        
-        #selenium으로
+    try:    
         driver.get(url=video_url)
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
         title = driver.find_element_by_xpath('//*[@id="container"]/h1/yt-formatted-string').text
         return title
-        
+    except:
+        return "오류발생"
+    finally:
+            driver.close()
         # #bs4로
         # url= requests.get(video_url)
         # soup= BeautifulSoup(url.text, "lxml")
@@ -30,8 +29,6 @@ def youtube_program(video_url):
         
         
 def naver_program(video_url):
-        video_id = video_url.split("/")[-1]
-        
         try:
             while True:
                 driver.get(video_url)
@@ -39,13 +36,12 @@ def naver_program(video_url):
                 n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
                 return n_title
         except:
-            prin("오류발생")
+            print("오류발생")
         finally:
             driver.close()
 
 
 want= input()
-
 if "youtube" in want:
     youtube_program(want)
 else:
