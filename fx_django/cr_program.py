@@ -15,12 +15,11 @@ def youtube_program(video_url):
         driver.get(url=video_url)
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
-        title = driver.find_element_by_xpath('//*[@id="container"]/h1/yt-formatted-string').text
-        return title
+        program = driver.find_element_by_xpath('//*[@id="container"]/h1/yt-formatted-string').text
+        print(program)
     except:
-        return "오류발생"
-    finally:
-            driver.close()
+        print("오류발생")
+
         # #bs4로
         # url= requests.get(video_url)
         # soup= BeautifulSoup(url.text, "lxml")
@@ -32,13 +31,11 @@ def naver_program(video_url):
         try:
             while True:
                 driver.get(video_url)
-                # 영상 제목
-                n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
-                return n_title
+                program = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
+                print(program)
         except:
             print("오류발생")
-        finally:
-            driver.close()
+
 
 
 want= input()
