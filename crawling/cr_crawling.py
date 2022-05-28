@@ -83,7 +83,7 @@ class c_crawling:
                     try:
                         if n_chat_name[i].text: #채팅이 있는 경우
                             t_chat_message= ct.preprocessing(n_chat_message[i].text)
-                            chat_text = (n_chat_name[i].text, t_chat_message)
+                            chat_text = (n_chat_name[i].text, n_chat_message[i].text)
                             if chat_text in pop_list: #중복되는 경우
                                 pass
                             else: #중복되지 않는 경우
