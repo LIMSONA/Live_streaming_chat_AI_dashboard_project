@@ -1,7 +1,8 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime as dt
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
+
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -12,31 +13,32 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 
 def youtube_play(video_url):
-    try:
-        while True :
+    a=0
+    while a==0:   
+        try:
             driver.get(url=video_url)
             html = driver.page_source
             soup = BeautifulSoup(html, "html.parser")
             play = driver.find_element_by_xpath('//*[@id="count"]/ytd-video-view-count-renderer/span[1]').text
             play2 =str(play).split()[1]
-            return play2
-    except:
-        return "오류발생"
-    finally:
-            driver.close()    
+            print(play2)
+        except:
+            pass
+  
 
         
 def naver_play(video_url):
-    try:
-        while True:
-            driver.get(video_url)
-            # 영상 제목
-            n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
-            return n_title
-    except:
-        return "오류발생"
-    finally:
-            driver.close()
+    a=0
+    while a==0:
+        try:
+            # print("네이버")
+            driver.get(url=video_url)
+            html = driver.page_source
+            soup = BeautifulSoup(html, "html.parser")
+            play = driver.find_element_by_xpath('/html/body/div/div/div/div/div/div/div/div/header/div/a[2]/div/span[2]/span[2]').text
+            print(play)
+        except:
+            pass
 
 want= input()
 if "youtube" in want:

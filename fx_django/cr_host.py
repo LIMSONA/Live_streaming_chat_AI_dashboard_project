@@ -15,11 +15,9 @@ def youtube_host(video_url):
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
         host = driver.find_element_by_xpath('//*[@id="text"]/a').text
-        return host
+        print(host)
     except:
-        return "오류발생"
-    finally:
-            driver.close()
+        print("오류발생")
         
         
 def naver_host(video_url):   
@@ -28,11 +26,9 @@ def naver_host(video_url):
         html = driver.page_source
         soup = BeautifulSoup(html, "html.parser")
         host = driver.find_element_by_xpath('/html/body/div/div/div/div/div/div/div/div/header/div/a[2]/div/span[1]').text
-        return host
+        print(host)
     except:
-        return "오류발생"
-    finally:
-            driver.close()
+        print("오류발생")
 
 
 want= input()
