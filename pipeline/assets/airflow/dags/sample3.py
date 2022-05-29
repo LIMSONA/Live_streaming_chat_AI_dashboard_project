@@ -15,7 +15,7 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id = 'DAG_1',
+    dag_id = 'Test_DAG_1',
     description = 'DAG_1_description',
     default_args= default_args,
     catchup = False,
