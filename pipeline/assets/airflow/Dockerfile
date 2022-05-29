@@ -12,9 +12,18 @@ ARG SPARK_VERSION="3.1.2"
 RUN apt-get update
 RUN apt update
 # RUN apt-get install openjdk-8-jdk -y
-RUN apt-get install -y vim 
+RUN apt-get install -y vim
 RUN apt-get install -y wget
 RUN apt-get install -y tar
+RUN apt-get install -y python3-pip
+
+# WORKDIR /src
+
+# COPY src/requirements.txt requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
+
+# COPY src/ .
+
 
 RUN apt-get update && \
     apt-get install -y software-properties-common && \
@@ -31,9 +40,6 @@ RUN apt-get update && \
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN export JAVA_HOME
 
-COPY ./requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --no-cache-dir apache-airflow-providers-docker
 
 # RUN cd "/tmp" && \
 #         wget --no-verbose "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" && \
@@ -46,35 +52,35 @@ RUN pip install --no-cache-dir apache-airflow-providers-docker
 
 RUN wget https://dlcdn.apache.org/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz && \
     tar -xvf spark-3.1.2-bin-hadoop3.2.tgz && \
-    mv spark-3.1.2-bin-hadoop3.2/ /opt/airflow && \
+    # mv spark-3.1.2-bin-hadoop3.2/ /opt/airflow && \
     rm -rf spark-3.1.2-bin-hadoop3.2.tgz
 
 # # download jars
 # # org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
 WORKDIR /opt/airflow/jars
 
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar && \
-    mv spark-sql-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.1.2/spark-sql-kafka-0-10_2.12-3.1.2.jar
+    # mv spark-sql-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
 
 # # org.apache.kafka:kafka-clients:3.1.0
-RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.1.0/kafka-clients-3.1.0.jar && \
-    mv kafka-clients-3.1.0.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.1.0/kafka-clients-3.1.0.jar
+    # mv kafka-clients-3.1.0.jar /opt/airflow/jars
 
 # # org.apache.spark:spark-token-provider-kafka-0-10_2.12:3.1.2
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.1.2/spark-token-provider-kafka-0-10_2.12-3.1.2.jar && \
-    mv spark-token-provider-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.1.2/spark-token-provider-kafka-0-10_2.12-3.1.2.jar
+    # mv spark-token-provider-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
 
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.1.2/spark-streaming-kafka-0-10_2.12-3.1.2.jar && \
-    mv spark-streaming-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.1.2/spark-streaming-kafka-0-10_2.12-3.1.2.jar
+    # mv spark-streaming-kafka-0-10_2.12-3.1.2.jar /opt/airflow/jars
 
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.2.1/spark-streaming-kafka-0-10_2.12-3.2.1.jar && \
-    mv spark-streaming-kafka-0-10_2.12-3.2.1.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-streaming-kafka-0-10_2.12/3.2.1/spark-streaming-kafka-0-10_2.12-3.2.1.jar
+    # mv spark-streaming-kafka-0-10_2.12-3.2.1.jar /opt/airflow/jars
 
-RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
-    mv commons-pool2-2.11.1.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar
+    # mv commons-pool2-2.11.1.jar /opt/airflow/jars
 
-RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar && \
-    mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/airflow/jars
+RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar
+    # mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/airflow/jars
 
 
 RUN chown root:root -R /opt/airflow
@@ -82,13 +88,31 @@ RUN chown root:root -R /opt/airflow
 # WORKDIR /opt/airflow
 
 
+
+
+
+# COPY requirements.txt requirements.txt
+# COPY ./requirements.txt .
+
+COPY requirements.txt /tmp
+WORKDIR /tmp
+# RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install --no-cache-dir apache-airflow-providers-docker
+RUN pip install --upgrade pip
+# RUN pip install -r requirements.txt
+# RUN apt install -r requirements.txt
+RUN pip install apache-airflow-providers-docker
+FROM python:3.8-slim-buster
+
+
+
 # ###### GIT 에서 퍼온 코드 #######
 
 # ### 여기 ###
-
 # COPY entrypoint.sh /entrypoint.sh
 # COPY config/airflow.cfg ${AIRFLOW_HOME}/airflow/airflow.cfg
-# #####
+# #### ! ###
 
 
 # ###############################
