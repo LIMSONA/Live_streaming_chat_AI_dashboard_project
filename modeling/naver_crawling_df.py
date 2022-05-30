@@ -13,6 +13,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 driver.implicitly_wait(5)
 
@@ -75,7 +76,7 @@ def get_chat_data(html):
     df["play"] = play
 
 # 위치+파일명 변수 들어주기
-    address= "D:\crawling_naver\\0424\\"
+    address= "C:\crawling\\0530\\"
     file_name = os.path.join(address + f"{program}.csv")
 #     print("경로+파일",file_name)
 # 기존에 존재하는 지 여부 확인
@@ -93,11 +94,11 @@ def get_chat_data(html):
     return df
 
 current = datetime.datetime.now()
-ten_minutes_later = current + datetime.timedelta(minutes=10)
+ten_minutes_later = current + datetime.timedelta(minutes=120)
 
 # 10분동안 반복문 진행되도록!!
 while True:
-    shopping_links = get_home_links(5)
+    shopping_links = get_home_links(10)
     for i in shopping_links:
         try:
             get_chat_data(i)
