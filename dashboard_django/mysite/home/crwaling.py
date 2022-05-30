@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import requests
 
 
+def home(requests):
+    return render(requests, 'home/home.html')
+
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
@@ -13,9 +16,6 @@ options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행�
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 # Create your views here.
-
-def home(requests):
-    return render(requests, 'home/home.html')
 
 
 def youtube_program(requests):
