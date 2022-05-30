@@ -15,7 +15,6 @@ services:
 #     volumes:
 #       - ./data/influxdb:/var/lib/influxdb
 
-#mongoDB
   mongodb:
     image: mongo
     restart: always
@@ -26,9 +25,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     volumes:
-      - ./data/mongo:/data/db
+       - ./data/mongo:/data/db
     ports:
-      - "27017:27017"
+       - "27017:27017"
 
   mongo-express:
     image: mongo-express

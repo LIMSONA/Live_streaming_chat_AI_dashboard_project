@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes: 
+      - ./assets/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+
+networks:
+  default:
+    name: hy22-external-network
+    external: true
