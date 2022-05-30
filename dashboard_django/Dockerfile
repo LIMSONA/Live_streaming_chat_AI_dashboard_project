@@ -16,6 +16,13 @@ RUN apk update
 RUN apk add postgresql-dev gcc python3-dev musl-dev zlib-dev jpeg-dev
 # RUN apk add --no-cache python3-dev libffi-dev gcc && pip3 install --upgrade pip #ffi.h no such file or directory 에러 발생 방지
 
+# 크롤링 셀레니움을 위해서
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get install -y google-chrome-stable && \
+    rm -rf /etc/apt/sources.list.d/google.list && apt-get clean
+
+
 COPY . /usr/src/app
 # 로컬 컴퓨터의 현재위치(dockerfile이 있는 위치)에 있는 파일을 모두 작업폴더로 복사. 그래야 지금까지 작성한 장고 프로젝트가 도커 이미지에 담김
 # . 은 현재 폴더를 의미하고, /usr/src/app는 복사할 작업 폴더를 의미
