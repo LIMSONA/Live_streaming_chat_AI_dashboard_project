@@ -76,7 +76,7 @@ def get_chat_data(html):
     df["play"] = play
 
 # 위치+파일명 변수 들어주기
-    address= "C:\crawling\\0530\\"
+    address= "C:\crawling\\0530_2\\"
     file_name = os.path.join(address + f"{program}.csv")
 #     print("경로+파일",file_name)
 # 기존에 존재하는 지 여부 확인
