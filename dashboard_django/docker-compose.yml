@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     image: dashboard_django:1.0
-    command: python3 ./manage.py runserver 0.0.0.0:8000
+    command: python3 ./mysite/manage.py runserver
     # command: sh
     stdin_open: true
     tty: true

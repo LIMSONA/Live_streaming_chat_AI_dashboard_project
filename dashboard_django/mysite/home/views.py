@@ -49,7 +49,7 @@ def naver_program(requests):
         finally:
             driver.close()
 
-want= 'https://www.youtube.com/watch?v=9BRyadl8-Gc'
+want= 'https://shoppinglive.naver.com/lives/541449?fm=shoppinglive&sn=home'
 if "youtube" in want:
     youtube_program(want)
 else:
