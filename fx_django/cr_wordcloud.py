@@ -1,7 +1,6 @@
 from konlpy.tag import Okt
 from collections import Counter
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
+from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 import pytchat
 import time
@@ -12,9 +11,10 @@ import re
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
-
 okt= Okt()    
-
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 def crawling_5(want):
     current= datetime.datetime.now()
@@ -119,10 +119,27 @@ def word_cloud(bucket):
     # print(bucket2)
     counts= Counter(bucket2)
     # print(counts)
+    
+    if "youtube" in want:
+        #유튜브 mask 1
+        mask= np.array(Image.open('C:\git\\hy22-platform\\fx_django\\youtube_1.png'))
+        image_colors = ImageColorGenerator(mask)
+        # #유튜브 mask 2
+        # mask= np.array(Image.open('C:\git\\hy22-platform\\fx_django\\youtube_2.png'))
+        # image_colors = ImageColorGenerator(mask)
+    else:
+        #네이버
+        mask= np.array(Image.open('C:\git\\hy22-platform\\fx_django\\naver.png'))
+        image_colors = ImageColorGenerator(mask)
+
+        
+    font = 'C:\git\\hy22-platform\\fx_django\\BMHANNA_11yrs_ttf.ttf'
     # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
-    wc= WordCloud(font_path='malgun', width=400, height=400, 
-                scale=2.0, max_font_size=250, background_color="white")
-    gen= wc.generate_from_frequencies(counts)
+    wc= WordCloud(font_path=font, width=400, height=400, 
+                scale=2.0, max_font_size=250, background_color="white", mask=mask)
+    gen=wc.generate_from_frequencies(counts)
+    # gen= wc.recolor(color_func=image_colors)
+    
     # plt.figure()
     # plt.imshow(gen)
     # 파일명은 날짜와 시간형식으로  
