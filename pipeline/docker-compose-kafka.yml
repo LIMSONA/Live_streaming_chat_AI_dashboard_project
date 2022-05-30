@@ -14,8 +14,11 @@ services:
 
 # 카프카 -standalone
   kafka:
+    build: 
+      context: .
+      dockerfile: ./assets/kafka/Dockerfile
     container_name: kafka
-    image: wurstmeister/kafka:latest 
+    image: my-kafka:0.1
     depends_on:
       - zookeeper
     ports:
@@ -26,13 +29,14 @@ services:
       - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
       - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
       - KAFKA_BROKER_ID=1
-
+      - KAFKA_OPTS= -javaagent:/usr/app/jmx_prometheus_javaagent.jar=7071:/usr/app/prom-jmx-agent-config.yml
     volumes:
       - ./data/kafka/logs:/opt/kafka/logs
       - ./data/kafka/data:/kafka
-    extra_hosts:
-      - kafka:20.232.136.207
-      - mongodb:20.232.136.207
+      - /var/run/docker.sock:/var/run/docker.sock
+    # extra_hosts:
+    #   - kafka:20.232.136.207
+    #   - mongodb:20.232.136.207
 
 
 # bash ./burrow-build.sh
