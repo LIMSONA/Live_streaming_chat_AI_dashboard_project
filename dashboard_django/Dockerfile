@@ -16,11 +16,11 @@ RUN apk update
 RUN apk add postgresql-dev gcc python3-dev musl-dev zlib-dev jpeg-dev
 # RUN apk add --no-cache python3-dev libffi-dev gcc && pip3 install --upgrade pip #ffi.h no such file or directory 에러 발생 방지
 
-# 크롤링 셀레니움을 위해서
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get install -y google-chrome-stable && \
-    rm -rf /etc/apt/sources.list.d/google.list && apt-get clean
+# # 크롤링 셀레니움을 위해서
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+# RUN apt-get install -y google-chrome-stable && \
+#     rm -rf /etc/apt/sources.list.d/google.list && apt-get clean
 
 
 COPY . /usr/src/app
