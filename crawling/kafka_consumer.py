@@ -2,6 +2,7 @@ from kafka import KafkaConsumer
 import json
 import time
 
+
 bootstrap_servers="kafka:9092"
 
 
@@ -17,4 +18,3 @@ while True:
         edit= json.loads(message.value)
         print(message.topic, message.partition, 
             message.offset, message.key, edit )
-    

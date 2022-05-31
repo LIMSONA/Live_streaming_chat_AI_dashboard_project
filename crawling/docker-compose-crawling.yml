@@ -13,8 +13,8 @@ services:
   #   volumes:
   #     - ./:/usr/src/app
   #   command: python3 ./kafka_consumer.py
-    # depends_on:
-    #   - py-producer
+  #   depends_on:
+  #     - py-producer
 
   py-producer:
     build:
@@ -29,11 +29,16 @@ services:
       - ./:/usr/src/app
     command: python3 ./test_main.py
     # command: bash
-    networks:
-      - hy22-external-network
+    # networks:
+    #   - hy22-external-network
 
 networks:
-  hy22-external-network :
-    driver: bridge
+  default:
+    name: hy22-external-network
     external: true
-    internal: true
+
+# networks:
+#   hy22-external-network :
+#     driver: bridge
+#     external: true
+#     internal: true

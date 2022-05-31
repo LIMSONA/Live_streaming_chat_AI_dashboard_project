@@ -5,15 +5,15 @@ services:
     build: 
       context: .
       dockerfile: ./Dockerfile
-    image: dashboard_django:1.0
-    command: python3 ./manage.py runserver 0.0.0.0:8000
+    image: dashboard_django:2.0
+    # command: python3 ./mysite/manage.py runserver
     # command: sh
     stdin_open: true
     tty: true
     volumes:
       - .:/usr/src/app
     ports:
-      - 8000:8000
+      - 20000:8000
 
 networks:
   default:

@@ -72,8 +72,8 @@ services:
       - hy22-external-network
 
 networks:
-  hy22-external-network :
-    driver: bridge
+  default:
+    name: hy22-external-network
     external: true
     internal: true
 
