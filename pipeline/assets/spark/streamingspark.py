@@ -34,8 +34,8 @@ df2= df1\
 
 
 # 비속어 모델
-sc.addFile("/spark-work/model/swearft.py")
-import swearft as swearft
+sc.addFile("/spark-work/model/swearft2.py")
+import swearft2 as swearft
 swearft_udf = udf(lambda x: swearft.test_result(x), IntergerType())
 
 # 긍부정 모델
