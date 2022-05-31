@@ -1,1 +1,1 @@
-docker exec -it spark-master-sona bash
+docker exec -it spark-master bash
