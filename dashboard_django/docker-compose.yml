@@ -12,6 +12,7 @@ services:
     tty: true
     volumes:
       - .:/usr/src/app
+    
     ports:
       - 20000:8000
 
