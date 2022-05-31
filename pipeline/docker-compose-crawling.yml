@@ -5,7 +5,7 @@ services:
   py-producer:
     build:
       context: .
-      dockerfile: ../crwaling/Dockerfile
+      dockerfile: ../crawling/Dockerfile
     image: py-docker:0.2
     stdin_open: true # docker run -i
     tty: true        # docker run -t
