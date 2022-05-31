@@ -1,5 +1,6 @@
 global:
   scrape_interval: 10s
+  evaluation_interval: 10s
 
   external_labels:
     monitor: 'spark-monitor'
@@ -10,7 +11,7 @@ scrape_configs:
     scrape_interval: 10s
     metrics_path: '/metrics/master/prometheus'
     static_configs:
-      - targets: ['spark-master-sona:8080']
+      - targets: ['spark-master:8080']
         labels:
           instance_type: 'master'
           spark_cluster: 'my-cluster'
@@ -18,10 +19,15 @@ scrape_configs:
     scrape_interval: 10s
     metrics_path: '/metrics/prometheus'
     static_configs:
-      - targets: ['spark-worker-sona:8081']
+      - targets: ['pipeline-spark-worker-1:8081','pipeline-spark-worker-2:8081','pipeline-spark-worker-3:8081']
         labels:
           instance_type: 'worker'
           spark_cluster: 'my-cluster'
+  - job_name: 'kafka'
+  # metrics_path defaults to '/metrics'
+  # scheme defaults to 'http'.
+    static_configs:
+      - targets: ['kafka:7071']
   # - job_name: 'integrations/spark-driver'
   #   scrape_interval: 10s
   #   metrics_path: '/metrics/prometheus/'

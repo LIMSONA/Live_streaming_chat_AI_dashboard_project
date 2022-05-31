@@ -8,13 +8,9 @@ services:
       - 9090:9090
     volumes: 
       - ./assets/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      - hy22-external-network
 
 
 networks:
-  hy22-external-network :
-    driver: bridge
+  default:
+    name: hy22-external-network
     external: true
-    internal: true
-

@@ -31,9 +31,10 @@ services:
       - ./assets/spark:/spark-work
       - ./assets/model:/spark-work/model
       - ./assets/spark/conf:/opt/spark/conf
+      - ./assets/spark/checkpoint:/opt/spark/tmp/dtn/checkpoint
+
     networks:
       - hy22-external-network
-
 
 # 스파크 워커 3개
   spark-worker:
@@ -41,22 +42,27 @@ services:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
     image: my-spark:0.2
+
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
-      - SPARK_WORKER_CORES=3
+      - SPARK_WORKER_CORES=2
       - NVIDIA_VISIBLE_DEVICE=0
     deploy:
-      replicas: 1
+      replicas: 3
       resources:
         reservations:
           devices:
             - driver: nvidia
               count: 1
               capabilities: [gpu]    
+
+    ports:
+      - 18080-18089:8081
     depends_on:
       - spark-master
+
     volumes: 
       # - ./assets/spark:/spark-work
       # - ./assets/model:/spark-work/model

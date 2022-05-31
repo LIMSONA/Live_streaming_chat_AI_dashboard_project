@@ -72,6 +72,12 @@ RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/
 RUN wget https://repo1.maven.org/maven2/com/pygmalios/reactiveinflux-spark_2.11/1.4.0.10.0.4.1/reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar && \
     mv reactiveinflux-spark_2.11-1.4.0.10.0.4.1.jar /opt/spark/jars
 
+RUN wget https://repo1.maven.org/maven2/com/izettle/metrics-influxdb/1.1.8/metrics-influxdb-1.1.8.jar && \
+    mv metrics-influxdb-1.1.8.jar /opt/spark/jars
+
+RUN wget https://repo1.maven.org/maven2/com/palantir/spark/influx/spark-influx-sink/0.4.0/spark-influx-sink-0.4.0.jar && \
+    mv spark-influx-sink-0.4.0.jar /opt/spark/jars
+
 RUN mkdir /root/.pip && \
    set -x \
     && { \
