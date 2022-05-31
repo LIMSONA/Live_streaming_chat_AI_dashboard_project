@@ -6,7 +6,7 @@ import time
 
 bootstrap_servers="kafka:9092"
 
-topic_name = "message"
+topic_name = "input"
 
 def qa_out() :
     while True:

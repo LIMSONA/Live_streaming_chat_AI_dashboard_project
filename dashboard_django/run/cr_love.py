@@ -19,7 +19,7 @@ def youtube_love(video_url):
             print(love)        
         except:
             pass
-youtube_love('https://www.youtube.com/watch?v=XSzXCaATb3Y')
+# youtube_love('https://www.youtube.com/watch?v=XSzXCaATb3Y')
 
         
 def naver_love(video_url): 
@@ -29,12 +29,12 @@ def naver_love(video_url):
             # print("네이버")
             driver.get(url=video_url)
             love = driver.find_element_by_xpath('/html/body/div/div/div/div/div/div/div/div/header/div/a[2]/div/span[3]/span[2]').text
-            print(love)
+            return print(love)
         except:
             pass
 
 
-want= input()
+want= "https://shoppinglive.naver.com/lives/508097?fm=shoppinglive&sn=home"
 if "youtube" in want:
     youtube_love(want)
 else:
