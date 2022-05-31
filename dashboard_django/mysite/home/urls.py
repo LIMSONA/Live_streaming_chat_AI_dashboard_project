@@ -1,17 +1,12 @@
 from django.urls import path
 from . import views
-from . import ka_qa
-# from home.crwaling import youtube_program , naver_program
+# from . import ka_qa
+from . import cr_love
+
 
 urlpatterns = [
     path('', views.home, name='home') , 
-    path('temp',ka_qa.함수명, name='ka_qna')
+    path('', cr_love.youtube_love, name='cr_love') ,
 ]
 
-# urlpatterns = [
-#     path('', views.youtube_program, name='youtube_program') , 
-# ]
-
-# urlpatterns = [
-#     path('', views.naver_program, name='naver_program') , 
-# ]
+# path('temp',ka_qa.qa_out, name='ka_qa') ,
