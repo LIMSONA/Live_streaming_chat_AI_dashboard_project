@@ -83,9 +83,9 @@ def test_result(s):
             test_pre = lstm_model.predict_classes([fast_vec])
 
             if test_pre[0][0] == 1:
-                return test_pre[0][0]
+                return int(test_pre[0][0])
             else:
-                return test_pre[0][0]
+                return int(test_pre[0][0])
     except:
         return 0
 # 빈 값이나 이모티콘같은 경우 비속어로 분류되면 안되기 때문에 0
