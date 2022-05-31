@@ -1,6 +1,5 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup 
+
 
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -13,9 +12,6 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 def youtube_host(video_url):
     try:
         driver.get(url=video_url)
-        html = driver.page_source
-        soup = BeautifulSoup(html, "html.parser")
-        # host = driver.find_element_by_class_name("yt-simple-endpoint style-scope yt-formatted-string").text
         host = driver.find_element_by_xpath('//*[@id="text"]/a').text
         print(host)
     except:

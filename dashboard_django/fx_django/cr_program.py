@@ -1,6 +1,5 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup
 import requests
 
 options = webdriver.ChromeOptions()
@@ -13,17 +12,11 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 def youtube_program(video_url):
     try:    
         driver.get(url=video_url)
-        # html = driver.page_source
-        # soup = BeautifulSoup(html, "html.parser")
         program = driver.find_element_by_xpath('//*[@id="container"]/h1/yt-formatted-string').text
         print(program)
     except:
         print("오류발생")
-        # #bs4로
-        # url= requests.get(video_url)
-        # soup= BeautifulSoup(url.text, "lxml")
-        # title = soup.select_one('meta[itemprop="name"][content]')['content']
-        # return title
+
         
         
 def naver_program(video_url):
