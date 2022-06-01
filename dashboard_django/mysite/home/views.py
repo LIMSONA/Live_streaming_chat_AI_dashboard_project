@@ -6,3 +6,5 @@ import requests
 
 def home(requests):
     return render(requests, 'home/home.html')
+
+
