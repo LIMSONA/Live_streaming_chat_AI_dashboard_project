@@ -20,7 +20,7 @@ while True:
         else edit["pn_score"]==0(긍정)
             print(edit[chat_id, chat_message])
             
-            
+            ################# matplolib 만들기
             import matplotlib.pyplot as plt
 
 # ratio = [34, 32, 16, 18]
