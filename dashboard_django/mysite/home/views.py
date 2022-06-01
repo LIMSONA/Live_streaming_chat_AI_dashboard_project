@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http.response import StreamingHttpResponse
 import requests
 
+
 # Create your views here.
 
 def home(requests):
