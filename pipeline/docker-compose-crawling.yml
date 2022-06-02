@@ -5,17 +5,17 @@ services:
   py-producer:
     build:
       context: .
-      dockerfile: ../crawling/Dockerfile
-    image: py-docker:0.2
+      dockerfile: ./assets/crawling/Dockerfile
+    image: py-docker:0.3
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     environment:
       - KAFKA_SERVER=${KAFKA_SERVER:-kafka:9092}
     volumes:
-      - ../crwaling:/usr/src/app
+      - ./assets/crawling:/usr/src/app
     # networks:
     #   - hy22-external-network
-    command: python3 ./test_main.py
+    # command: python3 test_main.py
     # command: bash
 
 networks:
