@@ -1,12 +1,11 @@
 
 from kafka import KafkaConsumer
-from json import dumps, loads
+import json 
 import time
-# import pandas as pd
 
 bootstrap_servers="kafka:9092"
 
-topic_name = "input"
+topic_name = "message"
 
 def qa_out() :
     while True:
@@ -17,4 +16,4 @@ def qa_out() :
         for message in consumer: 
             edit= json.loads(message.value)
             if edit["qa_score"]==1:
-                print(edit[chat_id, chat_message])
+                print(edit["chat_id"], edit["chat_message"])
