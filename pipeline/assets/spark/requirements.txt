@@ -108,3 +108,4 @@ numpy==1.19.0
 fasttext
 py4j==0.10.9
 pyarrow==1.0.0
+h5py==2.10.0
