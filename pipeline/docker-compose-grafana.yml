@@ -14,6 +14,7 @@ networks:
   default:
     name: hy22-external-network
     external: true
+    internal: true
 
 # networks:
 #   hy22-external-network :
