@@ -11,8 +11,8 @@ services:
     volumes:
       - ./data/zookeeper/data:/data
       - ./data/zookeeper/logs:/datalog
-    # networks:
-    #   - hy22-external-network
+    networks:
+      - hy22-external-network
 
 # 카프카 -standalone
   kafka:
@@ -40,16 +40,13 @@ services:
     #   - kafka:20.232.136.207
     #   - mongodb:20.232.136.207
 
-    # networks:
-    #   - hy22-external-network
+    networks:
+      - hy22-external-network
+
+
 
 networks:
-  default:
-    name: hy22-external-network
+  hy22-external-network :
+    driver: bridge
     external: true
-
-# networks:
-#   hy22-external-network :
-#     driver: bridge
-#     external: true
-#     internal: true
+    internal: true
