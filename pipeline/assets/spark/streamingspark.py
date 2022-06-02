@@ -8,7 +8,6 @@ sc = SparkContext()
 
 spark = SparkSession.builder\
     .appName("kafka-to-spark")\
-    .config("spark.some.config.option", "some-value")\
     .getOrCreate()
 
 df = spark\
