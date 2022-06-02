@@ -24,8 +24,7 @@ StructField("video_unique",StringType(),True),\
 StructField("num",IntegerType(),True),\
 StructField("chat_time",StringType(),True),\
 StructField("chat_id",StringType(),True),\
-StructField("chat_message",StringType(),True),
-])
+StructField("chat_message",StringType(),True)])
 
 df2= df1\
     .select(functions.from_json(functions.col("value").cast("string"),schema).alias("parse_value"))\
