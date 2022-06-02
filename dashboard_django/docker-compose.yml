@@ -15,6 +15,14 @@ services:
     
     ports:
       - 20000:8000
+#     networks:
+#       - hy22-external-network
+
+# networks:
+#   default:
+#     name: hy22-external-network
+#     external: true
+#     internal: true
 
 networks:
   default:
