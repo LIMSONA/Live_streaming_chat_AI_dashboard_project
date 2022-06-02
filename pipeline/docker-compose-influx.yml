@@ -8,13 +8,14 @@ services:
       - 8086:8086
     volumes:
       - ./data/influxdb:/var/lib/influxdb
-    # networks:
-    #   - hy22-external-network
+    networks:
+      - hy22-external-network
 
 networks:
   default:
     name: hy22-external-network
     external: true
+    internal: true
 
 # networks:
 #   hy22-external-network :
