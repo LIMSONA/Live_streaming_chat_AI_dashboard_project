@@ -4,6 +4,8 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession, functions
 
+sc = SparkContext()
+
 spark = SparkSession.builder\
     .appName("kafka-to-spark")\
     .getOrCreate()
@@ -23,8 +25,7 @@ StructField("video_unique",StringType(),True),\
 StructField("num",IntegerType(),True),\
 StructField("chat_time",StringType(),True),\
 StructField("chat_id",StringType(),True),\
-StructField("chat_message",StringType(),True),
-])
+StructField("chat_message",StringType(),True)])
 
 df2= df1\
     .select(functions.from_json(functions.col("value").cast("string"),schema).alias("parse_value"))\
