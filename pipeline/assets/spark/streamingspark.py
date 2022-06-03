@@ -4,18 +4,16 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession, functions
 
-sc = SparkContext()
-
 spark = SparkSession.builder\
     .appName("kafka-to-spark")\
+    .config("spark.some.config.option", "some-value")\
     .getOrCreate()
 
 df = spark\
     .readStream\
     .format('kafka')\
-    .option('kafka.bootstrap.servers', '20.232.136.207:9092')\
+    .option('kafka.bootstrap.servers', 'kafka:9092')\
     .option('subscribe', 'input')\
-    .option("failOnDataLoss", "false")\
     .option("startingOffsets", "earliest")\
     .load()
 
@@ -33,15 +31,10 @@ df2= df1\
     .select("parse_value.video_unique","parse_value.num","parse_value.chat_time",
             "parse_value.chat_id","parse_value.chat_message")
 
-
-# # 비속어 모델
+# 비속어 모델
 # sc.addFile("/spark-work/model/swearft2.py")
 # import swearft2 as swearft
 # swearft_udf = udf(lambda x: swearft.test_result(x), IntegerType())
-sc.addFile("/spark-work/model/swearft.py")
-import swearft as swearft
-swearft_udf = udf(lambda x: swearft.test_result(x), IntegerType())
-
 
 # 긍부정 모델
 sc.addFile("/spark-work/model/PN.py")
@@ -56,18 +49,19 @@ qa_udf = udf(lambda x: qa.predict(x), IntegerType())
 # df 열 추가
 df3=df2.withColumn("pn_score", pn_udf(col('chat_message')))\
     .withColumn("qa_score", qa_udf(col('chat_message')))
-    .withColumn("swear_score", swearft_udf(col('chat_message')))\
-    .withColumn("pn_score", pn_udf(col('chat_message')))\
-    .withColumn("qa_score", qa_udf(col('chat_message')))
+
+# df 열 추가
+# df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))\
+    # .withColumn("pn_score", pn_udf(col('chat_message')))\
+    # .withColumn("qa_score", qa_udf(col('chat_message')))
 
 
-df2\
+df3\
 .selectExpr("CAST('data' AS STRING) AS key", "to_json(struct(*)) AS value")\
 .writeStream\
 .format('kafka')\
 .outputMode("Append")\
-.option('kafka.bootstrap.servers', '20.232.136.207:9092')\
+.option('kafka.bootstrap.servers', 'kafka:9092')\
 .option('topic', 'message')\
 .option("checkpointLocation", "/tmp/dtn/checkpoint")\
 .start().awaitTermination()
-
