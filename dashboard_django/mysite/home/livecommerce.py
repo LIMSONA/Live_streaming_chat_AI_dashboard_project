@@ -9,7 +9,7 @@ from json import loads
 
 import urllib
 # from cr_kafka import c_kafka
-
+#
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
