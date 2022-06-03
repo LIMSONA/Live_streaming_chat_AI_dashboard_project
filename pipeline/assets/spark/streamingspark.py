@@ -13,7 +13,7 @@ spark = SparkSession.builder\
 df = spark\
     .readStream\
     .format('kafka')\
-    .option('kafka.bootstrap.servers', 'kafka:9092')\
+    .option('kafka.bootstrap.servers', '20.232.136.207:9092')\
     .option('subscribe', 'input')\
     .option("startingOffsets", "earliest")\
     .load()
@@ -61,7 +61,7 @@ df2\
 .writeStream\
 .format('kafka')\
 .outputMode("Append")\
-.option('kafka.bootstrap.servers', 'kafka:9092')\
+.option('kafka.bootstrap.servers', '20.232.136.207:9092')\
 .option('topic', 'message')\
 .option("checkpointLocation", "/tmp/dtn/checkpoint")\
 .start().awaitTermination()
