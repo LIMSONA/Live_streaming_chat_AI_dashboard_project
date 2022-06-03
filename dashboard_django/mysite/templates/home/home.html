@@ -47,7 +47,12 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
         let url = $("#txtUrl").val();
         $.ajax({
           url: "/tem?url=" + url,
-          success: function (data) {
+          beforeSend:function(){
+            if(isFirst)
+              $("#spinner").show();
+          }}).always(function(){
+            $("#spinner").hide();
+          }).done(function (data) {
             $("#host").text(data.host);
             $("#love").text(data.love);
             $("#play").text(data.play);
@@ -66,9 +71,8 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
               chatBoard[0].scrollTop = chatBoard[0].scrollHeight;
             }
             loadChat();
-          }
-        }), 1000
-      });
+          })
+      }, 1000);
     }
     $(document).ready(function () {
       $("#txtUrl").keydown(function () {
@@ -84,6 +88,13 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
+  <button class="btn btn-primary btn-sm mb-2 position-absolute" 
+    id="spinner"
+    style="display:none;left:50%;top:50%;z-index:99999;transform:translate(-50%, -50%);" type="button" disabled="">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Loading...
+  </button>
+
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside
     class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -206,10 +217,10 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
           <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center w-100">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here..." id="txtUrl">
+              <input type="text" class="form-control" placeholder="주소를 입력해주세요" id="txtUrl">
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -328,7 +339,7 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">판매자 명</p>
                     <h5 class="font-weight-bolder" id="host">
-                      {% url 'naver_host' %}
+                      22 
                     </h5>
                     <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">11</span>
