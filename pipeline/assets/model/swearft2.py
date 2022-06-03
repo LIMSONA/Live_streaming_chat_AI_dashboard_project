@@ -24,11 +24,11 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 warnings.filterwarnings(action='ignore')
 
-lstm_model = load_model('/spark-work/model/fasttext_LSTM1.h5')
-embedded_model = FastText.load("/spark-work/model/festtext_embedded_1.model")
+# lstm_model = load_model('/spark-work/model/fasttext_LSTM1.h5')
+# embedded_model = FastText.load("/spark-work/model/festtext_embedded_1.model")
 
-# lstm_model = load_model('/spark-work/model/fasttext_LSTM2.h5')
-# embedded_model = FastText.load("/spark-work/model/festtext_embedded_2.model")
+lstm_model = load_model('/spark-work/model/fasttext_LSTM2.h5')
+embedded_model = FastText.load("/spark-work/model/festtext_embedded_2.model")
 
 
 # 자모분리
