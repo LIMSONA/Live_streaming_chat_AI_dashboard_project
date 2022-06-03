@@ -50,7 +50,7 @@ services:
       - SPARK_WORKER_CORES=2
       - NVIDIA_VISIBLE_DEVICE=0
     deploy:
-      replicas: 3
+      replicas: 1
       resources:
         reservations:
           devices:
