@@ -4,7 +4,7 @@ from kafka import KafkaProducer, KafkaConsumer
 from json import dumps, loads
 import time
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 import re
 from konlpy.tag import Okt
