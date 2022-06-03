@@ -4,6 +4,8 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession, functions
 
+sc = SparkContext()
+
 spark = SparkSession.builder\
     .appName("kafka-to-spark")\
     .config("spark.some.config.option", "some-value")\
