@@ -15,7 +15,7 @@ df = spark\
     .format('kafka')\
     .option('kafka.bootstrap.servers', '20.232.136.207:9092')\
     .option('subscribe', 'input')\
-    .option("failOnDataLoss", "false")
+    .option("failOnDataLoss", "false")\
     .option("startingOffsets", "earliest")\
     .load()
 
