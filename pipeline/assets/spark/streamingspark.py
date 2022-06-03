@@ -31,8 +31,10 @@ df2= df1\
     .select("parse_value.video_unique","parse_value.num","parse_value.chat_time",
             "parse_value.chat_id","parse_value.chat_message")
 
-
-
+# 비속어 모델
+# sc.addFile("/spark-work/model/swearft2.py")
+# import swearft2 as swearft
+# swearft_udf = udf(lambda x: swearft.test_result(x), IntegerType())
 
 # 긍부정 모델
 sc.addFile("/spark-work/model/PN.py")
@@ -47,6 +49,11 @@ qa_udf = udf(lambda x: qa.predict(x), IntegerType())
 # df 열 추가
 df3=df2.withColumn("pn_score", pn_udf(col('chat_message')))\
     .withColumn("qa_score", qa_udf(col('chat_message')))
+
+# df 열 추가
+# df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))\
+    # .withColumn("pn_score", pn_udf(col('chat_message')))\
+    # .withColumn("qa_score", qa_udf(col('chat_message')))
 
 
 df3\
