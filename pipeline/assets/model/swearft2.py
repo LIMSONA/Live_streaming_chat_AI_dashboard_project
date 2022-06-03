@@ -14,6 +14,7 @@ from konlpy.tag import Okt
 import nltk # 자연어 처리 패키지
 from gensim.models import FastText
 from nltk.tokenize import word_tokenize
+from tensorflow import keras
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
