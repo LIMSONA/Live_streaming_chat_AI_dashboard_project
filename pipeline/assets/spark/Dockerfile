@@ -35,7 +35,7 @@ RUN apt install python3.8-distutils -y
 RUN wget https://bootstrap.pypa.io/get-pip.py && \
    python3.8 get-pip.py
 
-COPY assets/spark/requirements.txt .
+COPY ./requirements.txt .
 
 RUN pip3 install --upgrade pip  
 RUN pip install --upgrade setuptools 
@@ -94,7 +94,7 @@ ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/cuda/include:/usr/local/cuda/lib64
 
-COPY assets/spark/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENV SPARK_NO_DAEMONIZE=1
 ENV SPARK_MODE=master
