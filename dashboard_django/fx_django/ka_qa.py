@@ -17,3 +17,4 @@ def qa_out() :
             edit= json.loads(message.value)
             if edit["qa_score"]==1:
                 print(edit["chat_id"], edit["chat_message"])
+qa_out()
