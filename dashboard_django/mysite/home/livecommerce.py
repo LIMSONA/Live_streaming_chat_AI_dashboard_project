@@ -1,3 +1,5 @@
+
+import time
 from kafka import KafkaProducer, KafkaConsumer
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -6,6 +8,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from json import loads
+
+from json import dumps
+import random
+from kafka.admin import KafkaAdminClient, NewTopic
 
 import urllib
 # from cr_kafka import c_kafka
@@ -90,29 +96,18 @@ def naver_host(request):
         program = driver.find_element_by_css_selector('#container > h1 > yt-formatted-string').text
         
     # 카프카에 해당 토픽명에 해당하는 항목을 요청함
-    consumer = con_kafka("input")
+    consumer = con_kafka("message")
     
     #화면에 전달 할 메세지 목록 배열 객체 생성
     chats = []
-    # input0602516539588843330None{'video_unique': 'py_phbQxy5Y', 'num': 0, 
-    # // 'chat_time': '2022-05-31 01:01:20', 'chat_id': 'hosu k',
-    # 'chat_message': ':pushpin:형수에게 쌍욕하는 도련님'}[]None-1195-1
     
-    # videoId = "py_phbQxy5Y"
+    # videoId = "test"
     # 카프카에서 전달 받은 메세지 목록을 반복함
     for message in consumer:
         # 해당 메세지의 비디오를 식별함 (예시는 유튜브의 영상 아이디)
         if(message.value["video_unique"] == videoId): 
             # 메세지 목록 배열에 메세지 내용 추가
-            chats.append({ "nickName" : message.value["chat_id"], "contents" : message.value["chat_message"] })
-        
-
-    #chatContainerElement = driver.find_element_by_css_selector('#root > div > div > div > div > div > div > div > div[class^=Comments_wrap] > div > div:nth-child(1)')
-    #chatElements = chatContainerElement.find_elements(By.XPATH, "*")
-
-    # for item in chatElements :
-    #     elements = item.find_elements(By.XPATH, "*");
-    #     chats.append({ "nickName" : elements[0].text, "contents" : elements[1].text })
+            chats.append(message.value)
     
     # 화면에 전달 할 객체 생성
     data = {
@@ -129,6 +124,9 @@ def naver_host(request):
     #     return HttpResponse("error");
 
 
+
+
+
 bootstrap_servers="kafka:9092"
 def con_kafka(topic_name):      
     consumer = KafkaConsumer(
@@ -141,4 +139,46 @@ def con_kafka(topic_name):
                 consumer_timeout_ms=1000
                 )
     return consumer    
+
+
+# topic_name = "message" #토픽확인! 
+# producer = KafkaProducer(
+#         acks=0,
+#         compression_type='gzip',
+#         bootstrap_servers=[bootstrap_servers],
+#         value_serializer=lambda x: dumps(x).encode('utf-8')
+#         )
+
+
+# print("[begin] producer가 메세지전송 시작")
+
+# # video_unique	num	chat_time	chat_id	chat_message	swear_score	pn_score	qa_score
+# # 실시간 방송 이름	1	시스템 시간	작성자 닉네임	채팅내용	1	1	0
+
+# #10000개 갖고 오기
+
+# for i in range(100):
+#     swear = random.randrange(0,2)
+#     pn = random.randrange(0,2)
+#     qa = random.randrange(0,2)
+    
+#     data = {'video_unique':"-JhoMGoAfFc"
+#             ,'num':i
+#             ,'chat_time': time.time()
+#             ,'chat_id':"user_" + str(i) 
+#             ,'chat_message': ("정상" if swear == 0 else "욕설") 
+#                             +("긍정" if pn == 0 else "부정") 
+#                             +("질문" if qa == 1 else "일반") 
+#                                 + str(i)
+#             ,'swear_score':swear
+#             ,'pn_score':pn
+#             ,'qa_score':qa
+# }
+#     print("메세지 전송중 ...")
+#     producer.send(topic_name, value=data)
+#     producer.flush()
+
+
+
+
 
