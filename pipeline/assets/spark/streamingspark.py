@@ -48,11 +48,6 @@ sc.addFile("/spark-work/model/QA.py")
 import QA as qa
 qa_udf = udf(lambda x: qa.predict(x), IntegerType())
 
-# # df 열 추가
-# df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))
-# ("pn_score", pn_udf(col('chat_message')))\
-#     .withColumn("qa_score", qa_udf(col('chat_message')))
-
 # df 열 추가
 df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))\
     .withColumn("pn_score", pn_udf(col('chat_message')))\
