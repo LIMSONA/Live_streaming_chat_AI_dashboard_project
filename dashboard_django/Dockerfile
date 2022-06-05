@@ -34,4 +34,4 @@ RUN pip install -r requirements.txt
 
 RUN apt-get install -y 
 
-CMD ["python3", "./mysite/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "./mysite/manage.py", "runserver", "0.0.0.0:20000"]
