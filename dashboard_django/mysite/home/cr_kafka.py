@@ -3,7 +3,7 @@ from json import dumps, loads
 import time
 from datetime import datetime
 
-bootstrap_servers="kafka:9092"
+bootstrap_servers="kafka:9092"  
 class c_kafka: 
     def init_producer(self):
         self.producer = KafkaProducer(
