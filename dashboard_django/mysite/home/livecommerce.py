@@ -56,7 +56,7 @@ def naver_host(request):
         # https://www.youtube.com/watch?v=qT4RPpGXlAo
         type = "Y"
         videoId = url.split("v=")[1]
-        
+            
     
     if type == "N":
         # 로드 된 셀레니움 객체 내에서 호스트 명이 들어있는 엘리먼트를 찾음
