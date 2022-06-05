@@ -14,7 +14,7 @@ services:
       - .:/usr/src/app
     
     ports:
-      - 20000:20000
+      - 20000:8000
 #     networks:
 #       - hy22-external-network
 

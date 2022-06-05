@@ -25,15 +25,15 @@ cr = cr_crawling.c_crawling() # crawling 클래스
 
 
 # 카프카 
-kafka_topic= ['input']  
+kafka_topic= ['message']  
 
 # 유튜브 크롤링 test
 
 def startSaveChat(want, video_url):
     if "youtube" in video_url:
         print("youtube streaming!")
-        # cr.youtube_kafka(video_url, kafka_topic[0])
+        cr.youtube_kafka(video_url, kafka_topic[0])
     else:
         print("naver  streaming!")
-        # cr.naver_kafka(video_url, kafka_topic[0])
+        cr.naver_kafka(video_url, kafka_topic[0])
         
