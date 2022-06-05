@@ -19,7 +19,7 @@ from . import startbutton
 import urllib
 # from cr_kafka import c_kafka
 lock = Lock()
-
+    
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 
