@@ -24,5 +24,4 @@ konlpy==0.5.2
 jamo==0.4.1
 tweepy==3.10.0
 kafka-python==2.0.2
-
 python-dotenv==0.20.0
