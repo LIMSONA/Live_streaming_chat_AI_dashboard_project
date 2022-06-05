@@ -7,6 +7,10 @@ from datetime import datetime as dt
 from . import cr_kafka # 카프카파일명
 from . import cr_token # 토큰파일명
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 
@@ -74,8 +78,12 @@ class c_crawling:
                 # print(n_title)
 
                 # 채팅 id와 내용
+                n_chat_message = WebDriverWait(driver, 10).until(
+                    EC.presence_of_elements_located((By.CLASS_NAME, 'Comment_comment_2d0tc'))
+                )
+                
                 n_chat_name = driver.find_elements_by_class_name('Comment_id_3pR4u')
-                n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
+                
                 chat_time = dt.now().strftime('%Y-%m-%d %H:%M:%S')
                 
                 
