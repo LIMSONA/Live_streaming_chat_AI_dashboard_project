@@ -5,10 +5,6 @@ from json import dumps, loads
 import time
 import os
 
-import re
-from konlpy.tag import Okt
-from jamo import h2j, j2hcj #초성/중성/종성분리
-
 import pytchat
 import time
 from selenium import webdriver
