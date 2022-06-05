@@ -1,5 +1,5 @@
-
 import time
+# from sqlalchemy import true
 from kafka import KafkaProducer, KafkaConsumer
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
@@ -8,16 +8,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from json import loads
-
+  
 from json import dumps
 import random
 from kafka.admin import KafkaAdminClient, NewTopic
+from threading import Lock, Thread
 
-import startbutton
+from . import startbutton
 
 import urllib
 # from cr_kafka import c_kafka
-#
+lock = Lock()
+
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 
@@ -27,11 +29,13 @@ options.add_argument('--disable-gpu')
 options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행시 에러메시지 해결
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
+already_videos = []
+
 # def youtube_host(video_url):
 #     try:
 #         driver.get(url=video_url)
 #         host = driver.find_element_by_xpath('//*[@id="text"]/a').text
-#         print(host)
+#         print(host)..
 #     except:
 #         print("오류발생")
         
@@ -50,18 +54,26 @@ def naver_host(request):
     if "shoppinglive.naver.com" in url:
         # naver
         # https://shoppinglive.naver.com/lives/544780?fm=shoppinglive&sn=home
-        type = "N"
+        type = "naver"
         videoId = url.split("/")[4]
         if "?" in videoId:
             videoId = videoId.split("?")[0]
     else :
         # youtube
         # https://www.youtube.com/watch?v=qT4RPpGXlAo
-        type = "Y"
+        type = "youtube"
         videoId = url.split("v=")[1]
-        
     
-    if type == "N":
+    lock.acquire()
+    global already_videos
+    if videoId not in already_videos:
+        already_videos.append(videoId)
+        thread = Thread(target = startbutton.startSaveChat, args = (type, url))
+        thread.isDaemon = True
+        thread.start()
+    lock.release()
+    
+    if type == "naver":
         # 로드 된 셀레니움 객체 내에서 호스트 명이 들어있는 엘리먼트를 찾음
         host = driver.find_element_by_xpath('/html/body/div/div/div/div/div/div/div/div/header/div/a[2]/div/span[1]').text
         
