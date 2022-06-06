@@ -133,7 +133,10 @@ def naver_host(request):
             chats.append(message.value)
     
     files = glob.glob("static/image/*.png")
-    wordcloudImg = max(files, key=os.path.getctime)
+    if len(files) > 0:
+        wordcloudImg = max(files, key=os.path.getctime)
+    else:
+        wordcloudImg = ""
     
     # 화면에 전달 할 객체 생성
     data = {
