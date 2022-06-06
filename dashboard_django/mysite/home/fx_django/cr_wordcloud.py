@@ -1,5 +1,11 @@
 from konlpy.tag import Okt
 from collections import Counter
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from matplotlib.image import imread
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 import pytchat
@@ -45,6 +51,10 @@ def crawling_5(bucket, want):
             driver.get(want)
             pop_list= []
             # 채팅 id와 내용
+        
+            chatWait = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'Comment_comment_2d0tc'))
+            )
             n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
             
             for i in range(len(n_chat_message)):
@@ -90,6 +100,9 @@ def crawling_30(bucket, want):
             driver.get(want)
             pop_list= []
             # 채팅 id와 내용
+            chatWait = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'Comment_comment_2d0tc'))
+            )
             n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
             
             for i in range(len(n_chat_message)):
@@ -130,7 +143,8 @@ def word_cloud(bucket, want):
         # image_colors = ImageColorGenerator(mask)
     else:
         #네이버
-        mask= np.array(Image.open(currentPath + 'naver.png'))
+        # mask= np.array(Image.open(currentPath + 'naver.png'))
+        mask = imread(currentPath + 'naver.png')
         image_colors = ImageColorGenerator(mask)
 
         
@@ -138,6 +152,8 @@ def word_cloud(bucket, want):
     # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
     wc= WordCloud(font_path=font, width=400, height=400, 
                 scale=2.0, max_font_size=250, background_color="white", mask=mask)
+    
+    print(counts)
     gen=wc.generate_from_frequencies(counts)
     # gen= wc.recolor(color_func=image_colors)
     
