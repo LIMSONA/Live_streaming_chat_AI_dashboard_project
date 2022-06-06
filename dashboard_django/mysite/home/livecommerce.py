@@ -72,6 +72,11 @@ def naver_host(request):
         thread = Thread(target = startbutton.startSaveChat, args = (type, url))
         thread.isDaemon = True
         thread.start()
+        
+        thread = Thread(target = cr_wordcloud.make_wordcloud, args = (url,))
+        thread.isDaemon = True
+        thread.start()
+        
     lock.release()
     
     if type == "naver":

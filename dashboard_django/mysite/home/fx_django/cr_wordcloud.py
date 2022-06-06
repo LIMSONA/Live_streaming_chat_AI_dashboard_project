@@ -10,8 +10,9 @@ import re
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
+okt= Okt()    
 
-def crawling_5(want):
+def crawling_5(bucket, want):
     current= datetime.datetime.now()
     
     
@@ -58,7 +59,7 @@ def crawling_5(want):
             if datetime.datetime.now() >= current + datetime.timedelta(seconds=5):
                 break
             
-def crawling_30(want):
+def crawling_30(bucket, want):
     current= datetime.datetime.now()
 # 유튜브
     if "youtube" in want:
@@ -105,7 +106,7 @@ def crawling_30(want):
  
  
 # 워드클라우드 실행
-def word_cloud(bucket):
+def word_cloud(bucket, want):
     bucket2=[]
     for i in bucket:
         morph= okt.nouns(i)
@@ -141,26 +142,27 @@ def word_cloud(bucket):
     time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
     gen.to_file("C:\git\\hy22-platform\\fx_django\\image\\imagewordcloud_{}.png".format(time))
 
-# url 받고
-want= input()
-# want= "https://shoppinglive.naver.com/lives/541905?fm=shoppinglive&sn=home"
-#현재시간으로 부터 +30초 이전
-#5초동안 크롤링 => 워드클라우드  ---->  총6번
-for i in range(6):
-    bucket=[]
-    crawling_5(want)
-    # print("워드클라우드 여기======================================")
-    # print(bucket)
-    word_cloud(bucket)
+def make_wordcloud(want):
+    # url 받고
+    # want= input()
+    # want= "https://shoppinglive.naver.com/lives/541905?fm=shoppinglive&sn=home"
+    #현재시간으로 부터 +30초 이전
+    #5초동안 크롤링 => 워드클라우드  ---->  총6번
+    for i in range(6):
+        bucket=[]
+        crawling_5(bucket, want)
+        # print("워드클라우드 여기======================================")
+        # print(bucket)
+        word_cloud(bucket, want)
 
 
-#현재시간으로부터 +30초 이후인가?
-#30초이후 오류생기지 않는 한 반복 
-#30초동안 크롤링 => 워드클라우드
-while True:
-    bucket=[]
-    crawling_30(want)
-    # print("워드클라우드 여기=================================")
-    word_cloud(bucket)
-    
+    #현재시간으로부터 +30초 이후인가?
+    #30초이후 오류생기지 않는 한 반복 
+    #30초동안 크롤링 => 워드클라우드
+    while True:
+        bucket=[]
+        crawling_30(bucket, want)
+        # print("워드클라우드 여기=================================")
+        word_cloud(bucket, want)
+        
     
