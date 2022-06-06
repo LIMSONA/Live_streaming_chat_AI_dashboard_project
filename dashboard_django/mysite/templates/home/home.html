@@ -49,6 +49,7 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
         let url = $("#txtUrl").val();
         $.ajax({
           url: "/tem?url=" + url,
+          async: false,
           beforeSend:function(){
             if(isFirst)
               $("#spinner").show();
@@ -59,7 +60,7 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
             $("#love").text(data.love);
             $("#play").text(data.play);
             $("#program").text(data.program);
-            $("#carouselExampleCaptions").css("background-image", data.image.replace("mysite",""));
+            $("#carouselExampleCaptions").css("background-image", "url(" + data.image.replace("mysite","") + ")");
 
             var chatBoard = $("#chatBoard");
             var chatBoardQuestions = $("#chatBoardQuestions");
