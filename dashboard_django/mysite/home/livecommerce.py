@@ -162,7 +162,7 @@ def con_kafka(topic_name):
     consumer = KafkaConsumer(
                 topic_name,
                 bootstrap_servers=[bootstrap_servers],
-                auto_offset_reset='latest', # 또는  earliest
+                auto_offset_reset='earliest', # 또는  latest
                 enable_auto_commit=True,
                 group_id=None, #일단 그룹아이디 만들지 말고
                 value_deserializer=lambda x: loads(x.decode('utf-8')),
