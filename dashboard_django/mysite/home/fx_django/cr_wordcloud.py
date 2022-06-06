@@ -156,7 +156,7 @@ def word_cloud(bucket, want):
     
     # 파일명은 날짜와 시간형식으로  
     time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
-    gen.to_file("static/image/wordcloud_{}.png".format(time))
+    gen.to_file("mysite/static/image/wordcloud_{}.png".format(time))
 
 def make_wordcloud(want):
     # url 받고
