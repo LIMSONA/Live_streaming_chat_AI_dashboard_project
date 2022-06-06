@@ -10,7 +10,10 @@ import re
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
+import os
 okt= Okt()    
+
+currentPath = os.getcwd() + "/"
 
 def crawling_5(bucket, want):
     current= datetime.datetime.now()
@@ -120,14 +123,14 @@ def word_cloud(bucket, want):
     
     if "youtube" in want:
         #유튜브 mask 1
-        mask= np.array(Image.open('youtube_1.png'))
+        mask= np.array(Image.open(currentPath + 'youtube_1.png'))
         image_colors = ImageColorGenerator(mask)
         # #유튜브 mask 2
         # mask= np.array(Image.open('C:\git\\hy22-platform\\fx_django\\youtube_2.png'))
         # image_colors = ImageColorGenerator(mask)
     else:
         #네이버
-        mask= np.array(Image.open('naver.png'))
+        mask= np.array(Image.open(currentPath + 'naver.png'))
         image_colors = ImageColorGenerator(mask)
 
         
@@ -140,7 +143,7 @@ def word_cloud(bucket, want):
     
     # 파일명은 날짜와 시간형식으로  
     time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
-    gen.to_file("image\\imagewordcloud_{}.png".format(time))
+    gen.to_file(currentPath + "image\\imagewordcloud_{}.png".format(time))
 
 def make_wordcloud(want):
     # url 받고
