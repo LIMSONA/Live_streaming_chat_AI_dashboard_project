@@ -17,8 +17,11 @@ from threading import Lock, Thread
 from . import startbutton
 
 import urllib
+
+from home.fx_django import cr_wordcloud
+
 # from cr_kafka import c_kafka
-lock = Lock()
+lock = Lock() 
     
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
@@ -55,9 +58,7 @@ def naver_host(request):
         # naver
         # https://shoppinglive.naver.com/lives/544780?fm=shoppinglive&sn=home
         type = "naver"
-        videoId = url.split("/")[4]
-        if "?" in videoId:
-            videoId = videoId.split("?")[0]
+        videoId = url.split("/")[-1]
     else :
         # youtube
         # https://www.youtube.com/watch?v=qT4RPpGXlAo
