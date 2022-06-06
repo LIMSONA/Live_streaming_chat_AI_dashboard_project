@@ -17,6 +17,8 @@ from threading import Lock, Thread
 from . import startbutton
 
 import urllib
+import glob
+import os
 
 from home.fx_django import cr_wordcloud
 
@@ -130,13 +132,17 @@ def naver_host(request):
             # 메세지 목록 배열에 메세지 내용 추가
             chats.append(message.value)
     
+    files = glob.glob("static/image/*.png")
+    wordcloudImg = max(files, key=os.path.getctime)
+    
     # 화면에 전달 할 객체 생성
     data = {
         "host" : host,
         "love" : love,
         "play" : play,
         "program" : program,
-        "chats" : chats
+        "chats" : chats,
+        "image" : wordcloudImg
     }
     
     # 위에서 생성한 객체를 제이슨 객체로 페이지에 반환
