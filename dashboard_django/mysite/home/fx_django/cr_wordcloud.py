@@ -13,7 +13,7 @@ import numpy as np
 import os
 okt= Okt()    
 
-currentPath = os.getcwd() + "/"
+currentPath = os.path.dirname(os.path.realpath(__file__)) + "/"
 
 def crawling_5(bucket, want):
     current= datetime.datetime.now()
