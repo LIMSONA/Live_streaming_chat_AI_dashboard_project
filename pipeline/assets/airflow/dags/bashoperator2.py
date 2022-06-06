@@ -4,9 +4,9 @@ from airflow.utils.dates import days_ago
 from datetime import timedelta
 
 default_args = {
-        'owner': 'gahee',
+        'owner': 'gahee', 
         'catchup': False,
-        'execution_timeout': timedelta(hours=6),
+        'execution_자timeout': timedelta(hours=6),
         'depends_on_past': False,
     }
 

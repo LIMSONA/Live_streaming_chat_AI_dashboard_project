@@ -4,8 +4,8 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime as dt
 
-from . import cr_kafka # 카프카파일명
-from . import cr_token # 토큰파일명
+from home.crawling import cr_kafka # 카프카파일명
+from home.crawling import cr_token # 토큰파일명
 
 ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
