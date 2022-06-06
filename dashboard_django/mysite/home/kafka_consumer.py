@@ -6,7 +6,7 @@ import time
 bootstrap_servers="kafka:9092"
 
 
-topic_name = "message" #꼭 producer파일 확인하기!
+topic_name = "input" #꼭 producer파일 확인하기!
 
 while True:
     consumer = KafkaConsumer(
