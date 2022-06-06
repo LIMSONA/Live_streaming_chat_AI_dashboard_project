@@ -119,7 +119,7 @@ def naver_host(request):
         program = driver.find_element_by_css_selector('#container > h1 > yt-formatted-string').text
         
     # 카프카에 해당 토픽명에 해당하는 항목을 요청함
-    consumer = con_kafka("message")
+    consumer = con_kafka("input")
     
     #화면에 전달 할 메세지 목록 배열 객체 생성
     chats = []
