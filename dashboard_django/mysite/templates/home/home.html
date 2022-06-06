@@ -59,7 +59,7 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
             $("#love").text(data.love);
             $("#play").text(data.play);
             $("#program").text(data.program);
-            $("#imgWordCloud").attr("src", "/static/image/" + data.image);
+            $("#carouselExampleCaptions").css("background-image", data.image.replace("mysite",""));
 
             var chatBoard = $("#chatBoard");
             var chatBoardQuestions = $("#chatBoardQuestions");
@@ -567,24 +567,8 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
         </div>
         <div class="col-lg-5">
           <div class="card card-carousel overflow-hidden h-100 p-3">
-            <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-              <div class="carousel-inner border-radius-lg h-100">
-                <div class="col-lg-7 mb-lg-0 mb-4">
-                  <div class="card z-index-2 h-100">
-                    <!-- <div class="card-header pb-0 pt-3 bg-transparent"> -->
-                    <h6 class="text-capitalize">Word Cloud</h6>
-                    <img id="imgWordCloud"/>
-                    <!-- <p class="text-sm mb-4">
-                        <!-- <i class="fa fa-arrow-up text-success"></i> -->
-                    <!-- <span class="font-weight-bold">4% more</span> in 2021 -->
-                    <!-- </p> -->
-                    <!-- </div> -->
-                    <!-- <div class="card-body p-3"> -->
-                    <!-- <div class="chart"> -->
-                    <!-- <canvas height="300"></canvas>  -->
-                  </div>
-                </div>
-              </div>
+            <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel"
+            style=" background-repeat: no-repeat;background-size: contain;">
             </div>
           </div>
         </div>

@@ -132,7 +132,7 @@ def naver_host(request):
             # 메세지 목록 배열에 메세지 내용 추가
             chats.append(message.value)
     
-    files = glob.glob("static/image/*.png")
+    files = glob.glob("mysite/static/image/*.png")
     if len(files) > 0:
         wordcloudImg = max(files, key=os.path.getctime)
     else:
