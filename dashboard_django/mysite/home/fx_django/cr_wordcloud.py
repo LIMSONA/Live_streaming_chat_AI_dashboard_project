@@ -137,23 +137,21 @@ def word_cloud(bucket, want):
     if "youtube" in want:
         #유튜브 mask 1
         mask= np.array(Image.open(currentPath + 'youtube_1.png'))
-        image_colors = ImageColorGenerator(mask)
+        # image_colors = ImageColorGenerator(mask)
         # #유튜브 mask 2
         # mask= np.array(Image.open('C:\git\\hy22-platform\\fx_django\\youtube_2.png'))
         # image_colors = ImageColorGenerator(mask)
     else:
         #네이버
-        # mask= np.array(Image.open(currentPath + 'naver.png'))
-        mask = imread(currentPath + 'naver.png')
-        image_colors = ImageColorGenerator(mask)
+        mask= np.array(Image.open(currentPath + 'naver.png'))
+        # image_colors = ImageColorGenerator(mask)
 
         
-    font = 'BMHANNA_11yrs_ttf.ttf'
+    font = currentPath + 'BMHANNA_11yrs_ttf.ttf'
     # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
     wc= WordCloud(font_path=font, width=400, height=400, 
-                scale=2.0, max_font_size=250, background_color="white", mask=mask)
+                scale=2.0, max_font_size=250, background_color="white")
     
-    print(counts)
     gen=wc.generate_from_frequencies(counts)
     # gen= wc.recolor(color_func=image_colors)
     
