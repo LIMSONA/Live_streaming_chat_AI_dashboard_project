@@ -86,7 +86,9 @@ def crawling_30(bucket, want):
     else:
         # print("네이버========================================")
         
-        consumer = cr_kafka.con_kafka("input")
+        씨케이 = c_kafka()
+        
+        consumer = 씨케이.con_kafka("input")
         video_id = want.split("/")[-1]
         
         for message in consumer:
@@ -136,17 +138,18 @@ def word_cloud(bucket, want):
         # image_colors = ImageColorGenerator(mask)
 
         
-    font = currentPath + 'BMHANNA_11yrs_ttf.ttf'
-    # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
-    wc= WordCloud(font_path=font, width=400, height=400, 
-                scale=2.0, max_font_size=250, background_color="white")
-    
-    gen=wc.generate_from_frequencies(counts)
-    # gen= wc.recolor(color_func=image_colors)
-    
-    # 파일명은 날짜와 시간형식으로  
-    time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
-    gen.to_file("mysite/static/image/wordcloud_{}.png".format(time))
+    if len(bucket2) > 0:
+        font = currentPath + 'BMHANNA_11yrs_ttf.ttf'
+        # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
+        wc= WordCloud(font_path=font, width=400, height=400, 
+                    scale=2.0, max_font_size=250, background_color="white")
+        
+        gen=wc.generate_from_frequencies(counts)
+        # gen= wc.recolor(color_func=image_colors)
+        
+        # 파일명은 날짜와 시간형식으로  
+        time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+        gen.to_file("mysite/static/image/wordcloud_{}.png".format(time))
 
 def make_wordcloud(want):
     # url 받고
