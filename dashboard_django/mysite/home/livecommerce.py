@@ -14,7 +14,7 @@ import random
 from kafka.admin import KafkaAdminClient, NewTopic
 from threading import Lock, Thread
 
-from . import startbutton
+from . import test_main
 
 import urllib
 import glob
@@ -71,7 +71,7 @@ def naver_host(request):
     global already_videos
     if videoId not in already_videos:
         already_videos.append(videoId)
-        thread = Thread(target = startbutton.startSaveChat, args = (type, url))
+        thread = Thread(target = test_main.startSaveChat, args = (type, url))
         thread.isDaemon = True
         thread.start()
         
