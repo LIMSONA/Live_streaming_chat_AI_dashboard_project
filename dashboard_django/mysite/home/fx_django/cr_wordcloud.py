@@ -48,6 +48,8 @@ def crawling_5(bucket, want):
         consumer = 씨케이.con_kafka("input")
         video_id = want.split("/")[-1]
         
+        pop_list = []
+                
         for message in consumer:
             if video_id in message.value["video_unique"]:
                 n_chat_message = message.value["chat_message"]
@@ -55,13 +57,12 @@ def crawling_5(bucket, want):
                 for i in range(len(n_chat_message)):
                     # if n_chat_message[i].text: #채팅이 있는 경우
                     try:
-                        if (n_chat_message[i].text) in pop_list: 
+                        if (n_chat_message) in pop_list: 
                             pass
                         else: #중복되지 않는 경우
-                            pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
-                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
+                            pop_list.append(n_chat_message) #중복을 대조하기 위한 리스트에 추가
+                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message)) #워드클라우드를 위한 리스트추가
                             bucket.append(re_string)
-                            print(n_chat_message[i].text)
                     except:
                         pass
                 if datetime.datetime.now() >= current + datetime.timedelta(seconds=5):
@@ -91,21 +92,20 @@ def crawling_30(bucket, want):
         consumer = 씨케이.con_kafka("input")
         video_id = want.split("/")[-1]
         
+        pop_list= []
         for message in consumer:
             if video_id in message.value["video_unique"]:
                 n_chat_message = message.value["chat_message"]
                     
-                pop_list= []
                 for i in range(len(n_chat_message)):
                     # if n_chat_message[i].text: #채팅이 있는 경우
                     try:
-                        if (n_chat_message[i].text) in pop_list: 
+                        if (n_chat_message) in pop_list: 
                             pass
                         else: #중복되지 않는 경우
-                            pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
-                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
+                            pop_list.append(n_chat_message) #중복을 대조하기 위한 리스트에 추가
+                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message)) #워드클라우드를 위한 리스트추가
                             bucket.append(re_string)
-                            print(n_chat_message[i].text)
                     except:
                         pass
                 if datetime.datetime.now() >= current + datetime.timedelta(seconds=30):
@@ -156,7 +156,8 @@ def make_wordcloud(want):
     # want= input()
     # want= "https://shoppinglive.naver.com/lives/541905?fm=shoppinglive&sn=home"
     #현재시간으로 부터 +30초 이전
-    #5초동안 크롤링 => 워드클라우드  ---->  총6번
+    #5초동안 크롤링 => 워드클라우드  ---->  총6번 
+    # 
     for i in range(6):
         bucket=[]
         crawling_5(bucket, want)

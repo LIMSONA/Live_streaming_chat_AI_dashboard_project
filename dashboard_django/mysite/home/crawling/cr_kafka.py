@@ -15,13 +15,13 @@ class c_kafka:
         
     def pro_kafka(self, topic_name, get_data):
         now = datetime.now()
-        print("현재 시간 : ", now.time())
+        # print("현재 시간 : ", now.time())
        # print("메세지 전송중 ...")
        # print(get_data)
         self.producer.send(topic_name, value=get_data)
-        print('보냈음')
+        # print('보냈음')
         self.producer.flush()
-        print('flush 다음')
+        # print('flush 다음')
 
     def con_kafka(self, topic_name):      
         consumer = KafkaConsumer(
