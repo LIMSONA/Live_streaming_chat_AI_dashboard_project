@@ -21,7 +21,7 @@ cr = cr_crawling.c_crawling() # crawling 클래스
 
 
 # 카프카 
-kafka_topic= ['message']  
+kafka_topic= ['input']  
 
 # 유튜브 크롤링 test
 
