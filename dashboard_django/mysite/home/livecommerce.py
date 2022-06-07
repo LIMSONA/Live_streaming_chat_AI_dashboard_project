@@ -20,7 +20,7 @@ import urllib
 import glob
 import os
 
-from home.crawling import cr_kafka
+from home.crawling.cr_kafka import c_kafka
 from home.fx_django import cr_wordcloud
 
 # from cr_kafka import c_kafka
