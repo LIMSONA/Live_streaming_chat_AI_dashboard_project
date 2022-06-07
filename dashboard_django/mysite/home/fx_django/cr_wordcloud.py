@@ -17,7 +17,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
 import os
 
-from crawling import cr_kafka
+from home.crawling import cr_kafka
 
 okt= Okt()    
 
