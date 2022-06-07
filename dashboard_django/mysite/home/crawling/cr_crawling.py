@@ -7,6 +7,10 @@ from datetime import datetime as dt
 from home.crawling import cr_kafka # 카프카파일명
 from home.crawling import cr_token # 토큰파일명
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 ck = cr_kafka.c_kafka() # c_kafka 클래스
 ct = cr_token.c_token() # c_token 클래스
 
@@ -20,7 +24,7 @@ class c_crawling:
         "video_unique" : video_unique,
         "num" : num,
         "chat_time" : chat_time,
-        "chat_id" : chat_name,
+        "chat_id" : chat_name,  
         "chat_message" : chat_message}
         # "chat_n_token" : ct.noun_tokenize(chat_message)}
         return json_form
@@ -69,10 +73,13 @@ class c_crawling:
                 driver.get(video_url)
                 pop_list = []
                 
-                # 영상 제목
+                # 영상 제목         
                 n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
                 # print(n_title)
 
+                chat_name_wait = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, 'Comment_id_3pR4u'))
+                )
                 # 채팅 id와 내용
                 n_chat_name = driver.find_elements_by_class_name('Comment_id_3pR4u')
                 n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
