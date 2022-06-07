@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 ck = cr_kafka.c_kafka() # c_kafka 클래스
-ct = cr_token.c_token() # c_token 클래스
+# ct = cr_token.c_token() # c_token 클래스
 
 
 
