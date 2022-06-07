@@ -17,7 +17,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
 import os
 
-from home.crawling import cr_kafka
+from home.crawling.cr_kafka import c_kafka
 
 okt= Okt()    
 
@@ -44,7 +44,7 @@ def crawling_5(bucket, want):
     else:
         # print("네이버========================================")
         
-        consumer = cr_kafka.con_kafka("input")
+        consumer = c_kafka.con_kafka("input")
         video_id = want.split("/")[-1]
         
         for message in consumer:
