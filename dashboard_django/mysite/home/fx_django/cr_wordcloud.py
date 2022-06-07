@@ -43,8 +43,9 @@ def crawling_5(bucket, want):
 # 네이버
     else:
         # print("네이버========================================")
+        씨케이 = c_kafka()
         
-        consumer = c_kafka.con_kafka("input")
+        consumer = 씨케이.con_kafka("input")
         video_id = want.split("/")[-1]
         
         for message in consumer:
