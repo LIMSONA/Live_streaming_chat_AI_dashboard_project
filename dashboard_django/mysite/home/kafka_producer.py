@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 bootstrap_servers = os.getenv('KAFKA_SERVER')
 
-topic_name = "input" #토픽확인! 
+topic_name = "message" #토픽확인! 
 producer = KafkaProducer(
         acks=0,
         compression_type='gzip',
