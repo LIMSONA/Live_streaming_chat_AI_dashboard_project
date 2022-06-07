@@ -16,6 +16,9 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import numpy as np
 import os
+
+from home.crawling.cr_kafka import c_kafka
+
 okt= Okt()    
 
 currentPath = os.path.dirname(os.path.realpath(__file__)) + "/"
@@ -40,36 +43,29 @@ def crawling_5(bucket, want):
 # 네이버
     else:
         # print("네이버========================================")
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행시 에러메시지 해결
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        while True:
-            driver.get(want)
-            pop_list= []
-            # 채팅 id와 내용
+        씨케이 = c_kafka()
         
-            chatWait = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'Comment_comment_2d0tc'))
-            )
-            n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
-            
-            for i in range(len(n_chat_message)):
-                # if n_chat_message[i].text: #채팅이 있는 경우
-                try:
-                    if (n_chat_message[i].text) in pop_list: 
+        consumer = 씨케이.con_kafka("input")
+        video_id = want.split("/")[-1]
+        
+        for message in consumer:
+            if video_id in message.value["video_unique"]:
+                n_chat_message = message.value["chat_message"]
+                
+                for i in range(len(n_chat_message)):
+                    # if n_chat_message[i].text: #채팅이 있는 경우
+                    try:
+                        if (n_chat_message[i].text) in pop_list: 
+                            pass
+                        else: #중복되지 않는 경우
+                            pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
+                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
+                            bucket.append(re_string)
+                            print(n_chat_message[i].text)
+                    except:
                         pass
-                    else: #중복되지 않는 경우
-                        pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
-                        re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
-                        bucket.append(re_string)
-                        print(n_chat_message[i].text)
-                except:
-                    pass
-            if datetime.datetime.now() >= current + datetime.timedelta(seconds=5):
-                break
+                if datetime.datetime.now() >= current + datetime.timedelta(seconds=5):
+                    break
             
 def crawling_30(bucket, want):
     current= datetime.datetime.now()
@@ -89,35 +85,31 @@ def crawling_30(bucket, want):
 # 네이버
     else:
         # print("네이버========================================")
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행시 에러메시지 해결
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        while True:
-            driver.get(want)
-            pop_list= []
-            # 채팅 id와 내용
-            chatWait = WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'Comment_comment_2d0tc'))
-            )
-            n_chat_message = driver.find_elements_by_class_name('Comment_comment_2d0tc')
-            
-            for i in range(len(n_chat_message)):
-                # if n_chat_message[i].text: #채팅이 있는 경우
-                try:
-                    if (n_chat_message[i].text) in pop_list: 
+        
+        씨케이 = c_kafka()
+        
+        consumer = 씨케이.con_kafka("input")
+        video_id = want.split("/")[-1]
+        
+        for message in consumer:
+            if video_id in message.value["video_unique"]:
+                n_chat_message = message.value["chat_message"]
+                    
+                pop_list= []
+                for i in range(len(n_chat_message)):
+                    # if n_chat_message[i].text: #채팅이 있는 경우
+                    try:
+                        if (n_chat_message[i].text) in pop_list: 
+                            pass
+                        else: #중복되지 않는 경우
+                            pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
+                            re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
+                            bucket.append(re_string)
+                            print(n_chat_message[i].text)
+                    except:
                         pass
-                    else: #중복되지 않는 경우
-                        pop_list.append(n_chat_message[i].text) #중복을 대조하기 위한 리스트에 추가
-                        re_string= re.sub('[^ A-Za-z0-9ㄱ-ㅣ가-힣]+',"", str(n_chat_message[i].text)) #워드클라우드를 위한 리스트추가
-                        bucket.append(re_string)
-                        print(n_chat_message[i].text)
-                except:
-                    pass
-            if datetime.datetime.now() >= current + datetime.timedelta(seconds=30):
-                break
+                if datetime.datetime.now() >= current + datetime.timedelta(seconds=30):
+                    break
  
  
 # 워드클라우드 실행
@@ -146,17 +138,18 @@ def word_cloud(bucket, want):
         # image_colors = ImageColorGenerator(mask)
 
         
-    font = currentPath + 'BMHANNA_11yrs_ttf.ttf'
-    # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
-    wc= WordCloud(font_path=font, width=400, height=400, 
-                scale=2.0, max_font_size=250, background_color="white")
-    
-    gen=wc.generate_from_frequencies(counts)
-    # gen= wc.recolor(color_func=image_colors)
-    
-    # 파일명은 날짜와 시간형식으로  
-    time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
-    gen.to_file("mysite/static/image/wordcloud_{}.png".format(time))
+    if len(bucket2) > 0:
+        font = currentPath + 'BMHANNA_11yrs_ttf.ttf'
+        # mask = np.array(Image.open('C:\git\\hy22-platform\\fx_django\\comments.png'))
+        wc= WordCloud(font_path=font, width=400, height=400, 
+                    scale=2.0, max_font_size=250, background_color="white")
+        
+        gen=wc.generate_from_frequencies(counts)
+        # gen= wc.recolor(color_func=image_colors)
+        
+        # 파일명은 날짜와 시간형식으로  
+        time= datetime.datetime.now().strftime('%y-%m-%d_%H-%M-%S')
+        gen.to_file("mysite/static/image/wordcloud_{}.png".format(time))
 
 def make_wordcloud(want):
     # url 받고
