@@ -49,9 +49,9 @@ import QA as qa
 qa_udf = udf(lambda x: qa.predict(x), IntegerType())
 
 # df 열 추가
-df3=df2.withColumn("qa_score", qa_udf(col('chat_message'))) \
-    .withColumn("pn_score", pn_udf(col('chat_message'))) \
-    .withColumn("swear_score", swearft_udf(col('chat_message')))
+df3=df2.withColumn("qa_score", qa_udf(col('qa_score'))) \
+    .withColumn("pn_score", pn_udf(col('pn_score'))) \
+    .withColumn("swear_score", swearft_udf(col('swear_score')))
 
 
 df3\
