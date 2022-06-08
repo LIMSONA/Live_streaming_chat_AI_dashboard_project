@@ -68,11 +68,10 @@ class c_crawling:
             ck.init_producer()
             driver.get(video_url)
             pop_list = []
+            # 영상 제목
+            n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
+            # print(n_title)
             while True:
-                
-                # 영상 제목
-                n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
-                # print(n_title)
 
                 # 채팅 id와 내용
                 n_chat_name = driver.find_elements_by_class_name('Comment_id_3pR4u')
