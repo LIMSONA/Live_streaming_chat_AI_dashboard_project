@@ -44,7 +44,7 @@ already_videos = []
 #         print(host)..
 #     except:
 #         print("오류발생")
-        
+### con        
         
 def naver_host(request): 
     try:    
