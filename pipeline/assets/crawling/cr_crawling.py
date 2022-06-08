@@ -66,8 +66,8 @@ class c_crawling:
         
         try:
             ck.init_producer()
+            driver.get(video_url)
             while True:
-                driver.get(video_url)
                 pop_list = []
                 
                 # 영상 제목
