@@ -67,8 +67,8 @@ class c_crawling:
         try:
             ck.init_producer()
             driver.get(video_url)
+            pop_list = []
             while True:
-                pop_list = []
                 
                 # 영상 제목
                 n_title = driver.find_element_by_class_name('LiveHeader_text_2XGaZ').text
