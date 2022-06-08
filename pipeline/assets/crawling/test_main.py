@@ -30,7 +30,7 @@ kafka_topic= ['input']
 
 # 유튜브 크롤링 test
 
-# video_url = str(input())
+video_url = str(input())
 #video_url= "https://shoppinglive.naver.com/lives/546718"
 if "youtube" in video_url:
     print("유튜브방송!")
