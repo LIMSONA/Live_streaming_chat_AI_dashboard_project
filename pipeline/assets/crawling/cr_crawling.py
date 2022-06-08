@@ -57,6 +57,7 @@ class c_crawling:
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('User-Agent=Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36')
         options.add_experimental_option("excludeSwitches", ["enable-logging"]) # 실행시 에러메시지 해결
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         video_id = video_url.split("/")[-1]
