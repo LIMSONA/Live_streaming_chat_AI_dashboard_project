@@ -79,59 +79,59 @@ learning_rate = 5e-5
 
 # 저장된 가중치 가져오기
 model_pt = BERTClassifier(bertmodel,  dr_rate=0.5)
-# model_pt.load_state_dict(torch.load('/spark-work/model/PN.pt'))
-# model_pt.to(device)
+model_pt.load_state_dict(torch.load('/spark-work/model/PN.pt'))
+model_pt.to(device)
 
-# tokenizer= get_tokenizer()
-# tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
-
-
-# # In[5]:
+tokenizer= get_tokenizer()
+tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
 
 
-# # 예측하기 (부정채팅: 1, 일반채팅: 0)
+# In[5]:
 
-# def softmax(arr):
-#     m = np.argmax(arr)
-#     arr = arr - m
-#     arr = np.exp(arr)
-#     return arr / np.sum(arr)
 
-# def predict(predict_sentence):
-#     try:
-#         data = [predict_sentence, '0']
-#         dataset_another = [data]
+# 예측하기 (부정채팅: 1, 일반채팅: 0)
 
-#         another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
-#         test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
+def softmax(arr):
+    m = np.argmax(arr)
+    arr = arr - m
+    arr = np.exp(arr)
+    return arr / np.sum(arr)
+
+def predict(predict_sentence):
+    try:
+        data = [predict_sentence, '0']
+        dataset_another = [data]
+
+        another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
+        test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
         
-#         model_pt.eval()
+        model_pt.eval()
 
-#         for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
-#             token_ids = token_ids.long().to(device)
-#             segment_ids = segment_ids.long().to(device)
+        for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
+            token_ids = token_ids.long().to(device)
+            segment_ids = segment_ids.long().to(device)
 
-#             valid_length= valid_length
-#             label = label.long().to(device)
+            valid_length= valid_length
+            label = label.long().to(device)
 
-#             out = model_pt(token_ids, valid_length, segment_ids)
+            out = model_pt(token_ids, valid_length, segment_ids)
 
-#             test_eval=[]
-#             for i in out:
-#                 logits=i
-#                 logits = logits.detach().cpu().numpy()
-#                 # 부정채팅: 1, 일반채팅: 0
-#                 if softmax(logits)[1] >= 0.95:
-#                     return int(1)
+            test_eval=[]
+            for i in out:
+                logits=i
+                logits = logits.detach().cpu().numpy()
+                # 부정채팅: 1, 일반채팅: 0
+                if softmax(logits)[1] >= 0.95:
+                    return int(1)
+                else:
+                    return int(0)
+
 #                 else:
-#                     return int(0)
-
-# #                 else:
-# #                     test_eval.append(int(0))
-#             # print(test_eval[0])        
-#             # return test_eval[0]
-#             # return softmax(logits)[1]        
+#                     test_eval.append(int(0))
+            # print(test_eval[0])        
+            # return test_eval[0]
+            # return softmax(logits)[1]        
             
-#     except:
-#         return 0
+    except:
+        return 0
 
