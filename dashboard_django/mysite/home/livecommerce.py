@@ -120,7 +120,7 @@ def naver_host(request):
             
         # 카프카에 해당 토픽명에 해당하는 항목을 요청함
         씨케이 = c_kafka()  
-        consumer = 씨케이.con_kafka("message")
+        consumer = 씨케이.con_kafka("input")
         
         #화면에 전달 할 메세지 목록 배열 객체 생성
         chats = []
