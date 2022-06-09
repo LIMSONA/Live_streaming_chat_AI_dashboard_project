@@ -4,35 +4,35 @@ services:
 
 # 스파크
 # 스파크 마스터
-  spark-master:
-    build:
-      context: .
-      dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.3
-    container_name: spark-master
-    ports:
-      - 8080:8080 # master webui
-      - 7077:7077 # master port
-    environment:
-      - SPARK_MODE=master
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
-      - SPARK_MASTER_WEBUI_PORT=8080
-      - NVIDIA_VISIBLE_DEVICE=0
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+  # spark-master:
+  #   build:
+  #     context: .
+  #     dockerfile: ./assets/spark/Dockerfile 
+  #   image: my-spark:0.3
+  #   container_name: spark-master
+  #   ports:
+  #     - 8080:8080 # master webui
+  #     - 7077:7077 # master port
+  #   environment:
+  #     - SPARK_MODE=master
+  #     - SPARK_MASTER_HOST=spark-master
+  #     - SPARK_MASTER_PORT=7077
+  #     - SPARK_MASTER_WEBUI_PORT=8080
+  #     - NVIDIA_VISIBLE_DEVICE=0
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
 
-    volumes: 
-      - ./assets/spark:/spark-work
-      - ./assets/model:/spark-work/model
-      - ./assets/spark/conf:/opt/spark/conf
-    networks:
-      - hy22-external-network
+  #   volumes: 
+  #     - ./assets/spark:/spark-work
+  #     - ./assets/model:/spark-work/model
+  #     - ./assets/spark/conf:/opt/spark/conf
+  #   networks:
+  #     - hy22-external-network
 
 
 # 스파크 워커 1개
@@ -64,6 +64,12 @@ services:
 
     networks:
       - hy22-external-network
+
+    extra_hosts:
+      - "spark-master:20.232.136.207"
+      - "kafka:20.232.136.207"
+      - "influxdb:20.232.136.207"
+      - "mongodb:20.232.136.207"
 
 
 networks:
