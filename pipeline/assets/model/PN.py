@@ -80,7 +80,7 @@ learning_rate = 5e-5
 # 저장된 가중치 가져오기
 model_pt = BERTClassifier(bertmodel,  dr_rate=0.5)
 model_pt.load_state_dict(torch.load('/spark-work/model/PN.pt'))
-model_pt.to(device)
+# model_pt.to(device)
 
 # tokenizer= get_tokenizer()
 # tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
