@@ -38,7 +38,7 @@ sc.addFile("/spark-work/model/swearft2.py")
 import swearft2 as swearft
 swearft_udf = udf(lambda x: swearft.test_result(x), IntegerType())
 
-# 긍부정 모델
+#긍부정 모델
 sc.addFile("/spark-work/model/PN.py")
 import PN as pn
 pn_udf = udf(lambda x: pn.predict(x), IntegerType())
@@ -50,9 +50,8 @@ pn_udf = udf(lambda x: pn.predict(x), IntegerType())
 
 # df 열 추가
 df3=df2.withColumn("swear_score", swearft_udf(col('chat_message')))\
-    .withColumn("pn_score", pn_udf(col('chat_message'))) 
-    # .withColumn("qa_score", qa_udf(col('chat_message'))) \
-    # .withColumn("pn_score", pn_udf(col('chat_message'))) 
+    .withColumn("pn_score", pn_udf(col('chat_message')))\
+    # .withColumn("qa_score", qa_udf(col('chat_message'))) \ 
 
 
 df3\
