@@ -70,14 +70,7 @@ C:\git\hy22-platform\dashboard_django\mysite\templates
             for (var i = 0; i < data.chats.length; i++) {
               var chat = data.chats[i];
               
-              var chatTime = new Date(chat.chat_time * 1000);
-              var chatTimeString = "";
-              chatTimeString += chatTime.getFullYear();
-              chatTimeString += (chatTime.getMonth() + 1).toString().padStart(2, "0");
-              chatTimeString += chatTime.getDate().toString().padStart(2, "0");
-              chatTimeString += chatTime.getHours().toString().padStart(2, "0");
-              chatTimeString += chatTime.getMinutes().toString().padStart(2, "0");
-              chatTimeString += Math.floor(chatTime.getSeconds() / 10) * 10;
+              var chatTimeString = chat.chat_time;
 
               if(chartdatas[chatTimeString] === undefined){
                 chartdatas[chatTimeString] = 0;
