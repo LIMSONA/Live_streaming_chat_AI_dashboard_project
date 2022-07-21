@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  spark-worker:
+    extends:
+      file: docker-compose-spark.yml
+      service: spark-worker
+    extra_hosts:
+      - "spark-master:20.232.136.207"
+      - "kafka:20.232.136.207"
+      - "influxdb:20.232.136.207"
+      - "mongodb:20.232.136.207"
+
+
+
