@@ -13,7 +13,9 @@ docker network create hy22-external-network
 2. 카프카 목록 조회  
  kafka-topics.sh --list --bootstrap-server kafka:9092
 
-3. 카프카 컨슈머 조회(ex. 모델 분석 후 데이터 조회)  
+3. 카프카 컨슈머 조회(ex. 모델 분석 후 데이터 조회)
+ unset JMX_PORT
+ unset KAFKA_OPTS  
  kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic message
 
 4. local에서 확인하는 방법  
