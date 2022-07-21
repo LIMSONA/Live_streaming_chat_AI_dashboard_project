@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+# 주키퍼
+  zookeeper:
+    image: zookeeper:3.6.0
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./data/zookeeper/data:/data
+      - ./data/zookeeper/logs:/datalog
+    networks:
+      - hy22-external-network
+
+# 카프카 -standalone
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:latest 
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME= kafka
+      - KAFKA_ADVERTISED_PORT= 9092
+      - KAFKA_CREATE_TOPICS= "test_topic:1:1" # Topic명:Partition개수:Replica개수
+      - KAFKA_ZOOKEEPER_CONNECT= zookeeper:2181
+      - KAFKA_BROKER_ID=1
+
+    volumes:
+      - ./data/kafka/logs:/opt/kafka/logs
+      - ./data/kafka/data:/kafka
+
+    networks:
+      - hy22-external-network
+
+
+
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true

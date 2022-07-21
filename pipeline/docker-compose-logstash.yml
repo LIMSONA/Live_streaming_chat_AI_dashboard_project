@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+# logstash
+# https://github.com/elastic/logstash-docker
+  logstash:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: assets/logstash/Dockerfile.logstash 
+    image: my_logstash:0.1
+    container_name: logstash
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - 5044:5044 #기본포트
+    # environment:
+    #   https://www.elastic.co/guide/en/logstash/current/docker-config.html
+    #   - PIPELINE_WORKERS=value
+    #   - LOG_LEVEL=
+    #   - MONITORING_ENABLED=
+    volumes:
+      - ./assets/logstash/config:/usr/share/logstash/config
+      - ./assets/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./data/logstash:/usr/share/logstash/data
+    networks:
+      - hy22-external-network
+
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true

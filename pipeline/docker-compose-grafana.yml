@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  grafana:
+    image: grafana/grafana-oss:8.2.0
+    ports:
+      - 3000:3000
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    networks:
+      - hy22-external-network
+
+networks:
+  hy22-external-network :
+    driver: bridge
+    external: true
+    internal: true

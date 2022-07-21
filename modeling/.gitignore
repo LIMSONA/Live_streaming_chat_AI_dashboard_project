@@ -1,0 +1,6 @@
+logs
+*.pyc
+.vscode
+.ipynb_checkpoints
+.Trash*
+.cache
