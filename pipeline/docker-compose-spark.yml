@@ -4,11 +4,11 @@ services:
 
 # 스파크
 # 스파크 마스터
-  spark-master-sona:
+  spark-master:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.2
+    image: my-spark:0.3
     container_name: spark-master
     ports:
       - 8080:8080 # master webui
@@ -35,17 +35,17 @@ services:
       - hy22-external-network
 
 
-# 스파크 워커 3개
+# 스파크 워커 1개
   spark-worker:
     build:
       context: .
       dockerfile: ./assets/spark/Dockerfile 
-    image: my-spark:0.2
+    image: my-spark:0.3
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
-      - SPARK_WORKER_CORES=3
+      - SPARK_WORKER_CORES=2
       - NVIDIA_VISIBLE_DEVICE=0
     deploy:
       replicas: 1
@@ -56,7 +56,7 @@ services:
               count: 1
               capabilities: [gpu]    
     depends_on:
-      - spark-master-sona
+      - spark-master
     volumes: 
       # - ./assets/spark:/spark-work
       # - ./assets/model:/spark-work/model
@@ -65,9 +65,9 @@ services:
     networks:
       - hy22-external-network
 
+
 networks:
   hy22-external-network :
     driver: bridge
     external: true
     internal: true
-

@@ -11,11 +11,15 @@ services:
     networks:
       - hy22-external-network
 
-
 networks:
   hy22-external-network :
     driver: bridge
     external: true
     internal: true
+# networks:
+#   hy22-external-network :
+#     driver: bridge
+#     external: true
+#     internal: true
 
 

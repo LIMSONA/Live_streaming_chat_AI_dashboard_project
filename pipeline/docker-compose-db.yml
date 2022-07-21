@@ -13,10 +13,9 @@ services:
     #   - INFLUXDB_ADMIN_USER_TOKEN=admintoken123
     volumes:
       - ./data/influxdb:/var/lib/influxdb
-    networks:
-      - hy22-external-network
+    # networks:
+    #   - hy22-external-network
 
-#mongoDB
   mongodb:
     image: mongo
     restart: always
@@ -27,11 +26,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     volumes:
-      - ./data/mongo:/data/db
-    networks:
-      - hy22-external-network
+       - ./data/mongo:/data/db
     ports:
-      - "27017:27017"
+       - "27017:27017"
 
   mongo-express:
     image: mongo-express
@@ -42,13 +39,17 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USERNAME}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGODB_HOST}/
-    networks:
-      - hy22-external-network
-
+    # networks:
+    #   - hy22-external-network
 
 networks:
-  hy22-external-network :
-    driver: bridge
+  default:
+    name: hy22-external-network
     external: true
-    internal: true
+
+# networks:
+#   hy22-external-network :
+#     driver: bridge
+#     external: true
+#     internal: true
 
